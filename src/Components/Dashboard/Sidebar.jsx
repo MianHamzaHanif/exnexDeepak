@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import Web3 from "web3";
-import "./dash.css";
+import "./Dash.css";
 import "./responsive.css";
 import Logo from "../../../public/logoimg/logo2.png";
 import {

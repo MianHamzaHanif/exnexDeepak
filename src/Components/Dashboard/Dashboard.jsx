@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef, useCallback } from "react";
-import "./dash.css";
+import "./Dash.css";
 import "./responsive.css";
 import Sidebar from "./Sidebar";
 import Header from "./Header";
