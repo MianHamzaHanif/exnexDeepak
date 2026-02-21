@@ -1,6 +1,6 @@
 // src/Components/Dashboard/Header.jsx
 import React from "react";
-import "./dash.css";
+import "./Dash.css";
 import "./responsive.css";
 import Profile from "../../../public/Dashboardimg/logout.png";
 
