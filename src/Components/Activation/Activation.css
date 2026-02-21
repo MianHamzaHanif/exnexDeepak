@@ -1,0 +1,312 @@
+/* ================= Activation Page Theme ================= */
+.ActivationPage {
+    background: transparent;
+    padding: 20px;
+    min-height: 100vh;
+    color: #333;
+    font-family: "Poppins", sans-serif;
+}
+
+/* Heading */
+.ActivationPage .heading {
+    font-size: 32px;
+    font-weight: 700;
+    color: #fff;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-align: center;
+}
+
+/* Card Base Styling */
+.ActivationPage .card-bg {
+    background: linear-gradient(to right, #2a2019, #0d1414);
+    border: 1px solid #6664fc;
+    border-radius: 14px;
+    box-shadow: 0 4px 12px rgba(108, 74, 242, 0.1);
+}
+
+/* Card Header */
+.ActivationPage .bg-theme1 {
+    background: transparent !important;
+    border-radius: 14px 14px 0 0;
+    border: 1px solid white;
+}
+
+/* Input Group Box */
+.ActivationPage .inputg {
+    background: #18191a;
+    border: none;
+    color: #fff;
+    overflow: hidden;
+}
+
+/* Card Second Section */
+.ActivationPage .card-stacking-twos {
+    background: linear-gradient(to right, #2a2019, #0d1414);
+    border: 1px solid #6664fc;
+    border-radius: 14px;
+    padding: 25px 20px;
+}
+
+/* Input Field */
+.ActivationPage input.form-control {
+    background: linear-gradient(to right, #2a2019, #0d1414);
+    border: 1px solid #fff;
+    border-radius: 10px;
+    font-size: 16px;
+    padding: 12px 15px;
+    transition: 0.3s ease;
+    color: #fff !important;
+    /* Fix input text color */
+}
+
+.ActivationPage input.form-control::placeholder {
+    color: #fff !important;
+}
+
+.ActivationPage input.form-control:focus {
+    border-color: #fff;
+    box-shadow: 0 0 8px rgba(108, 74, 242, 0.4);
+    color: #333 !important;
+}
+
+.ActivationPage input.form-control::placeholder {
+    color: #fff !important;
+    /* Placeholder color */
+}
+
+/* Ensure select is visible */
+.ActivationPage .form-select {
+    color: #fff !important;
+}
+
+/* .ActivationPage input.form-control:focus {
+    border-color: #6c4af2;
+    box-shadow: 0 0 8px rgba(108, 74, 242, 0.4);
+} */
+
+.bg-custom {
+    background-color: #000;
+    border-radius: 50px;
+}
+
+/* Purple Button */
+/* Button Spacing and Responsive */
+.ActivationPage .btn-primary {
+    width: 100%;
+    background: linear-gradient(to right, #228706, #228706) !important;
+    border: 1px solid #fff !important;
+    padding: 12px 15px;
+    font-size: 18px;
+    border-radius: 10px;
+    transition: 0.3s;
+    margin-bottom: 10px;
+    overflow: hidden;
+}
+
+.ActivationPage .btn-primary:hover {
+    background: transparent !important;
+    transform: translateY(-2px);
+}
+
+@media (min-width: 576px) {
+    .ActivationPage .btn-primary {
+        width: auto;
+        /* Side by side on larger screens */
+        margin-bottom: 0;
+    }
+}
+
+/* Select Styling */
+.ActivationPage .form-select {
+    background: linear-gradient(to right, #2a2019, #0d1414);
+    border: 1px solid #6664fc;
+    border-radius: 10px;
+    font-size: 16px;
+    padding: 12px 15px;
+    color: #6664fc !important;
+}
+
+.ActivationPage .form-select:focus {
+    border-color: #6664fc;
+    box-shadow: 0 0 8px rgba(108, 74, 242, 0.4);
+}
+
+
+/* ================= Table Styling ================= */
+.ActivationPage .tablecard {
+    background: #000;
+    border-radius: 12px;
+    padding: 10px;
+    box-shadow: 0 4px 12px rgba(108, 74, 242, 0.15);
+    border: 1px solid #6664fc;
+}
+
+/* Table Container */
+.ActivationPage .custom-table-container {
+    padding: 5px;
+    border-radius: 10px;
+}
+
+/* Table Base */
+.ActivationPage .custom-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    font-family: "Poppins", sans-serif;
+    font-size: 15px;
+    color: #333;
+}
+
+/* Table Head */
+.ActivationPage .custom-table thead th {
+    background: linear-gradient(to right, #2a2019, #0d1414);
+    color: #fff;
+    font-weight: 600;
+    padding: 14px 12px;
+    text-align: center;
+    font-size: 15px;
+    text-transform: uppercase;
+    border-bottom: 0;
+}
+
+/* Table Rows */
+.ActivationPage .custom-table tbody tr {
+    background: transparent;
+    transition: 0.3s;
+}
+
+/* Zebra Effect */
+.ActivationPage .custom-table tbody tr:nth-child(even) {
+    background: #eee9ff;
+}
+
+/* Row Hover */
+.ActivationPage .custom-table tbody tr:hover {
+    background: #18191a;
+}
+
+/* Cells */
+.ActivationPage .custom-table td {
+    padding: 13px 12px;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+    font-weight: 500;
+    overflow: hidden;
+}
+
+/* Remove last border */
+.ActivationPage .custom-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+/* Pagination */
+.ActivationPage .pagination-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 12px;
+}
+
+/* Pagination Styling */
+.ActivationPage .custom-pagination li {
+    margin: 0 4px;
+    border-radius: 6px;
+    font-size: 14px;
+}
+
+.ActivationPage .custom-pagination .ant-pagination-item-active {
+    background: #6c4af2 !important;
+    border-color: #6c4af2 !important;
+}
+
+.ActivationPage .custom-pagination .ant-pagination-item-active a {
+    color: #fff !important;
+    font-weight: 600;
+}
+
+.ActivationPage .custom-pagination .ant-pagination-item:hover {
+    border-color: #6c4af2 !important;
+    color: #6c4af2;
+}
+
+.ActivationPage .ant-pagination-item-link {
+    border-radius: 6px !important;
+}
+
+/* Select dropdown page size */
+.ActivationPage .ant-select-selector {
+    border-radius: 6px !important;
+    background: #f7f4ff !important;
+}
+
+.ActivationPage .ant-select-selection-item {
+    color: #6c4af2 !important;
+    font-weight: 600;
+}
+
+.WithdrawalPage button {
+    background: #000;
+    color: white;
+    font-size: 15px;
+    padding: 10px 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+    font-weight: 600;
+}
+
+.ActivationPage input.form-control::placeholder {
+    color: #fff;
+}
+
+table tr td a {
+    color: #5637d3;
+}
+
+button.custom-login {
+    background: linear-gradient(to right, #2a2019, #0d1414);
+    color: #000;
+    padding: 10px;
+    border: none;
+    font-size: 18px;
+    border-radius: 10px;
+}
+
+/* Responsive */
+@media (max-width: 576px) {
+    .ActivationPage .heading {
+        font-size: 20px;
+    }
+
+    .ActivationPage .btn-primary {
+        font-size: 14px;
+    }
+
+    .ActivationPage .card-bg .card-title {
+        font-size: 15px !important;
+    }
+
+    .ActivationPage .card .card-body {
+        padding: 0.75rem 0.75rem;
+    }
+
+    .text-ellipse {
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+    }
+    .ActivationPage{
+        padding: 20px 10px;
+    }
+
+}
+
+@media (max-width: 420px) {
+    .ibtext {
+        justify-content: center !important;
+    }
+    .textcen{
+        text-align:center;
+    }
+}

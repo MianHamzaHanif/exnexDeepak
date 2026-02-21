@@ -1,0 +1,9 @@
+export { Hero } from "./Hero/Hero";
+export { Features } from "./Features/Features";
+export { About } from "./About/About";
+export { Share } from "./Share/Share";
+export { OurSupport } from "./OurSupporter/OurSupport";
+export { Participated } from "./Participated/Participated";
+export { FAQ } from "./faq/FAQ";
+export { Footer } from "./Footer/Footer";
+export { Login } from "./Login/Login";

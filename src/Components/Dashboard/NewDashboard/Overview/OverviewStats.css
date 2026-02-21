@@ -1,0 +1,128 @@
+.overview-card {
+    background: radial-gradient(circle at top, #1a1a1a, #0b0b0b);
+    border-radius: 16px;
+    padding: 2rem;
+    color: #fff;
+}
+
+/* HEADER */
+.title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    overflow: hidden;
+}
+
+.sub-info .company {
+    color: #aaa;
+    font-size: 0.8rem;
+}
+
+.sub-info h4 {
+    margin-top: 6px;
+    font-size: 1.1rem;
+}
+
+.up {
+    color: #3cff6a;
+    font-size: 0.9rem;
+    margin-left: 10px;
+}
+
+
+
+
+.timeline-section {
+    background-color: #1a1a1a;
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 15px;
+    border-radius: 8px;
+    align-items: center;
+    /* gap: .3srem; */
+}
+
+/* FILTER BUTTONS */
+.timeline-section .timeline-tab {
+    font-size: .9rem;
+    font-weight: 500;
+    padding: 8px 15px;
+    background-color: #141414;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.timeline-section .timeline-tab:hover {
+    background-color: #6664fc;
+    transition: all 0.6s ease;
+    cursor: pointer;
+}
+
+.icon-section {
+    width: fit-content;
+    align-self: self-end;
+    background-color: #1a1a1a;
+    display: flex;
+    padding: 10px 15px;
+    border-radius: 8px;
+}
+
+.icon-section .icon {
+    padding: 10px 15px;
+    font-size: 18px;
+    margin-left: 15px;
+    cursor: pointer;
+    background-color: #141414;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #6664fc;
+}
+
+.icon-section .icon:hover {
+    background-color: #6664fc;
+    color: white;
+    transition: all 0.5s ease-out;
+}
+
+.filter-row {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.filter-btn {
+    padding: 6px 16px;
+    border-radius: 20px;
+    background: #1c1c1c;
+    color: #aaa;
+    border: none;
+    cursor: pointer;
+}
+
+.filter-btn.active {
+    background: #ff5f6d;
+    color: #fff;
+}
+
+/* CHART */
+.chart-wrapper {
+    margin-top: 1.5rem;
+}
+
+/* MOBILE */
+@media (max-width: 768px) {
+    .title {
+        text-align: center;
+    }
+
+    .sub-info {
+        text-align: center;
+    }
+
+    .filter-row {
+        justify-content: center;
+    }
+}

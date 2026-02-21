@@ -1,0 +1,216 @@
+/* =========================
+   LOGIN PAGE WRAPPER
+========================= */
+
+.login-ui {
+    min-height: 100vh;
+    background:
+        radial-gradient(circle at top left, #3a2a7a, transparent 40%),
+        radial-gradient(circle at bottom right, #0c0624, transparent 40%),
+        #070b1a;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+}
+
+/* =========================
+   MAIN CARD
+========================= */
+
+.login-ui-wrapper {
+    width: 100%;
+    max-width: 1200px;
+    display: flex;
+    border-radius: 24px;
+    overflow: hidden;
+    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.6);
+}
+
+/* =========================
+   LEFT IMAGE
+========================= */
+
+.login-ui-left {
+    width: 50%;
+    background: linear-gradient(135deg, #2d1c64, #120a30);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.login-ui-left img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* =========================
+   RIGHT FORM
+========================= */
+
+.login-ui-right {
+    width: 50%;
+    background: linear-gradient(180deg, #16113a, #0c0922);
+    padding: 70px 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.login-ui-right .app-form {
+    width: 100%;
+    max-width: 420px;
+}
+
+/* =========================
+   LOGO
+========================= */
+
+.login-ui .logoimg {
+    width: 120px;
+    margin: 10px auto 20px;
+}
+
+/* =========================
+   HEADING
+========================= */
+
+.login-ui-right h2 {
+    font-size: 32px;
+    margin-bottom: 20px;
+}
+
+/* =========================
+   AUTHORIZE LOGIN BUTTON
+========================= */
+
+.login-ui .wallet-btn {
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    color: #9bb0ff;
+    padding: 14px 22px;
+    border-radius: 999px;
+    font-size: 15px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    min-width: 200px;
+}
+
+.login-ui .wallet-btn:hover {
+    background: rgba(255, 255, 255, 0.15);
+}
+
+.login-ui .disconnect-btn {
+    background: rgba(255, 77, 109, 0.12);
+    border-color: rgba(255, 77, 109, 0.45);
+    color: #ff9fb5;
+    min-width: 200px;
+}
+
+.login-ui .disconnect-btn:hover {
+    background: rgba(255, 77, 109, 0.2);
+    border-color: rgba(255, 77, 109, 0.65);
+    color: #ffd5df;
+}
+
+
+
+/* =========================
+   WALLET STATUS
+========================= */
+
+.login-ui-right p {
+    font-size: 14px;
+    margin-bottom: 15px;
+}
+
+.login-ui .text-success {
+    color: #5dff9b !important;
+}
+
+/* =========================
+   INPUT FIELD
+========================= */
+
+.login-ui .form-control {
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    color: #fff;
+    padding: 14px 18px;
+    border-radius: 999px;
+}
+
+.login-ui .form-control::placeholder {
+    color: #fff !important;
+}
+
+.login-ui .form-control:focus {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: #5c6cff;
+    box-shadow: none;
+    color: #fff;
+}
+
+/* =========================
+   SIGN IN BUTTON
+========================= */
+
+.login-ui .btn-light-info {
+    background: linear-gradient(90deg, #5c6cff, #4d8bff);
+    border: none;
+    border-radius: 999px;
+    padding: 14px;
+    color: white !important;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.login-ui .btn-light-info:hover {
+    opacity: 1;
+}
+
+
+
+/* =========================
+   SIGN UP LINK
+========================= */
+
+.login-ui-right a {
+    color: #5dff9b;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 1024px) {
+    .login-ui-wrapper {
+        flex-direction: column;
+    }
+
+    .login-ui-left,
+    .login-ui-right {
+        width: 100%;
+    }
+
+    .login-ui-right {
+        padding: 50px 30px;
+    }
+}
+
+@media (max-width: 768px) {
+    .login-ui-left {
+        display: none;
+    }
+}
+
+@media (max-width: 480px) {
+    .login-ui-right h2 {
+        font-size: 26px;
+    }
+
+    .login-ui .wallet-btn {
+        width: 100%;
+    }
+}

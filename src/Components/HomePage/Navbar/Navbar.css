@@ -1,0 +1,56 @@
+.navbar-content {
+    display: flex;
+    justify-content: space-between;
+    max-width: 1100px;
+    margin: 1rem auto;
+}
+
+.navbar-content .logo-section {
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+
+}
+
+.navbar-content .logo-section .title {
+    font-size: 1.7rem;
+    color: white;
+    font-weight: 500;
+}
+
+.navbar-content .logo-section img {
+    width: 40px;
+    height: 40px;
+}
+
+.navbar-content .login-section {
+    width: 120px;
+    height: 40px;
+    background-color: #6f83db1f;
+    border-radius: 20px;
+    position: relative;
+}
+
+.navbar-content .login-section .link-text {
+    position: absolute;
+    width: 100%;
+    text-align: center;
+    font-size: 17px;
+    color: #fff;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.navbar-content .login-section .link {
+    color: #fff;
+    text-decoration: none;
+}
+
+/* For Tablets (Under 1024px) */
+@media (max-width: 1024px) {
+    .navbar-content {
+        padding: 0rem 1.5rem;
+        gap: 2rem;
+    }
+}

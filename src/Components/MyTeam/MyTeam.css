@@ -1,0 +1,36 @@
+.MyReferralPage .custom-table tbody tr,
+.MyReferralPage .custom-table tbody tr:hover,
+.MyReferralPage .custom-table tbody tr:nth-child(even),
+.LevelDetailsPage .custom-table tbody tr,
+.LevelDetailsPage .custom-table tbody tr:hover,
+.LevelDetailsPage .custom-table tbody tr:nth-child(even),
+.DirectIncomePage .custom-table tbody tr,
+.DirectIncomePage .custom-table tbody tr:hover,
+.DirectIncomePage .custom-table tbody tr:nth-child(even),
+.LevelIncomePage .custom-table tbody tr,
+.LevelIncomePage .custom-table tbody tr:hover,
+.LevelIncomePage .custom-table tbody tr:nth-child(even),
+.RoiLevelIncomePage .custom-table tbody tr,
+.RoiLevelIncomePage .custom-table tbody tr:hover,
+.RoiLevelIncomePage .custom-table tbody tr:nth-child(even),
+.WithdrawLevelIncomePage .custom-table tbody tr,
+.WithdrawLevelIncomePage .custom-table tbody tr:hover,
+.WithdrawLevelIncomePage .custom-table tbody tr:nth-child(even),
+.SalaryIncomePage .custom-table tbody tr,
+.SalaryIncomePage .custom-table tbody tr:hover,
+.SalaryIncomePage .custom-table tbody tr:nth-child(even) {
+  background: #000 !important;
+  transition: none !important;
+}
+
+.MyReferralPage .custom-table tbody td,
+.LevelDetailsPage .custom-table tbody td,
+.DirectIncomePage .custom-table tbody td,
+.LevelIncomePage .custom-table tbody td,
+.RoiLevelIncomePage .custom-table tbody td,
+.WithdrawLevelIncomePage .custom-table tbody td,
+.SalaryIncomePage .custom-table tbody td {
+  background: #000 !important;
+  color: #fff !important;
+  border-bottom-color: #222 !important;
+}

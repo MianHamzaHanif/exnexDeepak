@@ -1,0 +1,370 @@
+.Trading .trade-list {
+  padding-top: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.Trading .trade-item {
+  background: #03172d;
+  border-radius: 14px;
+  padding: 16px;
+  box-shadow: 0 0 25px rgba(0, 128, 255, 0.25);
+  border: 1px solid rgba(0, 128, 255, 0.2);
+}
+
+.Trading .pair-line {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  align-items: center;
+}
+
+.Trading .pair-name {
+  font-size: 17px;
+  font-weight: 600;
+  color: #fff;
+  width: 46%;
+}
+
+.Trading .badges {
+  display: flex;
+  gap: 8px;
+}
+
+.Trading .badge {
+  padding: 3px 8px;
+  font-size: 12px;
+  border-radius: 6px;
+  font-weight: 600;
+  background: #262b3d;
+  color: #fff;
+}
+
+.Trading .prices {
+  margin-top: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.Trading .price-block span {
+  display: block;
+}
+
+.Trading .price-label {
+  font-size: 12px;
+  color: #9ca3af;
+}
+
+.Trading .price-value {
+  font-size: 15px;
+  font-weight: 600;
+  margin-top: 2px;
+  color: #fff;
+}
+
+.Trading .time {
+  margin-top: 3px;
+  font-size: 12px;
+  color: #9ca3af;
+}
+
+.Trading .pct {
+  font-size: 17px;
+  font-weight: 700;
+  text-align: end;
+}
+
+.Trading .btn-period {
+  background: #242832;
+  border: none;
+  color: #ccc;
+  padding: 6px 20px;
+  border-radius: 8px;
+  font-weight: 600;
+}
+
+.Trading .btn-period.active {
+  background: #ffcc00;
+  color: #000;
+}
+
+.Trading table thead tr th {
+  white-space: nowrap;
+}
+
+.Trading table tbody tr {
+  border-bottom: 1px solid #333;
+  white-space: nowrap;
+}
+
+.Trading table tbody tr .icon {
+  width: 30px;
+  height: 30px;
+}
+
+.Trading .positive {
+  color: #19c37d;
+  font-weight: 600;
+}
+
+.Trading .negative {
+  color: #ff4444;
+  font-weight: 600;
+}
+
+.Trading .tradingcard {
+  background: linear-gradient(to right, #2a2019, #0d1414);
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+  padding: 20px;
+  /* margin-top: 20px; */
+  border: 1px solid #6664fc;
+}
+
+.Trading .tradingcard .cardheader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.Trading .tradingcard .cardheader .cardtitle {
+  font-size: 18px;
+  font-weight: 600;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0;
+  text-transform: uppercase;
+  overflow: hidden;
+}
+
+.Trading .tradingcard .cardheader .cardtitle span {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  overflow: visible;
+}
+
+.Trading .tradingcard .cardheader .cardtitle span .btn.negative {
+  background: #ffe7e7;
+  color: #ff4d4d;
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: 600;
+  display: none;
+}
+
+.Trading .tradingcard .cardheader .cardtitle span .btn.Postive {
+  background: #05c34b26;
+  color: #05c34f;
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: 600;
+  display: none;
+}
+
+.Trading .tradingcard .cardheader p {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0;
+}
+
+.Trading .tradingcard .cardheader p span {
+  font-size: 12px;
+  color: #fff;
+  padding: 2px 8px;
+  font-weight: 600;
+  text-align: center;
+  background: #262b3d;
+  border-radius: 6px;
+}
+
+.Trading .tradingcard .cardheader p span a i {
+  font-size: 18px;
+  color: #777;
+}
+
+/* .Trading .tradingcard .carddata {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+} */
+
+.Trading .tradingcard .carddata .box {
+  font-size: 14px;
+  color: #9ca3af;
+}
+
+.Trading .tradingcard .box .Amount {
+  font-size: 22px;
+  font-weight: 700;
+  text-align: end;
+}
+
+.Trading .tradingcard .box .Amount.Positve {
+  color: #05c34f;
+}
+
+.Trading .tradingcard .box .Amount.Negtive {
+  color: #ff4d4d;
+}
+
+.Trading .tradingcard .card-bottm {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.Trading .tradingcard .card-bottm .box {
+  margin-top: 15px;
+  text-align: center;
+}
+
+.Trading .tradingcard .card-bottm .box .bootmheading {
+  font-size: 15px;
+  color: #aaa;
+}
+
+.Trading .tradingcard .card-bottm .box .anount {
+  font-size: 22px;
+  margin-top: 7px;
+  font-weight: 600;
+  color: #fff;
+}
+
+.Trading .tradingcard .card-bottm .box .date {
+  color: #777;
+  font-size: 14px;
+}
+
+.dark-theme .Trading .tradingcard .cardheader .cardtitle {
+  color: white;
+}
+
+.dark-theme .Trading .tradingcard .card-bottm .box .anount {
+  color: white;
+}
+
+.iconupp {
+  left: 30px;
+  top: 0px;
+  z-index: 0;
+}
+
+@media (min-width: 320px) and (max-width: 575.99px) {
+  .Trading .pair-line {
+    justify-content: space-between;
+  }
+
+  .Trading .pair-line>div:nth-child(2) {
+    text-align: end;
+  }
+
+  .Trading .pair-name {
+    width: 100%;
+  }
+
+  .Trading .btn-period {
+    font-size: 14px;
+    padding: 6px 7px;
+  }
+
+  .Trading table tr th {
+    font-size: 14px;
+  }
+
+  .Trading table tbody tr td {
+    font-size: 14px;
+  }
+
+  .Trading .tradingcard {
+    padding: 5px;
+  }
+
+  .Trading .tradingcard .card-body {
+    padding: 5px;
+  }
+
+  .Trading .tradingcard .cardheader .cardtitle {
+    font-size: 15px;
+  }
+
+  .Trading .tradingcard .card-bottm .box .anount {
+    font-size: 18px;
+    margin-top: 0;
+  }
+
+  .Trading .tradingcard .box .Amount {
+    font-size: 18px;
+    margin-top: 0;
+  }
+}
+
+@media (min-width: 380px) and (max-width: 429.99px) {
+  .Trading .tradingcard .card-body {
+    padding: 5px;
+  }
+
+  .Trading .tradingcard .card-bottm .box .bootmheading {
+    font-size: 12px;
+  }
+
+  .Trading .tradingcard .box .Amount {
+    font-size: 18px;
+  }
+
+  .Trading .tradingcard .card-bottm .box .date {
+    font-size: 12px;
+  }
+
+  .Trading .tradingcard .card-bottm .box .anount {
+    font-size: 18px;
+  }
+
+  .Trading .tradingcard .cardheader {
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .Trading .tradingcard .cardheader .cardtitle {
+    font-size: 22px;
+  }
+}
+
+@media (min-width: 320px) and (max-width: 380.99px) {
+  .Trading .tradingcard .card-body {
+    padding: 5px;
+  }
+
+  .Trading .tradingcard .card-bottm .box .bootmheading {
+    font-size: 12px;
+  }
+
+  .Trading .tradingcard .box .Amount {
+    font-size: 15px;
+  }
+
+  .Trading .tradingcard .card-bottm .box .date {
+    font-size: 10px;
+  }
+
+  .Trading .tradingcard .card-bottm .box .anount {
+    font-size: 15px;
+    margin-top: 0;
+  }
+
+  .Trading .tradingcard .cardheader {
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .Trading .tradingcard .cardheader .cardtitle {
+    font-size: 20px;
+  }
+}

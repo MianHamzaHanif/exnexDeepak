@@ -1,0 +1,145 @@
+/* 🔒 GLOBAL SAFETY (footer scope only) */
+.footer-outer {
+    width: 100%;
+    overflow-x: hidden;   /* 🔥 main fix */
+}
+
+/* MAIN WRAPPER */
+.footer-wrapper {
+    margin: 0 auto;
+    max-width: 1100px;
+    width: 100%;
+    padding: 0 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    margin-bottom: 1rem;
+    box-sizing: border-box;
+}
+
+/* HEADER */
+.footer-wrapper .footer-headder {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.footer-headder .logo img {
+    width: 40px;
+    height: 40px;
+    display: block;
+}
+
+.footer-headder h1 {
+    color: #fff;
+    font-size: 2rem;
+    margin: 0;
+}
+
+/* ICON SECTION */
+.footer-icon {
+    display: flex;
+    gap: 2rem;
+    position: relative;
+    overflow: hidden;   /* 🔥 pseudo-element fix */
+}
+
+/* ICON CIRCLE */
+.footer-icon .icon {
+    width: 50px;
+    height: 50px;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: radial-gradient(circle at center,
+            #5b4aa8 0%,
+            #221d3b 45%,
+            #172d6a 70%);
+    position: relative;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+/* GLOW EFFECT (FIXED – no overflow) */
+.footer-icon .icon::before {
+    content: "";
+    position: absolute;
+    inset: -8px;     /* reduced to prevent overflow */
+    border-radius: 50%;
+    background: radial-gradient(circle,
+            rgba(123, 63, 228, 0.6),
+            transparent 70%);
+    filter: blur(10px);
+    z-index: -1;
+}
+
+/* ICON IMAGE */
+.footer-icon img {
+    width: 25px;
+    height: 20px;
+    z-index: 1;
+    filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.6));
+    display: block;
+}
+
+/* ------------------ RESPONSIVE ------------------ */
+
+@media (max-width: 1024px) {
+    .footer-wrapper {
+        gap: 1.8rem;
+    }
+
+    .footer-headder h1 {
+        font-size: 1.8rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .footer-wrapper {
+        gap: 1.5rem;
+        text-align: center;
+    }
+
+    .footer-headder {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .footer-headder .logo img {
+        width: 45px;
+        height: 45px;
+    }
+
+    .footer-headder h1 {
+        font-size: 1.6rem;
+    }
+
+    .footer-icon {
+        gap: 1.2rem;
+    }
+
+    .footer-icon .icon {
+        width: 44px;
+        height: 44px;
+    }
+
+    .footer-icon img {
+        width: 22px;
+        height: auto;
+    }
+}
+
+@media (max-width: 480px) {
+    .footer-headder h1 {
+        font-size: 1.4rem;
+    }
+
+    .footer-icon .icon {
+        width: 40px;
+        height: 40px;
+    }
+}

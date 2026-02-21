@@ -1,0 +1,15 @@
+.custom-slider-wrapper {
+    height: 315px;
+    overflow: hidden;
+    position: relative;
+}
+
+.custom-slider {
+    display: flex;
+    flex-direction: column;
+}
+
+.slider-item {
+    height: 100px;
+    display: block;
+}

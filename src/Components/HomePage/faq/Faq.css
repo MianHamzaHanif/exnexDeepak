@@ -1,0 +1,151 @@
+/* =========================
+   FAQ UI SECTION
+========================= */
+
+.faq-ui-section {
+    min-height: 100vh;
+    padding: 100px 60px;
+    color: #fff;
+    position: relative;
+}
+
+/* =========================
+   TITLE
+========================= */
+
+.faq-header h1 {
+    font-size: 64px;
+    font-weight: 700;
+    text-align: right;
+    margin-bottom: 60px;
+    opacity: 0.95;
+}
+
+/* =========================
+   GRID LAYOUT
+========================= */
+
+.faq-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+}
+
+/* =========================
+   GLASS CARD
+========================= */
+
+.faq-glass-card {
+    background: linear-gradient(
+        180deg,
+        rgba(255,255,255,0.08),
+        rgba(255,255,255,0.02)
+    );
+    border-radius: 20px;
+    padding: 28px;
+    border: 1px solid rgba(255,255,255,0.15);
+    backdrop-filter: blur(14px);
+    transition: all 0.3s ease;
+}
+
+.faq-glass-card:hover {
+    transform: translateY(-6px);
+    border-color: rgba(140,100,255,0.6);
+}
+
+/* =========================
+   ICON
+========================= */
+
+.faq-icon-wrap {
+    width: 56px;
+    height: 56px;
+    border-radius: 14px;
+    background: linear-gradient(135deg, #7b3fe4, #a067ff);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 16px;
+}
+
+.faq-icon-wrap img {
+    width: 28px;
+    height: 28px;
+}
+
+/* =========================
+   TEXT
+========================= */
+
+.faq-glass-card h3 {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 10px;
+    line-height: 1.4;
+}
+
+.faq-glass-card p {
+    font-size: 14px;
+    opacity: 0.75;
+    line-height: 1.6;
+}
+
+/* =========================
+   TABLET (≤1024px)
+========================= */
+
+@media (max-width: 1024px) {
+    .faq-ui-section {
+        padding: 80px 30px;
+    }
+
+    .faq-header h1 {
+        font-size: 48px;
+        text-align: center;
+    }
+
+    .faq-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* =========================
+   MOBILE (≤768px)
+========================= */
+
+@media (max-width: 768px) {
+    .faq-ui-section {
+        padding: 60px 20px;
+    }
+
+    .faq-header h1 {
+        font-size: 36px;
+        margin-bottom: 40px;
+    }
+
+    .faq-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .faq-glass-card {
+        padding: 22px;
+    }
+}
+
+/* =========================
+   SMALL MOBILE (≤480px)
+========================= */
+
+@media (max-width: 480px) {
+    .faq-header h1 {
+        font-size: 28px;
+    }
+
+    .faq-glass-card h3 {
+        font-size: 15px;
+    }
+
+    .faq-glass-card p {
+        font-size: 13px;
+    }
+}
