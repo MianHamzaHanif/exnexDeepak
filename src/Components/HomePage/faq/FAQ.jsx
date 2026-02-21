@@ -1,5 +1,5 @@
 import React from "react";
-import "./FAQ.css";
+import "./Faq.css";
 import faq1 from "/webimg/faq-icon-1.png";
 import faq2 from "/webimg/faq-icon-2.png";
 import faq3 from "/webimg/faq-icon-3.png";
