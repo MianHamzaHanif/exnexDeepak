@@ -284,7 +284,7 @@ const ClaimSalary = () => {
                           Previous
                         </button>
                         <span className="text-white">
-                          Page {currentPage} / {totalPages}
+                          Page {currentPage} of {totalPages} ({pendingMonths.length})
                         </span>
                         <button
                           className="btn btn-sm btn-outline-primary"

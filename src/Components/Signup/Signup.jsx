@@ -126,15 +126,11 @@ const Signup = () => {
       const mainContract = new web3.eth.Contract(Abi_Main, ContractAddress_Main);
       const tokenContract = new web3.eth.Contract(USDT_Abi, USDT_Address);
 
-      const rootAddress = await mainContract.methods.rootAddress().call();
-      let referralAddress = referrerInput;
-
-      // Keep signup smooth: if user enters a non-root/invalid referral,
-      // fallback to rootAddress instead of hard-stopping with a referral error.
-      const isInputAddress = web3.utils.isAddress(referrerInput);
-      if (!isInputAddress || referrerInput.toLowerCase() !== rootAddress.toLowerCase()) {
-        referralAddress = rootAddress;
+      if (!web3.utils.isAddress(referrerInput)) {
+        throw new Error("Please enter a valid referral address.");
       }
+
+      const referralAddress = web3.utils.toChecksumAddress(referrerInput);
 
       const amountWei = web3.utils.toWei(packageAmount, "ether");
       const allowance = await tokenContract.methods

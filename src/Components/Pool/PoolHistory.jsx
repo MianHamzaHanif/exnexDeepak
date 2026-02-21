@@ -9,6 +9,8 @@ const PoolHistory = () => {
   const account = useSelector((state) => state.web3State?.account || "");
   const [history, setHistory] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 10;
 
   useEffect(() => {
     const fetchPoolHistory = async () => {
@@ -20,35 +22,61 @@ const PoolHistory = () => {
         setIsLoading(true);
         const web3 = window.web3 || new Web3(window.ethereum);
         const poolContract = new web3.eth.Contract(poolContractAbi, poolContractAddress);
-        const currentMonthRaw = await poolContract.methods.getCurrentMonthId().call();
-        const currentMonth = Number(currentMonthRaw || 0);
+        const lengthRaw = await poolContract.methods
+          .getMonthlyRewardHistoryLength(account)
+          .call();
+        const length = Number(lengthRaw || 0);
 
-        const rows = [];
-        for (let month = currentMonth; month >= 0; month -= 1) {
-          const [claimedRaw, monthInfoRaw] = await Promise.all([
-            poolContract.methods.hasClaimed(month, account).call().catch(() => false),
-            poolContract.methods.monthInfo(month).call().catch(() => null),
-          ]);
+        const calls = Array.from({ length }, (_, idx) =>
+          poolContract.methods
+            .userMonthlyRewardHistory(account, idx)
+            .call()
+            .catch(() => null)
+        );
+        const records = await Promise.all(calls);
 
-          if (claimedRaw) {
-            const totalAmountRaw = monthInfoRaw?.totalAmount ?? monthInfoRaw?.[0] ?? "0";
-            const qualifiedCountRaw = monthInfoRaw?.qualifiedCount ?? monthInfoRaw?.[1] ?? "0";
-            rows.push({
-              month,
-              totalAmount: Number(
-                web3.utils.fromWei((totalAmountRaw || "0").toString(), "ether")
+        const rows = records
+          .map((entry, idx) => {
+            if (!entry) return null;
+            const monthIdRaw = entry?.monthId ?? entry?.[0] ?? "0";
+            const amountRaw = entry?.amount ?? entry?.[1] ?? "0";
+            const claimedAtRaw = entry?.claimedAt ?? entry?.[2] ?? "0";
+            const claimedAtSeconds = Number(claimedAtRaw || 0);
+            return {
+              index: idx + 1,
+              monthId: Number(monthIdRaw || 0),
+              amount: Number(
+                web3.utils.fromWei((amountRaw || "0").toString(), "ether")
               ).toFixed(4),
-              qualifiedCount: Number(qualifiedCountRaw || 0),
-            });
-          }
-        }
+              claimedAt: claimedAtSeconds
+                ? new Date(claimedAtSeconds * 1000).toLocaleString()
+                : "-",
+            };
+          })
+          .filter(Boolean)
+          .reverse();
+
         setHistory(rows);
+        setCurrentPage(1);
+      } catch (error) {
+        setHistory([]);
+        setCurrentPage(1);
       } finally {
         setIsLoading(false);
       }
     };
     fetchPoolHistory();
   }, [account]);
+
+  const totalPages = Math.max(1, Math.ceil(history.length / itemsPerPage));
+  const safeCurrentPage = Math.min(currentPage, totalPages);
+  const indexOfFirstItem = (safeCurrentPage - 1) * itemsPerPage;
+  const currentItems = history.slice(indexOfFirstItem, indexOfFirstItem + itemsPerPage);
+
+  const handlePageChange = (page) => {
+    const safePage = Math.min(Math.max(page, 1), totalPages);
+    setCurrentPage(safePage);
+  };
 
   return (
     <div className="app-wrapper">
@@ -71,10 +99,10 @@ const PoolHistory = () => {
                       <table className="table table-dark align-middle mb-0 pool-history-table">
                         <thead>
                           <tr>
+                            <th className="text-white">#</th>
                             <th className="text-white">Month</th>
-                            <th className="text-white">Total Amount</th>
-                            <th className="text-white">Qualified Users</th>
-                            <th className="text-white">Status</th>
+                            <th className="text-white">Amount</th>
+                            <th className="text-white">Claimed At</th>
                           </tr>
                         </thead>
                         <tbody>
@@ -91,24 +119,51 @@ const PoolHistory = () => {
                               </td>
                             </tr>
                           ) : (
-                            history.map((row) => (
-                              <tr key={row.month}>
-                                <td className="text-white">{row.month}</td>
-                                <td className="text-white">$ {row.totalAmount}</td>
-                                <td className="text-white">{row.qualifiedCount}</td>
-                                <td className="text-white">Claimed</td>
+                            currentItems.map((row, idx) => (
+                              <tr key={`${row.monthId}-${row.index}`}>
+                                <td className="text-white">
+                                  {indexOfFirstItem + idx + 1}
+                                </td>
+                                <td className="text-white">{row.monthId}</td>
+                                <td className="text-white">$ {row.amount}</td>
+                                <td className="text-white">{row.claimedAt}</td>
                               </tr>
                             ))
                           )}
                         </tbody>
                       </table>
                     </div>
+                    {history.length > 0 && (
+                      <div className="pagination mt-3 d-flex justify-content-center align-items-center gap-2 flex-wrap">
+                        <button
+                          className="btn btn-sm btn-outline-primary"
+                          onClick={() => handlePageChange(safeCurrentPage - 1)}
+                          disabled={safeCurrentPage <= 1}
+                        >
+                          Previous
+                        </button>
+                        <span className="text-white">
+                          Page {safeCurrentPage} of {totalPages} ({history.length})
+                        </span>
+                        <button
+                          className="btn btn-sm btn-outline-primary"
+                          onClick={() => handlePageChange(safeCurrentPage + 1)}
+                          disabled={safeCurrentPage >= totalPages}
+                        >
+                          Next
+                        </button>
+                      </div>
+                    )}
                     <style>{`
                       .pool-history-table tbody tr td {
                         color: #fff !important;
                       }
+                      .pool-history-table thead tr th {
+                        color: #fff !important;
+                      }
                       .pool-history-table tbody tr:hover td {
                         color: #fff !important;
+                        background-color: transparent !important;
                       }
                     `}</style>
                   </div>

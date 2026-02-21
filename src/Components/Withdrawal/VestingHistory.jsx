@@ -87,7 +87,11 @@ const VestingHistory = () => {
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   const currentItems = history.slice(indexOfFirstItem, indexOfLastItem);
-  const totalPages = Math.ceil(history.length / itemsPerPage);
+  const totalPages = Math.max(1, Math.ceil(history.length / itemsPerPage));
+  const handlePageChange = (page) => {
+    const safePage = Math.min(Math.max(page, 1), totalPages);
+    setCurrentPage(safePage);
+  };
 
   return (
     <div className="app-wrapper">
@@ -166,17 +170,25 @@ const VestingHistory = () => {
                         </tbody>
                       </table>
                     </div>
-                    {totalPages > 1 && (
-                      <div className="pagination mt-3 d-flex justify-content-center">
-                        {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
-                          <button
-                            key={page}
-                            className={`btn btn-sm ${currentPage === page ? "btn-primary" : "btn-outline-primary"} me-1`}
-                            onClick={() => setCurrentPage(page)}
-                          >
-                            {page}
-                          </button>
-                        ))}
+                    {history.length > 0 && (
+                      <div className="pagination mt-3 d-flex justify-content-center align-items-center gap-2 flex-wrap">
+                        <button
+                          className="btn btn-sm btn-outline-primary"
+                          onClick={() => handlePageChange(currentPage - 1)}
+                          disabled={currentPage <= 1}
+                        >
+                          Previous
+                        </button>
+                        <span className="text-white">
+                          Page {currentPage} of {totalPages} ({history.length})
+                        </span>
+                        <button
+                          className="btn btn-sm btn-outline-primary"
+                          onClick={() => handlePageChange(currentPage + 1)}
+                          disabled={currentPage >= totalPages}
+                        >
+                          Next
+                        </button>
                       </div>
                     )}
                     <style>{`

@@ -52,8 +52,12 @@ const Dashboard = () => {
   const [onChainWithdrawLevelIncome, setOnChainWithdrawLevelIncome] = useState(null);
   const [onChainSalaryIncome, setOnChainSalaryIncome] = useState(null);
   const [onChainLevelIncomeByLevel, setOnChainLevelIncomeByLevel] = useState([]);
+  const [upgradePackageHistory, setUpgradePackageHistory] = useState([]);
+  const [isUpgradeHistoryLoading, setIsUpgradeHistoryLoading] = useState(false);
+  const [upgradeHistoryPage, setUpgradeHistoryPage] = useState(1);
   const [selectedUpgradeAmount, setSelectedUpgradeAmount] = useState("50");
   const [isUpgradeLoading, setIsUpgradeLoading] = useState(false);
+  const upgradeHistoryPerPage = 5;
   const levelCounts = Array.isArray(dashboardData.levelCounts)
     ? dashboardData.levelCounts
     : [];
@@ -87,6 +91,20 @@ const Dashboard = () => {
   const totalTokenSupply = Number.isFinite(parsedTotalSupply)
     ? parsedTotalSupply.toFixed(2)
     : "0.00";
+  const totalUpgradeHistoryPages = Math.max(
+    1,
+    Math.ceil(upgradePackageHistory.length / upgradeHistoryPerPage)
+  );
+  const safeUpgradeHistoryPage = Math.min(
+    upgradeHistoryPage,
+    totalUpgradeHistoryPages
+  );
+  const upgradeHistoryStartIndex =
+    (safeUpgradeHistoryPage - 1) * upgradeHistoryPerPage;
+  const paginatedUpgradeHistory = upgradePackageHistory.slice(
+    upgradeHistoryStartIndex,
+    upgradeHistoryStartIndex + upgradeHistoryPerPage
+  );
   const [isRefreshing, setIsRefreshing] = useState(false);
   const hasInitialFetch = useRef(false);
   const autoRefreshIntervalRef = useRef(null);
@@ -439,6 +457,78 @@ const Dashboard = () => {
 
     fetchDirectAndTeam();
   }, [web3State.isConnected, web3State.account, web3State.lastUpdated]);
+
+  useEffect(() => {
+    const fetchUpgradeablePackageHistory = async () => {
+      if (!web3State.isConnected || !web3State.account || !window.ethereum) {
+        setUpgradePackageHistory([]);
+        setUpgradeHistoryPage(1);
+        return;
+      }
+
+      try {
+        setIsUpgradeHistoryLoading(true);
+        const web3 = window.web3 || new Web3(window.ethereum);
+        const contract = new web3.eth.Contract(Abi_Main, ContractAddress_Main);
+        const depositCountRaw = await contract.methods
+          .getUserDepositCount(web3State.account)
+          .call()
+          .catch(() => "0");
+        const depositCount = Number(depositCountRaw || 0);
+
+        if (!depositCount) {
+          setUpgradePackageHistory([]);
+          setUpgradeHistoryPage(1);
+          return;
+        }
+
+        const depositCalls = Array.from({ length: depositCount }, (_, idx) =>
+          contract.methods.userDeposits(web3State.account, idx).call()
+        );
+        const deposits = await Promise.all(depositCalls);
+
+        const normalizedDeposits = deposits
+          .map((deposit, idx) => {
+            const amountRaw = deposit?.amount ?? deposit?.[0] ?? "0";
+            const startTimeRaw = deposit?.startTime ?? deposit?.[1] ?? "0";
+            const cycleIndexRaw = deposit?.cycleIndex ?? deposit?.[2] ?? "0";
+            const claimedDaysRaw = deposit?.claimedDays ?? deposit?.[3] ?? "0";
+            const claimedAmountRaw = deposit?.claimedAmount ?? deposit?.[4] ?? "0";
+            const roiEligibleRaw = deposit?.roiEligible ?? deposit?.[5] ?? false;
+            const startTimestamp = Number(startTimeRaw || 0);
+
+            return {
+              srNo: idx + 1,
+              amount: Number(
+                web3.utils.fromWei((amountRaw || "0").toString(), "ether")
+              ).toFixed(2),
+              startDate: startTimestamp
+                ? new Date(startTimestamp * 1000).toLocaleString()
+                : "-",
+              cycleIndex: Number(cycleIndexRaw || 0),
+              claimedDays: Number(claimedDaysRaw || 0),
+              claimedAmount: Number(
+                web3.utils.fromWei((claimedAmountRaw || "0").toString(), "ether")
+              ).toFixed(2),
+              roiEligible: Boolean(roiEligibleRaw),
+            };
+          })
+          .reverse();
+
+        setUpgradePackageHistory(normalizedDeposits);
+        setUpgradeHistoryPage(1);
+      } catch (error) {
+        console.error("Failed to fetch upgradeable package history:", error);
+        setUpgradePackageHistory([]);
+        setUpgradeHistoryPage(1);
+      } finally {
+        setIsUpgradeHistoryLoading(false);
+      }
+    };
+
+    fetchUpgradeablePackageHistory();
+  }, [web3State.isConnected, web3State.account, web3State.lastUpdated]);
+
   return (
     <>
       <div className="app-wrapper Dashboardpage">
@@ -671,9 +761,9 @@ const Dashboard = () => {
                               Overall Portfolio
                             </h2>
                             <div className="col-lg-6 col-md-12 d-flex gap-3 justify-content-end">
-                              <a href="/Withdrawal" className="btn-outline">
+                              {/* <a href="/Withdrawal" className="btn-outline">
                                 Withdraw
-                              </a>
+                              </a> */}
                               {/* <a
                                 href="/activationContract"
                                 className="btn-fill"
@@ -852,6 +942,120 @@ const Dashboard = () => {
                             ).toFixed(2) || "0.00"}
                           </h3>
                         </div> */}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="row g-3 mb-3">
+                  <div className="col-12">
+                    <div className="card maincard overflow-hidden">
+                      <div className="card-header bg-black text-white">
+                        <h5 className="text-white mb-0">
+                          Upgradeable Package History
+                        </h5>
+                      </div>
+                      <div className="card-body px-0 pt-0">
+                        <div className="table-responsive app-scroll dashtable overflow-x-hidden Dashtable">
+                          <table className="table align-middle top-products-table mb-0">
+                            <thead>
+                              <tr>
+                                <th className="bg-black text-white" scope="col">
+                                  Sr.no
+                                </th>
+                                <th className="bg-black text-white" scope="col">
+                                  Amount
+                                </th>
+                                <th className="bg-black text-white" scope="col">
+                                  Start Date
+                                </th>
+                                <th className="bg-black text-white" scope="col">
+                                  Cycle
+                                </th>
+                                <th className="bg-black text-white" scope="col">
+                                  Claimed Days
+                                </th>
+                                <th className="bg-black text-white" scope="col">
+                                  Claimed Amount
+                                </th>
+                                <th className="bg-black text-white" scope="col">
+                                  ROI Eligible
+                                </th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              {isUpgradeHistoryLoading ? (
+                                <tr>
+                                  <td colSpan={7} className="text-white text-center">
+                                    Loading...
+                                  </td>
+                                </tr>
+                              ) : paginatedUpgradeHistory.length ? (
+                                paginatedUpgradeHistory.map((row, idx) => (
+                                  <tr key={`${row.srNo}-${row.startDate}-${idx}`}>
+                                    <td className="bg-transparent text-white">
+                                      {upgradeHistoryStartIndex + idx + 1}
+                                    </td>
+                                    <td className="bg-transparent text-white">
+                                      $ {row.amount}
+                                    </td>
+                                    <td className="bg-transparent text-white">
+                                      {row.startDate}
+                                    </td>
+                                    <td className="bg-transparent text-white">
+                                      {row.cycleIndex}
+                                    </td>
+                                    <td className="bg-transparent text-white">
+                                      {row.claimedDays}
+                                    </td>
+                                    <td className="bg-transparent text-white">
+                                      $ {row.claimedAmount}
+                                    </td>
+                                    <td className="bg-transparent text-white">
+                                      {row.roiEligible ? "Yes" : "No"}
+                                    </td>
+                                  </tr>
+                                ))
+                              ) : (
+                                <tr>
+                                  <td colSpan={7} className="text-white text-center">
+                                    No upgradeable package history found.
+                                  </td>
+                                </tr>
+                              )}
+                            </tbody>
+                          </table>
+                        </div>
+
+                        {!isUpgradeHistoryLoading && upgradePackageHistory.length > 0 && (
+                          <div className="d-flex justify-content-center align-items-center gap-2 py-3">
+                            <button
+                              className="btn btn-sm btn-outline-light"
+                              onClick={() =>
+                                setUpgradeHistoryPage((prev) => Math.max(prev - 1, 1))
+                              }
+                              disabled={safeUpgradeHistoryPage === 1}
+                            >
+                              Previous
+                            </button>
+                            <span className="text-white">
+                              Page {safeUpgradeHistoryPage} of {totalUpgradeHistoryPages}
+                            </span>
+                            <button
+                              className="btn btn-sm btn-outline-light"
+                              onClick={() =>
+                                setUpgradeHistoryPage((prev) =>
+                                  Math.min(prev + 1, totalUpgradeHistoryPages)
+                                )
+                              }
+                              disabled={
+                                safeUpgradeHistoryPage === totalUpgradeHistoryPages
+                              }
+                            >
+                              Next
+                            </button>
+                          </div>
+                        )}
                       </div>
                     </div>
                   </div>
