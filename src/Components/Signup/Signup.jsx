@@ -24,13 +24,13 @@ import toast from "react-hot-toast";
 import Web3 from "web3";
 
 const PACKAGE_OPTIONS = [
-  { label: "50 Token Sign", value: "50" },
-  { label: "100 Token Sign", value: "100" },
+  { label: "50 USDT", value: "50" },
+  { label: "100 USDT", value: "100" },
 ];
 
 const Signup = () => {
   const [referrerInput, setReferrerInput] = useState("");
-  const [packageAmount, setPackageAmount] = useState("50");
+  const [packageAmount, setPackageAmount] = useState("100");
   const [isConnecting, setIsConnecting] = useState(false);
   const [isRegistering, setIsRegistering] = useState(false);
   const dispatch = useDispatch();
