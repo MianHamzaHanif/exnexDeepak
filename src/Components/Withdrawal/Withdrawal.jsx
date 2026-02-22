@@ -158,7 +158,7 @@ const Withdrawal = () => {
             <div className="row g-3">
               <div className="col-12">
                 <div className="heading text-start">
-                  <th>Working Withdrawal</th>
+                  <th>Working Withdrawal ROI</th>
                 </div>
               </div>
               
@@ -176,7 +176,7 @@ const Withdrawal = () => {
                   <div className="col-md-6">
                     <div className="card bg-success text-white">
                       <div className="card-body">
-                        <h6 className="card-title">Total Withdrawn</h6>
+                        <h6 className="card-title">Total ROI Withdrawn</h6>
                         <h3 className="mb-0">$ {totalWithdrawn}</h3>
                       </div>
                     </div>

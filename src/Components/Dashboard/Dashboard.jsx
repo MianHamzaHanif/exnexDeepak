@@ -52,6 +52,7 @@ const Dashboard = () => {
   const [onChainWithdrawLevelIncome, setOnChainWithdrawLevelIncome] = useState(null);
   const [onChainSalaryIncome, setOnChainSalaryIncome] = useState(null);
   const [onChainLevelIncomeByLevel, setOnChainLevelIncomeByLevel] = useState([]);
+  const [onChainUnlockedLevelCount, setOnChainUnlockedLevelCount] = useState(null);
   const [upgradePackageHistory, setUpgradePackageHistory] = useState([]);
   const [isUpgradeHistoryLoading, setIsUpgradeHistoryLoading] = useState(false);
   const [upgradeHistoryPage, setUpgradeHistoryPage] = useState(1);
@@ -331,6 +332,7 @@ const Dashboard = () => {
         setOnChainWithdrawLevelIncome(null);
         setOnChainSalaryIncome(null);
         setOnChainLevelIncomeByLevel([]);
+        setOnChainUnlockedLevelCount(null);
         return;
       }
 
@@ -436,6 +438,12 @@ const Dashboard = () => {
             web3.utils.fromWei((salaryIncomeRaw || "0").toString(), "ether")
           ).toFixed(2)
         );
+
+        const unlockedLevelCountRaw = await contract.methods
+          .getUnlockedLevelCount(web3State.account)
+          .call()
+          .catch(() => "0");
+        setOnChainUnlockedLevelCount(Number(unlockedLevelCountRaw || 0));
 
         const tokenContract = new web3.eth.Contract(TokenAbi, TokenAddress);
         const [walletBalanceRaw, tokenDecimalsRaw] = await Promise.all([
@@ -921,7 +929,7 @@ const Dashboard = () => {
                         </div>
 
                         <div className="exnex-trans-item exnex-primary">
-                          <span>Total Withdrawn</span>
+                          <span>Total ROI Withdrawn</span>
                           <h3>$ {totalWithdrawnValue}</h3>
                         </div>
 
@@ -933,15 +941,10 @@ const Dashboard = () => {
                           </small> */}
                         </div>
 
-                        {/* <div className="exnex-trans-item exnex-warning">
-                          <span>Withdrawable</span>
-                          <h3>
-                            $
-                            {parseFloat(
-                              dashboardData.withdrawalBalance,
-                            ).toFixed(2) || "0.00"}
-                          </h3>
-                        </div> */}
+                        <div className="exnex-trans-item exnex-warning">
+                          <span>Level Open</span>
+                          <h3>{onChainUnlockedLevelCount ?? 0}</h3>
+                        </div>
                       </div>
                     </div>
                   </div>

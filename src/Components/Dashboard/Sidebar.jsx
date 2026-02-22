@@ -147,13 +147,13 @@ const Sidebar = () => {
               </a>
               <ul className="collapse" id="icons">
                 <li>
-                  <Link to="/Withdrawal">Withdrawal</Link>
+                  <Link to="/Withdrawal">Withdrawal ROI</Link>
                 </li>
                 <li>
-                  <Link to="/WithdrawalHistory">Withdrawal History</Link>
+                  <Link to="/WithdrawalHistory">Withdrawal ROI History</Link>
                 </li>
                 <li>
-                  <Link to="/VestingHistory">Vesting History</Link>
+                  <Link to="/VestingHistory">Vesting ROI History</Link>
                 </li>
               </ul>
             </li>
