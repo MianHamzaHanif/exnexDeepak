@@ -72,6 +72,25 @@ const Signup = () => {
       const web3 = new Web3(window.ethereum);
       const mainContract = new web3.eth.Contract(Abi_Main, ContractAddress_Main);
 
+      const ownerAddress = await mainContract.methods.owner().call().catch(() => "");
+      if (
+        ownerAddress &&
+        walletData?.account &&
+        ownerAddress.toLowerCase() === walletData.account.toLowerCase()
+      ) {
+        dispatch(
+          UpdateAuth({
+            isAuth: true,
+            userId: "OWNER",
+            jwtToken: null,
+            ipAddress: null,
+          }),
+        );
+        toast.success("Owner wallet connected. Redirecting to dashboard...");
+        navigate("/dashboard", { replace: true });
+        return;
+      }
+
       let isRegistered = false;
       let userId = null;
 
