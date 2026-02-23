@@ -1,5 +1,5 @@
 // src/App.jsx
-import { Routes, Route, Navigate } from "react-router-dom";
+import { Routes, Route, Navigate, useLocation } from "react-router-dom";
 import "bootstrap-icons/font/bootstrap-icons.css";
 
 import { Toaster } from "react-hot-toast";
@@ -32,6 +32,24 @@ import ApproveSalary from "./Components/Withdrawal/ApproveSalary";
 import Trading from "./Components/Trading/Trading";
 
 // Main app content component
+function HomeEntry() {
+  const location = useLocation();
+  const params = new URLSearchParams(location.search);
+  const hasReferral =
+    !!params.get("ref") || !!params.get("referral") || !!params.get("referrer");
+
+  if (hasReferral) {
+    return <Navigate to={`/signup${location.search}`} replace />;
+  }
+
+  return <Home />;
+}
+
+function LoginEntry() {
+  const location = useLocation();
+  return <Navigate to={`/signup${location.search || ""}`} replace />;
+}
+
 function AppContent() {
   return (
     <>
@@ -69,9 +87,9 @@ function AppContent() {
         />
 
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route path="/" element={<HomeEntry />} />
           <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/login" element={<Navigate to="/signup" replace />} />
+          <Route path="/login" element={<LoginEntry />} />
           <Route path="/home" element={<Home />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/Forget" element={<Forget />} />

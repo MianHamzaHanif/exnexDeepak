@@ -19,7 +19,7 @@ import {
   tokenAbi as USDT_Abi,
 } from "../../Services/tokenAddress";
 import { UpdateAuth, updateStatus } from "../../Redux/AuthSlice";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import Web3 from "web3";
 
@@ -35,7 +35,21 @@ const Signup = () => {
   const [isRegistering, setIsRegistering] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const location = useLocation();
   const web3State = useSelector((state) => state.web3State);
+  const referralParams = new URLSearchParams(location.search);
+  const referralFromLink =
+    referralParams.get("ref") ||
+    referralParams.get("referral") ||
+    referralParams.get("referrer") ||
+    "";
+
+  useEffect(() => {
+    const linkedRef = referralFromLink.trim();
+    if (linkedRef) {
+      setReferrerInput(linkedRef);
+    }
+  }, [referralFromLink]);
 
   useEffect(() => {
     if (web3State.isConnected && web3State.userInfo?.isRegistered) {
@@ -92,6 +106,9 @@ const Signup = () => {
       }
 
       await dispatch(fetchContractData());
+      if (referralFromLink.trim()) {
+        setReferrerInput(referralFromLink.trim());
+      }
       toast.success("Wallet connected. Enter referral address and package.");
     } catch (error) {
       toast.error(error?.message || error || "Connection failed");
