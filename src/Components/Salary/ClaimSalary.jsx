@@ -292,8 +292,7 @@ const ClaimSalary = () => {
                       isClaiming ||
                       !account ||
                       isRequesting ||
-                      isRefreshing ||
-                      Number(approvedPendingSalary || 0) <= 0
+                      isRefreshing
                     }
                   >
                     {isClaiming ? "Processing..." : "Claim Salary"}

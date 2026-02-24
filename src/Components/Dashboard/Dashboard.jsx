@@ -26,7 +26,7 @@ import {
   tokenAbi as TokenAbi,
 } from "../../Services/tokenAddress";
 
-const UPGRADE_OPTIONS = ["50", "100"];
+const UPGRADE_OPTIONS = ["100"];
 
 const toBaseUnits = (amount, decimals) => {
   const [whole = "0", fraction = ""] = String(amount).split(".");
@@ -61,7 +61,7 @@ const Dashboard = () => {
   const [upgradePackageHistory, setUpgradePackageHistory] = useState([]);
   const [isUpgradeHistoryLoading, setIsUpgradeHistoryLoading] = useState(false);
   const [upgradeHistoryPage, setUpgradeHistoryPage] = useState(1);
-  const [selectedUpgradeAmount, setSelectedUpgradeAmount] = useState("50");
+  const [selectedUpgradeAmount, setSelectedUpgradeAmount] = useState("100");
   const [isUpgradeLoading, setIsUpgradeLoading] = useState(false);
   const upgradeHistoryPerPage = 5;
   const levelCounts = Array.isArray(dashboardData.levelCounts)
@@ -83,10 +83,13 @@ const Dashboard = () => {
     onChainUserTopUp ?? Number(dashboardData.totalInvested || 0).toFixed(2);
   const totalWithdrawnValue =
     onChainTotalWithdrawn ?? Number(dashboardData.totalWithdrawn || 0).toFixed(2);
+  const totalRoiValue = Number(dashboardData.tradingIncome || 0).toFixed(2);
   const totalRoiLevelIncomeValue = onChainRoiLevelIncome ?? "0.00";
   const totalWithdrawLevelIncomeValue = onChainWithdrawLevelIncome ?? "0.00";
   const totalSalaryIncomeValue = onChainSalaryIncome ?? "0.00";
   const totalEarningValue = (
+    Number(totalRoiValue || 0) +
+    Number(totalWithdrawnValue || 0) +
     Number(directIncomeValue || 0) +
     Number(levelIncomeValue || 0) +
     Number(totalRoiLevelIncomeValue || 0) +
