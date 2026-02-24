@@ -26,35 +26,34 @@ const PoolHistory = () => {
           .getMonthlyRewardHistoryLength(account)
           .call();
         const length = Number(lengthRaw || 0);
-
-        const calls = Array.from({ length }, (_, idx) =>
-          poolContract.methods
-            .userMonthlyRewardHistory(account, idx)
+        const rows = [];
+        for (let idx = 0; idx < length; idx += 1) {
+          const entry = await poolContract.methods
+            .getMonthlyRewardHistoryAt(account, idx)
             .call()
-            .catch(() => null)
-        );
-        const records = await Promise.all(calls);
+            .catch(() => null);
+          if (!entry) continue;
 
-        const rows = records
-          .map((entry, idx) => {
-            if (!entry) return null;
-            const monthIdRaw = entry?.monthId ?? entry?.[0] ?? "0";
-            const amountRaw = entry?.amount ?? entry?.[1] ?? "0";
-            const claimedAtRaw = entry?.claimedAt ?? entry?.[2] ?? "0";
-            const claimedAtSeconds = Number(claimedAtRaw || 0);
-            return {
-              index: idx + 1,
-              monthId: Number(monthIdRaw || 0),
-              amount: Number(
-                web3.utils.fromWei((amountRaw || "0").toString(), "ether")
-              ).toFixed(4),
-              claimedAt: claimedAtSeconds
-                ? new Date(claimedAtSeconds * 1000).toLocaleString()
-                : "-",
-            };
-          })
-          .filter(Boolean)
-          .reverse();
+          const monthIdRaw = entry?.monthId ?? entry?.[0] ?? "0";
+          const amountRaw = entry?.amount ?? entry?.[1] ?? "0";
+          const claimedAtRaw = entry?.claimedAt ?? entry?.[2] ?? "0";
+          const claimedAtSeconds = Number(claimedAtRaw || 0);
+
+          rows.push({
+            index: idx + 1,
+            monthId: Number(monthIdRaw || 0),
+            amountRaw: amountRaw?.toString?.() || "0",
+            amount: Number(
+              web3.utils.fromWei((amountRaw || "0").toString(), "ether")
+            ).toFixed(4),
+            claimedAtRaw: claimedAtRaw?.toString?.() || "0",
+            claimedAt: claimedAtSeconds
+              ? new Date(claimedAtSeconds * 1000).toLocaleString()
+              : "-",
+          });
+        }
+
+        rows.reverse();
 
         setHistory(rows);
         setCurrentPage(1);
@@ -102,19 +101,21 @@ const PoolHistory = () => {
                             <th className="text-white">#</th>
                             <th className="text-white">Month</th>
                             <th className="text-white">Amount</th>
+                            <th className="text-white">Amount Raw</th>
                             <th className="text-white">Claimed At</th>
+                            <th className="text-white">Claimed At Raw</th>
                           </tr>
                         </thead>
                         <tbody>
                           {isLoading ? (
                             <tr>
-                              <td colSpan={4} className="text-white text-center">
+                              <td colSpan={6} className="text-white text-center">
                                 Loading...
                               </td>
                             </tr>
                           ) : history.length === 0 ? (
                             <tr>
-                              <td colSpan={4} className="text-white text-center">
+                              <td colSpan={6} className="text-white text-center">
                                 No pool history found.
                               </td>
                             </tr>
@@ -126,7 +127,9 @@ const PoolHistory = () => {
                                 </td>
                                 <td className="text-white">{row.monthId}</td>
                                 <td className="text-white">$ {row.amount}</td>
+                                <td className="text-white">{row.amountRaw}</td>
                                 <td className="text-white">{row.claimedAt}</td>
+                                <td className="text-white">{row.claimedAtRaw}</td>
                               </tr>
                             ))
                           )}

@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useState } from "react";
 import Web3 from "web3";
 import toast from "react-hot-toast";
 import Sidebar from "../Dashboard/Sidebar";
@@ -17,100 +17,85 @@ const ClaimSalary = () => {
   const web3State = useSelector((state) => state.web3State);
   const account = web3State?.account || "";
   const [salaryEarned, setSalaryEarned] = useState("0.0000");
-  const [totalWithdrawSalary, setTotalWithdrawSalary] = useState("0.0000");
-  const [pendingMonths, setPendingMonths] = useState([]);
+  const [approvedPendingSalary, setApprovedPendingSalary] = useState("0.0000");
+  const [claimedSalary, setClaimedSalary] = useState("0.0000");
+  const [salaryPreview, setSalaryPreview] = useState(null);
+  const [isRequesting, setIsRequesting] = useState(false);
   const [isClaiming, setIsClaiming] = useState(false);
-  const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 10;
+  const [isRefreshing, setIsRefreshing] = useState(false);
+  const actionBtnStyle = {
+    width: "170px",
+    height: "42px",
+    display: "inline-flex",
+    alignItems: "center",
+    justifyContent: "center",
+  };
 
-  const walletStatus = useMemo(
-    () => (account ? "Connected" : "Not Connected"),
-    [account]
-  );
-  const totalPages = Math.max(1, Math.ceil(pendingMonths.length / itemsPerPage));
-  const paginatedPendingMonths = useMemo(() => {
-    const start = (currentPage - 1) * itemsPerPage;
-    const end = start + itemsPerPage;
-    return pendingMonths.slice(start, end);
-  }, [pendingMonths, currentPage]);
+  const resetSalaryState = () => {
+    setSalaryEarned("0.0000");
+    setApprovedPendingSalary("0.0000");
+    setClaimedSalary("0.0000");
+    setSalaryPreview(null);
+  };
 
-  useEffect(() => {
-    setCurrentPage(1);
-  }, [pendingMonths.length]);
+  const toAmount = (web3, raw) => {
+    const parsed = Number(web3.utils.fromWei((raw || "0").toString(), "ether"));
+    return Number.isFinite(parsed) ? parsed : 0;
+  };
 
-  const handlePageChange = (nextPage) => {
-    const safePage = Math.min(Math.max(nextPage, 1), totalPages);
-    setCurrentPage(safePage);
+  const loadSalaryData = async () => {
+    if (!account || !window.ethereum) {
+      resetSalaryState();
+      return;
+    }
+
+    try {
+      const web3 = window.web3 || new Web3(window.ethereum);
+      const contract = new web3.eth.Contract(Abi_Main, ContractAddress_Main);
+      const poolContract = new web3.eth.Contract(poolContractAbi, poolContractAddress);
+
+      const [salaryRaw, previewRaw] = await Promise.all([
+        contract.methods.userSalaryEarned(account).call().catch(() => "0"),
+        contract.methods.getSalaryRequestPreview(account).call().catch(() => null),
+      ]);
+
+      const previewMonthId = Number(previewRaw?.monthId ?? previewRaw?.[0] ?? 0);
+      const previewMonthCompleted = Boolean(
+        previewRaw?.monthCompleted ?? previewRaw?.[1]
+      );
+      const previewRank = Number(previewRaw?.rank ?? previewRaw?.[2] ?? 0);
+      const previewRewardRaw = previewRaw?.reward ?? previewRaw?.[3] ?? "0";
+      const previewReward = toAmount(web3, previewRewardRaw);
+      const previewEligible = Boolean(previewRaw?.eligible ?? previewRaw?.[4]);
+      const previewApproved = Boolean(previewRaw?.approved ?? previewRaw?.[5]);
+      const previewClaimed = Boolean(previewRaw?.claimed ?? previewRaw?.[6]);
+
+      setSalaryPreview({
+        monthId: previewMonthId,
+        monthCompleted: previewMonthCompleted,
+        rank: previewRank,
+        reward: previewReward.toFixed(4),
+        eligible: previewEligible,
+        approved: previewApproved,
+        claimed: previewClaimed,
+      });
+
+      const onChainEarned = toAmount(web3, salaryRaw);
+      const salaryEarnedValue = previewReward > 0 ? previewReward : onChainEarned;
+      const approvedValue = previewApproved && !previewClaimed ? previewReward : 0;
+
+      setSalaryEarned(salaryEarnedValue.toFixed(4));
+      setApprovedPendingSalary(approvedValue.toFixed(4));
+      setClaimedSalary(onChainEarned.toFixed(4));
+
+    } catch (error) {
+      resetSalaryState();
+    }
   };
 
   useEffect(() => {
     const fetchSalaryData = async () => {
-      if (!account || !window.ethereum) {
-        setSalaryEarned("0.0000");
-        setTotalWithdrawSalary("0.0000");
-        setPendingMonths([]);
-        return;
-      }
-
-      try {
-        const web3 = window.web3 || new Web3(window.ethereum);
-        const contract = new web3.eth.Contract(Abi_Main, ContractAddress_Main);
-        const poolContract = new web3.eth.Contract(
-          poolContractAbi,
-          poolContractAddress
-        );
-
-        const [salaryRaw, pendingData, salaryHistoryLengthRaw] = await Promise.all([
-          contract.methods.userSalaryEarned(account).call().catch(() => "0"),
-          poolContract.methods
-            .getUserPendingApprovedSalaryMonths(account)
-            .call()
-            .catch(() => [[], [], []]),
-          contract.methods.getSalaryHistoryLength(account).call().catch(() => "0"),
-        ]);
-
-        const months = pendingData?.months ?? pendingData?.[0] ?? [];
-        const amounts = pendingData?.amounts ?? pendingData?.[2] ?? [];
-
-        const pendingTotal = amounts.reduce((sum, amountRaw) => {
-          const amount = Number(
-            web3.utils.fromWei((amountRaw || "0").toString(), "ether")
-          );
-          return sum + (Number.isFinite(amount) ? amount : 0);
-        }, 0);
-
-        const salaryValue = Number(
-          web3.utils.fromWei((salaryRaw || "0").toString(), "ether")
-        );
-        setSalaryEarned((pendingTotal - salaryValue).toFixed(4));
-
-        const rows = months.map((month, index) => {
-          const amountRaw = amounts[index] ?? "0";
-          const amountFormatted = Number(
-            web3.utils.fromWei((amountRaw || "0").toString(), "ether")
-          ).toFixed(2);
-          return {
-            month: Number(month),
-            amount: amountFormatted,
-          };
-        });
-        setPendingMonths(rows);
-
-        const salaryHistoryLength = Number(salaryHistoryLengthRaw || 0);
-        let withdrawnTotal = 0;
-        for (let i = 0; i < salaryHistoryLength; i += 1) {
-          const row = await contract.methods.userSalaryHistory(account, i).call();
-          const rowAmount = Array.isArray(row) ? row[2] : row?.amount;
-          withdrawnTotal += Number(
-            web3.utils.fromWei((rowAmount || "0").toString(), "ether")
-          );
-        }
-        setTotalWithdrawSalary(withdrawnTotal.toFixed(4));
-      } catch (error) {
-        setSalaryEarned("0.0000");
-        setTotalWithdrawSalary("0.0000");
-        setPendingMonths([]);
-      }
+      await loadSalaryData();
     };
 
     fetchSalaryData();
@@ -136,55 +121,57 @@ const ClaimSalary = () => {
         throw new Error("Claim salary failed");
       }
       toast.success("Salary claimed successfully");
-
-      // Refresh page data
-      const contract = new web3.eth.Contract(Abi_Main, ContractAddress_Main);
-      const [salaryRaw, pendingData, salaryHistoryLengthRaw] = await Promise.all([
-        contract.methods.userSalaryEarned(account).call().catch(() => "0"),
-        poolContract.methods
-          .getUserPendingApprovedSalaryMonths(account)
-          .call()
-          .catch(() => [[], [], []]),
-        contract.methods.getSalaryHistoryLength(account).call().catch(() => "0"),
-      ]);
-
-      const months = pendingData?.months ?? pendingData?.[0] ?? [];
-      const amounts = pendingData?.amounts ?? pendingData?.[2] ?? [];
-      const pendingTotal = amounts.reduce((sum, amountRaw) => {
-        const amount = Number(
-          web3.utils.fromWei((amountRaw || "0").toString(), "ether")
-        );
-        return sum + (Number.isFinite(amount) ? amount : 0);
-      }, 0);
-
-      const salaryValue = Number(
-        web3.utils.fromWei((salaryRaw || "0").toString(), "ether")
-      );
-      setSalaryEarned((pendingTotal - salaryValue).toFixed(4));
-
-      setPendingMonths(
-        months.map((month, index) => ({
-          month: Number(month),
-          amount: Number(
-            web3.utils.fromWei((amounts[index] || "0").toString(), "ether")
-          ).toFixed(2),
-        }))
-      );
-
-      const salaryHistoryLength = Number(salaryHistoryLengthRaw || 0);
-      let withdrawnTotal = 0;
-      for (let i = 0; i < salaryHistoryLength; i += 1) {
-        const row = await contract.methods.userSalaryHistory(account, i).call();
-        const rowAmount = Array.isArray(row) ? row[2] : row?.amount;
-        withdrawnTotal += Number(
-          web3.utils.fromWei((rowAmount || "0").toString(), "ether")
-        );
-      }
-      setTotalWithdrawSalary(withdrawnTotal.toFixed(4));
+      await loadSalaryData();
     } catch (error) {
       toast.error(error?.message || "Claim salary failed");
     } finally {
       setIsClaiming(false);
+    }
+  };
+
+  const handleRequestSalary = async () => {
+    if (!account || !window.ethereum) {
+      toast.error("Please connect wallet first");
+      return;
+    }
+
+    const salaryValue = Number(salaryEarned || 0);
+    if (!Number.isFinite(salaryValue) || salaryValue <= 0) {
+      toast.error("Salary value should be greater than 0");
+      return;
+    }
+
+    try {
+      setIsRequesting(true);
+      const web3 = window.web3 || new Web3(window.ethereum);
+      const contract = new web3.eth.Contract(Abi_Main, ContractAddress_Main);
+      const tx = await contract.methods.requestMonthlySalary().send({ from: account });
+
+      if (!tx?.status) {
+        throw new Error("Salary request failed");
+      }
+
+      toast.success("Salary requested successfully");
+      await loadSalaryData();
+    } catch (error) {
+      toast.error(error?.message || "Salary request failed");
+    } finally {
+      setIsRequesting(false);
+    }
+  };
+
+  const handleRefreshSalary = async () => {
+    if (!account || !window.ethereum) {
+      toast.error("Please connect wallet first");
+      return;
+    }
+
+    try {
+      setIsRefreshing(true);
+      await loadSalaryData();
+      toast.success("Data refreshed");
+    } finally {
+      setIsRefreshing(false);
     }
   };
 
@@ -197,8 +184,17 @@ const ClaimSalary = () => {
           <div className="container-fluid ActivationPage">
             <div className="row g-3">
               <div className="col-12">
-                <div className="heading text-start">
+                <div className="heading text-start d-flex justify-content-between align-items-center">
                   <th>Claim Salary</th>
+                  <button
+                    type="button"
+                    className="btn btn-sm btn-info"
+                    onClick={handleRefreshSalary}
+                    disabled={isRefreshing || !account || isRequesting || isClaiming}
+                    title="Refresh"
+                  >
+                    <i className="fa-solid fa-rotate-right" />
+                  </button>
                 </div>
               </div>
 
@@ -215,16 +211,61 @@ const ClaimSalary = () => {
                   <div className="col-md-4">
                     <div className="card bg-info text-white">
                       <div className="card-body">
-                        <h6 className="card-title">Total Withdraw Salary</h6>
-                        <h3 className="mb-0">$ {totalWithdrawSalary}</h3>
+                        <h6 className="card-title">Approved</h6>
+                        <h3 className="mb-0">$ {approvedPendingSalary}</h3>
                       </div>
                     </div>
                   </div>
                   <div className="col-md-4">
-                    <div className="card bg-primary text-white">
+                    <div className="card bg-success text-white">
                       <div className="card-body">
-                        <h6 className="card-title">Wallet Status</h6>
-                        <h3 className="mb-0">{walletStatus}</h3>
+                        <h6 className="card-title">Claimed Salary</h6>
+                        <h3 className="mb-0">$ {claimedSalary}</h3>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="col-12">
+                <div className="row g-3">
+                  <div className="col-md-3">
+                    <div className="card bg-theme1 text-white border-0">
+                      <div className="card-body">
+                        <h6 className="card-title">Preview Month</h6>
+                        <h5 className="mb-0">{salaryPreview?.monthId ?? 0}</h5>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="col-md-3">
+                    <div className="card bg-theme1 text-white border-0">
+                      <div className="card-body">
+                        <h6 className="card-title">Rank</h6>
+                        <h5 className="mb-0">{salaryPreview?.rank ?? 0}</h5>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="col-md-3">
+                    <div className="card bg-theme1 text-white border-0">
+                      <div className="card-body">
+                        <h6 className="card-title">Reward</h6>
+                        <h5 className="mb-0">$ {salaryPreview?.reward ?? "0.0000"}</h5>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="col-md-3">
+                    <div className="card bg-theme1 text-white border-0">
+                      <div className="card-body">
+                        <h6 className="card-title">Status</h6>
+                        <h6 className="mb-0">
+                          {salaryPreview?.claimed
+                            ? "Claimed"
+                            : salaryPreview?.approved
+                              ? "Approved"
+                              : salaryPreview?.eligible
+                                ? "Eligible"
+                                : "Pending"}
+                        </h6>
                       </div>
                     </div>
                   </div>
@@ -235,73 +276,28 @@ const ClaimSalary = () => {
                 <div className="text-center py-2">
                   <button
                     type="button"
+                    className="btn btn-warning me-2"
+                    style={actionBtnStyle}
+                    onClick={handleRequestSalary}
+                    disabled={isRequesting || !account || Number(salaryEarned || 0) <= 0}
+                  >
+                    {isRequesting ? "Requesting..." : "Request Salary"}
+                  </button>
+                  <button
+                    type="button"
                     className="btn btn-primary"
+                    style={actionBtnStyle}
                     onClick={handleClaimSalary}
-                    disabled={isClaiming || !account}
+                    disabled={
+                      isClaiming ||
+                      !account ||
+                      isRequesting ||
+                      isRefreshing ||
+                      Number(approvedPendingSalary || 0) <= 0
+                    }
                   >
                     {isClaiming ? "Processing..." : "Claim Salary"}
                   </button>
-                </div>
-              </div>
-
-              <div className="col-12">
-                <div className="card bg-theme1 rounded-2">
-                  <div className="card-body">
-                    <h5 className="text-white mb-3">Pending Approved Salary Months</h5>
-                    <div className="table-responsive">
-                      <table className="table table-dark align-middle mb-0 claim-salary-table">
-                        <thead>
-                          <tr>
-                            <th className="text-white">Month</th>
-                            <th className="text-white">Amount</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          {pendingMonths.length === 0 ? (
-                            <tr>
-                              <td className="text-white text-center" colSpan={2}>
-                                No pending approved salary months found.
-                              </td>
-                            </tr>
-                          ) : (
-                            paginatedPendingMonths.map((row, index) => (
-                              <tr key={`${row.month}-${index}`}>
-                                <td className="text-white">{row.month}</td>
-                                <td className="text-white">$ {row.amount}</td>
-                              </tr>
-                            ))
-                          )}
-                        </tbody>
-                      </table>
-                    </div>
-                    {pendingMonths.length > 0 && (
-                      <div className="pagination mt-3 d-flex justify-content-center align-items-center gap-2">
-                        <button
-                          className="btn btn-sm btn-outline-primary"
-                          onClick={() => handlePageChange(currentPage - 1)}
-                          disabled={currentPage <= 1}
-                        >
-                          Previous
-                        </button>
-                        <span className="text-white">
-                          Page {currentPage} of {totalPages} ({pendingMonths.length})
-                        </span>
-                        <button
-                          className="btn btn-sm btn-outline-primary"
-                          onClick={() => handlePageChange(currentPage + 1)}
-                          disabled={currentPage >= totalPages}
-                        >
-                          Next
-                        </button>
-                      </div>
-                    )}
-                    <style>{`
-                      .claim-salary-table tbody tr td,
-                      .claim-salary-table thead tr th {
-                        color: #fff !important;
-                      }
-                    `}</style>
-                  </div>
                 </div>
               </div>
             </div>

@@ -53,6 +53,11 @@ const Dashboard = () => {
   const [onChainSalaryIncome, setOnChainSalaryIncome] = useState(null);
   const [onChainLevelIncomeByLevel, setOnChainLevelIncomeByLevel] = useState([]);
   const [onChainUnlockedLevelCount, setOnChainUnlockedLevelCount] = useState(null);
+  const [onChainUserRank, setOnChainUserRank] = useState(null);
+  const [activeCycleUnlockAt, setActiveCycleUnlockAt] = useState(0);
+  const [secondsPerDay, setSecondsPerDay] = useState(86400);
+  const [remainingCycleTime, setRemainingCycleTime] = useState("00:00:00:00");
+  const [remainingCycleDays, setRemainingCycleDays] = useState("0.00");
   const [upgradePackageHistory, setUpgradePackageHistory] = useState([]);
   const [isUpgradeHistoryLoading, setIsUpgradeHistoryLoading] = useState(false);
   const [upgradeHistoryPage, setUpgradeHistoryPage] = useState(1);
@@ -81,6 +86,13 @@ const Dashboard = () => {
   const totalRoiLevelIncomeValue = onChainRoiLevelIncome ?? "0.00";
   const totalWithdrawLevelIncomeValue = onChainWithdrawLevelIncome ?? "0.00";
   const totalSalaryIncomeValue = onChainSalaryIncome ?? "0.00";
+  const totalEarningValue = (
+    Number(directIncomeValue || 0) +
+    Number(levelIncomeValue || 0) +
+    Number(totalRoiLevelIncomeValue || 0) +
+    Number(totalWithdrawLevelIncomeValue || 0) +
+    Number(totalSalaryIncomeValue || 0)
+  ).toFixed(2);
   const tokenSymbol = web3State.balances?.symbol || "USDT";
   const parsedWalletTokenBalance = Number(
     onChainWalletBalance ?? web3State.balances?.usdt ?? 0
@@ -262,22 +274,30 @@ const Dashboard = () => {
       const mainContract = new web3.eth.Contract(Abi_Main, ContractAddress_Main);
       const tokenContract = new web3.eth.Contract(TokenAbi, TokenAddress);
 
-      // Pre-check: upgrade only when active cycle last index (closed) is true
       const activeCycle = await mainContract.methods
         .getActivePackageCycle(web3State.account)
         .call()
         .catch(() => null);
 
-      const canUpgrade = Boolean(activeCycle?.closed ?? activeCycle?.[7] ?? false);
-      if (!canUpgrade) {
+      const decimalsRaw = await tokenContract.methods.decimals().call().catch(() => "18");
+      const decimals = Number(decimalsRaw || 18);
+      const amountInBaseUnits = toBaseUnits(selectedUpgradeAmount, decimals);
+      const selectedUpgradeAmountRaw = BigInt(amountInBaseUnits || "0");
+      const activePackageAmountRaw = (
+        activeCycle?.packageAmount ??
+        activeCycle?.[0] ??
+        "0"
+      ).toString();
+      const currentPackageAmountRaw = BigInt(activePackageAmountRaw || "0");
+      const isHigherPackageUpgrade = selectedUpgradeAmountRaw > currentPackageAmountRaw;
+      const canUpgradeAfterLock = Boolean(activeCycle?.closed ?? activeCycle?.[7] ?? false);
+
+      // If user is moving to a higher package (e.g. 50 -> 100), allow without 25-day lock check.
+      if (!isHigherPackageUpgrade && !canUpgradeAfterLock) {
         toast.dismiss(toastId);
         toast.error("Please claim ROI first and upgrade only after 25 days are completed.");
         return;
       }
-
-      const decimalsRaw = await tokenContract.methods.decimals().call().catch(() => "18");
-      const decimals = Number(decimalsRaw || 18);
-      const amountInBaseUnits = toBaseUnits(selectedUpgradeAmount, decimals);
 
       const allowanceRaw = await tokenContract.methods
         .allowance(web3State.account, ContractAddress_Main)
@@ -319,6 +339,36 @@ const Dashboard = () => {
   };
 
   useEffect(() => {
+    if (!activeCycleUnlockAt || Number(activeCycleUnlockAt) <= 0) {
+      setRemainingCycleTime("00:00:00:00");
+      setRemainingCycleDays("0.00");
+      return;
+    }
+
+    const formatRemaining = () => {
+      const now = Math.floor(Date.now() / 1000);
+      const diff = Math.max(Number(activeCycleUnlockAt) - now, 0);
+      const effectiveSecondsPerDay = Number(secondsPerDay || 86400);
+      const days = Math.floor(diff / effectiveSecondsPerDay);
+      const dayRemainder = diff % effectiveSecondsPerDay;
+      const hours = Math.floor(dayRemainder / 3600);
+      const minutes = Math.floor((dayRemainder % 3600) / 60);
+      const seconds = dayRemainder % 60;
+      const daysLeft = diff / effectiveSecondsPerDay;
+      setRemainingCycleDays(daysLeft.toFixed(2));
+      setRemainingCycleTime(
+        `${String(days).padStart(2, "0")}:${String(hours).padStart(2, "0")}:${String(
+          minutes
+        ).padStart(2, "0")}:${String(seconds).padStart(2, "0")}`
+      );
+    };
+
+    formatRemaining();
+    const timer = setInterval(formatRemaining, 1000);
+    return () => clearInterval(timer);
+  }, [activeCycleUnlockAt, secondsPerDay]);
+
+  useEffect(() => {
     const fetchDirectAndTeam = async () => {
       if (!web3State.isConnected || !web3State.account || !window.ethereum) {
         setOnChainDirect(null);
@@ -333,6 +383,9 @@ const Dashboard = () => {
         setOnChainSalaryIncome(null);
         setOnChainLevelIncomeByLevel([]);
         setOnChainUnlockedLevelCount(null);
+        setOnChainUserRank(null);
+        setActiveCycleUnlockAt(0);
+        setSecondsPerDay(86400);
         return;
       }
 
@@ -444,6 +497,25 @@ const Dashboard = () => {
           .call()
           .catch(() => "0");
         setOnChainUnlockedLevelCount(Number(unlockedLevelCountRaw || 0));
+
+        const userRankRaw = await contract.methods
+          .userRank(web3State.account)
+          .call()
+          .catch(() => "0");
+        setOnChainUserRank(Number(userRankRaw || 0));
+
+        const activeCycle = await contract.methods
+          .getActivePackageCycle(web3State.account)
+          .call()
+          .catch(() => null);
+        const unlockAtRaw = activeCycle?.unlockAt ?? activeCycle?.[2] ?? "0";
+        setActiveCycleUnlockAt(Number(unlockAtRaw || 0));
+
+        const secondsPerDayRaw = await contract.methods
+          .SECONDS_PER_DAY()
+          .call()
+          .catch(() => "86400");
+        setSecondsPerDay(Number(secondsPerDayRaw || 86400));
 
         const tokenContract = new web3.eth.Contract(TokenAbi, TokenAddress);
         const [walletBalanceRaw, tokenDecimalsRaw] = await Promise.all([
@@ -737,19 +809,36 @@ const Dashboard = () => {
                         <h5 className="text-white pb-2">Your Referral Link</h5>
                       </div>
                       <div className="card-body">
-                        <div className="input-group">
-                          <input
-                            type="text"
-                            className="form-control"
-                            value={referralLink}
-                            readOnly
-                          />
-                          <button
-                            className="btn btn-primary"
-                            onClick={copyReferralLink}
-                          >
-                            <i className="fa-solid fa-copy"></i> Copy
-                          </button>
+                        <div className="row g-2 align-items-center">
+                          <div className="col-lg-8 col-md-12">
+                            <div className="input-group">
+                              <input
+                                type="text"
+                                className="form-control"
+                                value={referralLink}
+                                readOnly
+                              />
+                              <button
+                                className="btn btn-primary"
+                                onClick={copyReferralLink}
+                              >
+                                <i className="fa-solid fa-copy"></i> Copy
+                              </button>
+                            </div>
+                          </div>
+                          <div className="col-lg-4 col-md-12 text-lg-end">
+                            <div className="text-white">
+                              <small className="d-block text-white-50">
+                                Current Cycle Time Left
+                              </small>
+                              <span className="badge bg-primary fs-6">
+                                {remainingCycleTime}
+                              </span>
+                              <small className="d-block text-white mt-1">
+                                {remainingCycleDays} day(s) left
+                              </small>
+                            </div>
+                          </div>
                         </div>
                         <small className="text-white mt-2 d-block">
                           Share this link to invite new users. They will
@@ -831,7 +920,7 @@ const Dashboard = () => {
                     </div>
 
                     <div className="row mt-3">
-                      <div className="col-12">
+                      <div className="col-lg-6 col-md-12">
                         <div className="card maincard">
                           <div className="card-body">
                             <h5 className="text-white mb-3">Upgradeable Package</h5>
@@ -855,6 +944,30 @@ const Dashboard = () => {
                               >
                                 {isUpgradeLoading ? "Processing..." : "Upgrade Package"}
                               </button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div className="col-lg-6 col-md-12">
+                        <div className="row g-3">
+                          <div className="col-12 col-sm-6">
+                            <div className="card maincard h-100">
+                              <div className="card-body">
+                                <p className="label mb-2">
+                                  Current Salary Rank <span className="up"> &#9650;</span>
+                                </p>
+                                <h3>{onChainUserRank ?? 0}</h3>
+                              </div>
+                            </div>
+                          </div>
+                          <div className="col-12 col-sm-6">
+                            <div className="card maincard h-100">
+                              <div className="card-body">
+                                <p className="label mb-2">
+                                  Total Earning <span className="up"> &#9650;</span>
+                                </p>
+                                <h3>$ {totalEarningValue}</h3>
+                              </div>
                             </div>
                           </div>
                         </div>

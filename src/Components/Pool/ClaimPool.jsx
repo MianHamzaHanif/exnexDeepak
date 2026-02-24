@@ -13,6 +13,13 @@ const ClaimPool = () => {
   const [poolStatus, setPoolStatus] = useState(null);
   const [isStatusLoading, setIsStatusLoading] = useState(false);
   const [isClaiming, setIsClaiming] = useState(false);
+  const claimableAmount = Number(poolStatus?.claimableAmount || 0);
+  const canClaim =
+    !isClaiming &&
+    !isStatusLoading &&
+    !!account &&
+    selectedMonth !== "" &&
+    claimableAmount > 0;
 
   useEffect(() => {
     const loadMonths = async () => {
@@ -26,9 +33,12 @@ const ClaimPool = () => {
         const poolContract = new web3.eth.Contract(poolContractAbi, poolContractAddress);
         const currentMonthRaw = await poolContract.methods.getCurrentMonthId().call();
         const currentMonth = Number(currentMonthRaw || 0);
-        const months = Array.from({ length: currentMonth + 1 }, (_, idx) => currentMonth - idx);
+        const months =
+          currentMonth > 0
+            ? Array.from({ length: currentMonth }, (_, idx) => currentMonth - 1 - idx)
+            : [];
         setMonthOptions(months);
-        setSelectedMonth(String(currentMonth));
+        setSelectedMonth(months.length > 0 ? String(months[0]) : "");
       } catch (error) {
         setMonthOptions([]);
         setSelectedMonth("");
@@ -49,7 +59,7 @@ const ClaimPool = () => {
         const web3 = window.web3 || new Web3(window.ethereum);
         const poolContract = new web3.eth.Contract(poolContractAbi, poolContractAddress);
         const status = await poolContract.methods
-          .getUserMonthlyPoolRewardStatus(Number(selectedMonth), account)
+          .getUserExnexDeepakRewardStatus(Number(selectedMonth), account)
           .call();
 
         const totalPoolAmountRaw = status?.totalPoolAmount ?? status?.[1] ?? "0";
@@ -91,13 +101,22 @@ const ClaimPool = () => {
       toast.error("Please select month");
       return;
     }
+    if (claimableAmount <= 0) {
+      toast.error("Claimable amount must be greater than zero");
+      return;
+    }
+    const selectedMonthNum = Number(selectedMonth);
+    if (Number.isNaN(selectedMonthNum)) {
+      toast.error("Invalid selected month");
+      return;
+    }
 
     try {
       setIsClaiming(true);
       const web3 = window.web3 || new Web3(window.ethereum);
       const poolContract = new web3.eth.Contract(poolContractAbi, poolContractAddress);
       const tx = await poolContract.methods
-        .claimMonthlyReward(Number(selectedMonth))
+        .claimMonthlyReward(selectedMonthNum)
         .send({ from: account });
 
       if (!tx?.status) {
@@ -107,7 +126,7 @@ const ClaimPool = () => {
 
       // Refresh current status after claim
       const status = await poolContract.methods
-        .getUserMonthlyPoolRewardStatus(Number(selectedMonth), account)
+        .getUserExnexDeepakRewardStatus(selectedMonthNum, account)
         .call()
         .catch(() => null);
       if (status) {
@@ -241,12 +260,12 @@ const ClaimPool = () => {
                       )}
                     </div>
 
-                    <div className="d-flex justify-content-end">
+                    <div className="d-flex justify-content-center">
                       <button
                         className="btn pool-claim-btn px-4"
                         type="button"
                         onClick={handleClaimPool}
-                        disabled={isClaiming || !account || selectedMonth === ""}
+                        disabled={!canClaim}
                       >
                         {isClaiming ? "Processing..." : "Claim"}
                       </button>

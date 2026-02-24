@@ -41,26 +41,19 @@ const SalaryIncome = () => {
           .userSalaryHistory(web3State.account, i)
           .call();
 
-        const rankRaw = Array.isArray(row) ? row[0] : row?.rank;
-        const periodsRaw = Array.isArray(row) ? row[1] : row?.periods;
-        const amountRaw = Array.isArray(row) ? row[2] : row?.amount;
-        const claimedAtRaw = Array.isArray(row) ? row[3] : row?.claimedAt;
+        const rankRaw = Array.isArray(row) ? row[0] : row?.rank ?? "0";
+        const periodsRaw = Array.isArray(row) ? row[1] : row?.periods ?? "0";
+        const amountRaw = Array.isArray(row) ? row[2] : row?.amount ?? "0";
+        const claimedAtRaw = Array.isArray(row) ? row[3] : row?.claimedAt ?? "0";
 
         rows.push({
-          rank: Number(rankRaw || 0),
-          periods: Number(periodsRaw || 0),
-          income: amountRaw
-            ? web3.utils.fromWei(amountRaw.toString(), "ether")
-            : "0",
-          date:
-            Number(claimedAtRaw) > 0
-              ? new Date(Number(claimedAtRaw) * 1000).toLocaleString()
-              : "N/A",
-          timestamp: Number(claimedAtRaw || 0),
+          rank: rankRaw.toString(),
+          periods: periodsRaw.toString(),
+          amount: amountRaw.toString(),
+          claimedAt: claimedAtRaw.toString(),
         });
       }
 
-      rows.sort((a, b) => b.timestamp - a.timestamp);
       setHistory(rows);
       setCurrentPage(1);
     } catch (error) {
@@ -155,8 +148,8 @@ const SalaryIncome = () => {
                             <th>S.No</th>
                             <th>Rank</th>
                             <th>Periods</th>
-                            <th>Income</th>
-                            <th>Date</th>
+                            <th>Amount</th>
+                            <th>Claimed At</th>
                           </tr>
                         </thead>
                         <tbody className="text-white">
@@ -174,12 +167,12 @@ const SalaryIncome = () => {
                             </tr>
                           ) : (
                             currentItems.map((item, idx) => (
-                              <tr key={`${item.rank}-${item.timestamp}-${idx}`}>
+                              <tr key={`${item.rank}-${item.claimedAt}-${idx}`}>
                                 <td>{(currentPage - 1) * itemsPerPage + idx + 1}</td>
                                 <td>{item.rank}</td>
                                 <td>{item.periods}</td>
-                                <td>$ {Number(item.income || 0).toFixed(4)}</td>
-                                <td>{item.date || "N/A"}</td>
+                                <td>{item.amount}</td>
+                                <td>{item.claimedAt}</td>
                               </tr>
                             ))
                           )}

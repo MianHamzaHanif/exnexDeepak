@@ -8,16 +8,11 @@ import {
   poolContractAddress,
   poolContractAbi,
 } from "../../Services/poolAddress";
-import {
-  exnexDeepakAddress,
-  exnexDeepakAbi,
-} from "../../Services/exnexDeepakAddress";
 
 const ApproveSalary = () => {
   const account = useSelector((state) => state.web3State?.account || "");
   const [monthOptions, setMonthOptions] = useState([]);
   const [selectedMonth, setSelectedMonth] = useState("");
-  const [users, setUsers] = useState([]);
   const [previewRows, setPreviewRows] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [poolOwner, setPoolOwner] = useState("");
@@ -46,10 +41,6 @@ const ApproveSalary = () => {
           poolContractAbi,
           poolContractAddress
         );
-        const mainContract = new web3.eth.Contract(
-          exnexDeepakAbi,
-          exnexDeepakAddress
-        );
 
         const currentMonthRaw = await poolContract.methods
           .getCurrentMonthId()
@@ -64,28 +55,6 @@ const ApproveSalary = () => {
         );
         setMonthOptions(months);
         setSelectedMonth(String(currentMonth));
-
-        const nextUserIdRaw = await mainContract.methods
-          .nextUserId()
-          .call()
-          .catch(() => "1");
-        const nextUserId = Number(nextUserIdRaw || 1);
-
-        const userRows = [];
-        for (let i = 1; i < nextUserId; i += 1) {
-          const addr = await mainContract.methods
-            .userAddressById(i)
-            .call()
-            .catch(() => "0x0000000000000000000000000000000000000000");
-
-          if (
-            addr &&
-            addr !== "0x0000000000000000000000000000000000000000"
-          ) {
-            userRows.push({ id: i, address: addr });
-          }
-        }
-        setUsers(userRows);
       } finally {
         setIsLoading(false);
       }
@@ -115,52 +84,58 @@ const ApproveSalary = () => {
           poolContractAddress
         );
 
+        const pendingLengthRaw = await poolContract.methods
+          .getPendingSalaryRequestMonthLength(selectedMonthNum)
+          .call()
+          .catch(() => "0");
+        const pendingLength = Number(pendingLengthRaw || 0);
+
+        const pendingAddresses = await Promise.all(
+          Array.from({ length: pendingLength }, (_, idx) =>
+            poolContract.methods
+              .getPendingSalaryRequestMonthUserAt(selectedMonthNum, idx)
+              .call()
+              .catch(() => "0x0000000000000000000000000000000000000000")
+          )
+        );
+
+        const validAddresses = pendingAddresses.filter(
+          (addr) => addr && addr !== "0x0000000000000000000000000000000000000000"
+        );
+
         const rows = await Promise.all(
-          users.map(async (u) => {
+          validAddresses.map(async (address, idx) => {
             const preview = await poolContract.methods
-              .previewUserMonthSalary(selectedMonthNum, u.address)
+              .getUserSalaryPreview(selectedMonthNum, address)
               .call()
               .catch(() => null);
 
-            if (!preview) {
-              return {
-                id: u.id,
-                address: u.address,
-                monthCompleted: false,
-                rank: 0,
-                reward: "0.00",
-                eligible: false,
-                approved: false,
-                claimed: false,
-              };
-            }
-
-            const rewardRaw = preview.reward ?? preview[2] ?? "0";
-            const reward = Number(
-              web3.utils.fromWei((rewardRaw || "0").toString(), "ether")
+            const estimatedRewardRaw = preview?.estimatedReward ?? preview?.[4] ?? "0";
+            const estimatedReward = Number(
+              web3.utils.fromWei((estimatedRewardRaw || "0").toString(), "ether")
             ).toFixed(2);
 
             return {
-              id: u.id,
-              address: u.address,
-              monthCompleted: Boolean(preview.monthCompleted ?? preview[0]),
-              rank: Number(preview.rank ?? preview[1] ?? 0),
-              reward,
-              eligible: Boolean(preview.eligible ?? preview[3]),
-              approved: Boolean(preview.approved ?? preview[4]),
-              claimed: Boolean(preview.claimed ?? preview[5]),
+              id: idx + 1,
+              address,
+              monthApproved: Boolean(preview?.monthApproved ?? preview?.[0]),
+              userApproved: Boolean(preview?.userApproved ?? preview?.[1]),
+              rank: Number(preview?.rank ?? preview?.[2] ?? 0),
+              periods: Number(preview?.periods ?? preview?.[3] ?? 0),
+              estimatedReward,
+              canClaim: Boolean(preview?.canClaim ?? preview?.[5]),
             };
           })
         );
 
-        setPreviewRows(rows.filter((row) => row.rank > 0));
+        setPreviewRows(rows);
       } finally {
         setIsLoading(false);
       }
     };
 
     loadPreviewTable();
-  }, [account, selectedMonth, users]);
+  }, [account, selectedMonth]);
 
   const handleApproveSalary = async (row) => {
     if (!isOwner) {
@@ -186,7 +161,7 @@ const ApproveSalary = () => {
       setPreviewRows((prev) =>
         prev.map((r) =>
           r.id === row.id && r.address.toLowerCase() === row.address.toLowerCase()
-            ? { ...r, approved: true }
+            ? { ...r, userApproved: true }
             : r
         )
       );
@@ -234,10 +209,10 @@ const ApproveSalary = () => {
                             {selectedMonthLabel}
                           </span>
                           <span className="badge bg-info px-3 py-2">
-                            Total Users: {users.length}
+                            Pending Requests: {previewRows.length}
                           </span>
                           <span className="badge bg-success px-3 py-2">
-                            Rank &gt; 0: {previewRows.length}
+                            Owner: {isOwner ? "Yes" : "No"}
                           </span>
                         </div>
                       </div>
@@ -254,23 +229,24 @@ const ApproveSalary = () => {
                       <table className="table table-dark align-middle mb-0 text-white approve-salary-table">
                         <thead>
                           <tr>
-                            <th className="text-white">User ID</th>
+                            <th className="text-white">#</th>
                             <th className="text-white">Address</th>
                             <th className="text-white">Rank</th>
-                            <th className="text-white">Reward</th>
-                            <th className="text-white">Approved</th>
-                            <th className="text-white">Claimed</th>
-                            <th className="text-white">Month Completed</th>
+                            <th className="text-white">Periods</th>
+                            <th className="text-white">Estimated Reward</th>
+                            <th className="text-white">Month Approved</th>
+                            <th className="text-white">User Approved</th>
+                            <th className="text-white">Can Claim</th>
                             <th className="text-white">Action</th>
                           </tr>
                         </thead>
                         <tbody>
                           {previewRows.length === 0 && (
                             <tr>
-                              <td colSpan={8} className="text-center text-white">
+                              <td colSpan={9} className="text-center text-white">
                                 {isLoading
                                   ? "Loading..."
-                                  : "No users found for selected month."}
+                                  : "No pending salary requests for selected month."}
                               </td>
                             </tr>
                           )}
@@ -279,10 +255,11 @@ const ApproveSalary = () => {
                               <td className="text-white">{row.id}</td>
                               <td className="text-white">{row.address}</td>
                               <td className="text-white">{row.rank}</td>
-                              <td className="text-white">$ {row.reward}</td>
-                              <td className="text-white">{row.approved ? "Yes" : "No"}</td>
-                              <td className="text-white">{row.claimed ? "Yes" : "No"}</td>
-                              <td className="text-white">{row.monthCompleted ? "Yes" : "No"}</td>
+                              <td className="text-white">{row.periods}</td>
+                              <td className="text-white">$ {row.estimatedReward}</td>
+                              <td className="text-white">{row.monthApproved ? "Yes" : "No"}</td>
+                              <td className="text-white">{row.userApproved ? "Yes" : "No"}</td>
+                              <td className="text-white">{row.canClaim ? "Yes" : "No"}</td>
                               <td className="text-white">
                                 <button
                                   type="button"
@@ -290,14 +267,14 @@ const ApproveSalary = () => {
                                   style={{ padding: "2px 8px", fontSize: "12px" }}
                                   disabled={
                                     !isOwner ||
-                                    row.approved ||
+                                    row.userApproved ||
                                     approvingKey === `${row.id}-${row.address}`
                                   }
                                   onClick={() => handleApproveSalary(row)}
                                 >
                                   {approvingKey === `${row.id}-${row.address}`
                                     ? "Approving..."
-                                    : row.approved
+                                    : row.userApproved
                                       ? "Approved"
                                       : "Approve"}
                                 </button>
