@@ -229,14 +229,14 @@ const ClaimSalary = () => {
 
               <div className="col-12">
                 <div className="row g-3">
-                  <div className="col-md-3">
+                  {/* <div className="col-md-3">
                     <div className="card bg-theme1 text-white border-0">
                       <div className="card-body">
                         <h6 className="card-title">Preview Month</h6>
                         <h5 className="mb-0">{salaryPreview?.monthId ?? 0}</h5>
                       </div>
                     </div>
-                  </div>
+                  </div> */}
                   <div className="col-md-3">
                     <div className="card bg-theme1 text-white border-0">
                       <div className="card-body">
