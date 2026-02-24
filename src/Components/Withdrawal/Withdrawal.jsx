@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 // src/Components/Withdrawal/Withdrawal.jsx 
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
 import Sidebar from "../Dashboard/Sidebar";
 import Header from "../Dashboard/Header";
 import { useDispatch, useSelector } from "react-redux";
@@ -60,43 +60,42 @@ const Withdrawal = () => {
     }
   }, [dispatch, web3State.isConnected]);
 
+  const loadWithdrawalStats = useCallback(async () => {
+    if (!web3State.isConnected || !account || !window.ethereum) {
+      setPendingRoiBalance("0.0000");
+      setOnChainTotalWithdrawn("0.0000");
+      return;
+    }
+
+    try {
+      const web3 = window.web3 || new Web3(window.ethereum);
+      const contract = new web3.eth.Contract(Abi_Main, ContractAddress_Main);
+      const [pendingRoiRaw, totalWithdrawnRaw] = await Promise.all([
+        contract.methods.getTotalPendingRoi(account).call(),
+        contract.methods.userTotalWithdrawn(account).call(),
+      ]);
+
+      const pendingRoi = web3.utils.fromWei(
+        (pendingRoiRaw || "0").toString(),
+        "ether"
+      );
+      const totalWithdrawnValue = web3.utils.fromWei(
+        (totalWithdrawnRaw || "0").toString(),
+        "ether"
+      );
+
+      setPendingRoiBalance(formatAmount(pendingRoi));
+      setOnChainTotalWithdrawn(formatAmount(totalWithdrawnValue));
+    } catch (error) {
+      console.error("Failed to fetch getTotalPendingRoi:", error);
+      setPendingRoiBalance("0.0000");
+      setOnChainTotalWithdrawn("0.0000");
+    }
+  }, [web3State.isConnected, account]);
+
   useEffect(() => {
-    const fetchPendingRoi = async () => {
-      if (!web3State.isConnected || !account || !window.ethereum) {
-        setPendingRoiBalance("0.0000");
-        setOnChainTotalWithdrawn("0.0000");
-        return;
-      }
-
-      try {
-        const web3 = window.web3 || new Web3(window.ethereum);
-        const contract = new web3.eth.Contract(Abi_Main, ContractAddress_Main);
-        const pendingRoiRaw = await contract.methods
-          .getTotalPendingRoi(account)
-          .call();
-        const pendingRoi = web3.utils.fromWei(
-          (pendingRoiRaw || "0").toString(),
-          "ether"
-        );
-        setPendingRoiBalance(formatAmount(pendingRoi));
-
-        const totalWithdrawnRaw = await contract.methods
-          .userTotalWithdrawn(account)
-          .call();
-        const totalWithdrawnValue = web3.utils.fromWei(
-          (totalWithdrawnRaw || "0").toString(),
-          "ether"
-        );
-        setOnChainTotalWithdrawn(formatAmount(totalWithdrawnValue));
-      } catch (error) {
-        console.error("Failed to fetch getTotalPendingRoi:", error);
-        setPendingRoiBalance("0.0000");
-        setOnChainTotalWithdrawn("0.0000");
-      }
-    };
-
-    fetchPendingRoi();
-  }, [web3State.isConnected, account, web3State.lastUpdated]);
+    loadWithdrawalStats();
+  }, [loadWithdrawalStats, web3State.lastUpdated]);
 
   const handleWithdraw = async () => {
     if (!account) {
@@ -128,9 +127,9 @@ const Withdrawal = () => {
 
       toast.dismiss(toastId);
       toast.success("Withdrawal successful!");
-      // Refresh data immediately after withdrawal
-      await dispatch(fetchContractData());
-      dispatch(fetchDashboardData());
+      // Refresh redux + direct on-chain values immediately after successful tx
+      await Promise.all([dispatch(fetchContractData()), dispatch(fetchDashboardData())]);
+      await loadWithdrawalStats();
     } catch (error) {
       toast.error(error?.message || "Withdrawal failed");
     } finally {

@@ -20,6 +20,8 @@ const ClaimSalary = () => {
   const [approvedPendingSalary, setApprovedPendingSalary] = useState("0.0000");
   const [claimedSalary, setClaimedSalary] = useState("0.0000");
   const [salaryPreview, setSalaryPreview] = useState(null);
+  const [salaryCompletionAt, setSalaryCompletionAt] = useState(0);
+  const [remainingToComplete, setRemainingToComplete] = useState("0d 00:00:00");
   const [isRequesting, setIsRequesting] = useState(false);
   const [isClaiming, setIsClaiming] = useState(false);
   const [isRefreshing, setIsRefreshing] = useState(false);
@@ -36,11 +38,22 @@ const ClaimSalary = () => {
     setApprovedPendingSalary("0.0000");
     setClaimedSalary("0.0000");
     setSalaryPreview(null);
+    setSalaryCompletionAt(0);
+    setRemainingToComplete("0d 00:00:00");
   };
 
   const toAmount = (web3, raw) => {
     const parsed = Number(web3.utils.fromWei((raw || "0").toString(), "ether"));
     return Number.isFinite(parsed) ? parsed : 0;
+  };
+
+  const formatRemainingTime = (secondsLeft) => {
+    const safe = Math.max(Number(secondsLeft || 0), 0);
+    const days = Math.floor(safe / 86400);
+    const hours = Math.floor((safe % 86400) / 3600);
+    const minutes = Math.floor((safe % 3600) / 60);
+    const seconds = safe % 60;
+    return `${days}d ${String(hours).padStart(2, "0")}:${String(minutes).padStart(2, "0")}:${String(seconds).padStart(2, "0")}`;
   };
 
   const loadSalaryData = async () => {
@@ -54,9 +67,14 @@ const ClaimSalary = () => {
       const contract = new web3.eth.Contract(Abi_Main, ContractAddress_Main);
       const poolContract = new web3.eth.Contract(poolContractAbi, poolContractAddress);
 
-      const [salaryRaw, previewRaw] = await Promise.all([
+      const [salaryRaw, previewRaw, windowRaw, salaryCycleRaw] = await Promise.all([
         contract.methods.userSalaryEarned(account).call().catch(() => "0"),
         contract.methods.getSalaryRequestPreview(account).call().catch(() => null),
+        contract.methods
+          .getSalaryRequestPreviewWithWindow(account)
+          .call()
+          .catch(() => null),
+        contract.methods.salaryCycle().call().catch(() => "0"),
       ]);
 
       const previewMonthId = Number(previewRaw?.monthId ?? previewRaw?.[0] ?? 0);
@@ -88,10 +106,39 @@ const ClaimSalary = () => {
       setApprovedPendingSalary(approvedValue.toFixed(4));
       setClaimedSalary(onChainEarned.toFixed(4));
 
+      const startAt = Number(windowRaw?.startAt ?? windowRaw?.[0] ?? 0);
+      const nextWindowAt = Number(windowRaw?.nextWindowAt ?? windowRaw?.[1] ?? 0);
+      const salaryCycle = Number(salaryCycleRaw || 0);
+      const computedCompletionAt =
+        nextWindowAt > 0
+          ? nextWindowAt
+          : startAt > 0 && salaryCycle > 0
+            ? startAt + salaryCycle
+            : 0;
+
+      setSalaryCompletionAt(computedCompletionAt);
+
     } catch (error) {
       resetSalaryState();
     }
   };
+
+  useEffect(() => {
+    if (!salaryCompletionAt) {
+      setRemainingToComplete("0d 00:00:00");
+      return undefined;
+    }
+
+    const updateRemaining = () => {
+      const now = Math.floor(Date.now() / 1000);
+      const remaining = Math.max(salaryCompletionAt - now, 0);
+      setRemainingToComplete(formatRemainingTime(remaining));
+    };
+
+    updateRemaining();
+    const timerId = setInterval(updateRemaining, 1000);
+    return () => clearInterval(timerId);
+  }, [salaryCompletionAt]);
 
   useEffect(() => {
     const fetchSalaryData = async () => {
@@ -250,6 +297,14 @@ const ClaimSalary = () => {
                       <div className="card-body">
                         <h6 className="card-title">Reward</h6>
                         <h5 className="mb-0">$ {salaryPreview?.reward ?? "0.0000"}</h5>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="col-md-3">
+                    <div className="card bg-theme1 text-white border-0">
+                      <div className="card-body">
+                        <h6 className="card-title">Time Remaining</h6>
+                        <h6 className="mb-0">{remainingToComplete}</h6>
                       </div>
                     </div>
                   </div>
