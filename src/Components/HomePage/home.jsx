@@ -1,9 +1,10 @@
-import { Link } from "react-router-dom";
 import "./home.css";
 import Header from "../header/Header";
 import Hero from "./Hero/Hero";
 import Features from "./Features/Features";
-import About from "./About/About";
+import Product from "./Product/Product";
+import Marketing from "./Marketing/Marketing";
+import Contact from "./Contact/Contact";
 import Share from "./Share/Share";
 import OurSupport from "./OurSupporter/OurSupport";
 import Participated from "./Participated/Participated";
@@ -21,7 +22,9 @@ const Home = () => {
               <div className="col-12 pageBg">
                 <Hero />
                 <Features />
-                <About />
+                <Product />
+                <Marketing />
+                <Contact />
                 {/* <Share /> */}
                 <OurSupport />
                 {/* <Participated /> */}

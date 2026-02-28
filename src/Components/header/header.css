@@ -1,22 +1,183 @@
 .homepageheader {
-  background-color: #0c7e55;
+  position: sticky;
+  top: 0;
+  z-index: 999;
+  background: #f8f9fb;
+  border-bottom: 1px solid #dde4ee;
 }
 
-.homepageheader ul.navbar-nav {
-  gap: 30px;
+.home-topbar {
+  background: #e5ebf2;
+  border-bottom: 1px solid #d1d9e4;
 }
 
-.homepageheader ul.navbar-nav li a {
-  align-items: center;
-  font-family: 'Dela Gothic One';
+.home-topbar-inner,
+.home-main-nav-inner {
+  width: min(1320px, 96%);
+  margin: 0 auto;
+}
+
+.home-topbar-inner {
+  min-height: 44px;
   display: flex;
-  flex-wrap: wrap;
-  font-size: 16px;
-  font-weight: 500;
-  gap: 4px;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.home-top-left,
+.home-top-right {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  font-size: 13px;
+}
+
+.home-top-left a {
+  color: #294b72;
+  text-decoration: none;
+}
+
+.home-top-left i,
+.home-top-right i {
+  color: #1f95d3;
+  margin-right: 6px;
+}
+
+.home-top-right span,
+.home-top-right a {
+  color: #294b72;
+  text-decoration: none;
+}
+
+.home-lang {
+  font-weight: 600;
+}
+
+.home-main-nav {
+  background: #f8f9fb;
+}
+
+.home-main-nav-inner {
+  min-height: 112px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 24px;
+}
+
+.home-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+}
+
+.home-brand img {
+  width: 66px;
+  height: 66px;
+  object-fit: contain;
+}
+
+.home-brand h4 {
+  margin: 0;
+  font-family: "Times New Roman", serif;
+  font-size: 46px;
   line-height: 1;
-  line-height: 18px;
-  overflow: hidden;
-  position: relative;
-  z-index: 1;
+  color: #2e4572;
+}
+
+.home-brand p {
+  margin: 0;
+  font-size: 14px;
+  letter-spacing: 0.3px;
+  color: #3d5d8f;
+}
+
+.home-nav-links {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  margin-left: auto;
+}
+
+.home-nav-links a {
+  text-decoration: none;
+  color: #4b4b4b;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.home-nav-links a:hover {
+  color: #1f95d3;
+}
+
+.member-btn {
+  border-radius: 8px;
+  background: #24a0dc;
+  color: #fff;
+  text-decoration: none;
+  padding: 11px 18px;
+  font-size: 15px;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.member-btn:hover {
+  color: #fff;
+}
+
+@media (max-width: 1200px) {
+  .home-nav-links {
+    gap: 16px;
+  }
+
+  .home-nav-links a {
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 991px) {
+  .home-topbar {
+    display: none;
+  }
+
+  .home-brand h4 {
+    font-size: 28px;
+  }
+
+  .home-brand p {
+    font-size: 10px;
+  }
+
+  .home-nav-links {
+    display: none;
+  }
+}
+
+@media (max-width: 575px) {
+  .home-main-nav-inner {
+    min-height: 72px;
+    gap: 10px;
+  }
+
+  .home-brand img {
+    width: 44px;
+    height: 44px;
+  }
+
+  .home-brand h4 {
+    font-size: 20px;
+  }
+
+  .home-brand p {
+    display: none;
+  }
+
+  .member-btn {
+    padding: 7px 10px;
+    font-size: 11px;
+  }
 }

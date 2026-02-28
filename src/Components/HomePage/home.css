@@ -1,0 +1,9 @@
+.page_wrapper {
+  background: #f2f6fb;
+  min-height: 100vh;
+}
+
+.Homepage .pageBg {
+  background: transparent;
+  padding: 0 0 40px;
+}

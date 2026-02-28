@@ -1,69 +1,58 @@
 .supporter-section {
-    max-width: 1100px;
-    margin: 5rem auto;
-    display: flex;
-    flex-direction: column;
-    gap: 4rem;
+  width: min(1320px, 96%);
+  margin: 24px auto 0;
+  background: #fff;
+  border: 1px solid #dce5f0;
+  border-radius: 16px;
+  padding: 28px 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 
 .supporter-section h1 {
-    font-size: 2.2rem;
-    color: white;
-    align-self: flex-end;
+  margin: 0;
+  font-size: clamp(1.3rem, 2.8vw, 2rem);
+  color: #24588b;
 }
 
 .supporter-section .supporter-wrapper {
-    display: flex;
-    justify-content: space-between;
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 14px;
 }
 
 .supporter-wrapper h4 {
-    color: rgba(240, 248, 255, 0.311);
-    font-size: 1.5rem;
-    font-weight: 700;
+  margin: 0;
+  border: 1px solid #dce5f0;
+  border-radius: 12px;
+  padding: 12px 10px;
+  color: #455d79;
+  font-size: 1rem;
+  font-weight: 700;
+  justify-content: center;
+  background: #f7fbff;
 }
 
-.supporter-wrapper h4 .icon{
-    width: auto;
-    height: 70px;
-}
-@media (max-width: 1024px) {
-    .supporter-section {
-        padding: 0 1.5rem;
-        gap: 3rem;
-    }
-
-    .supporter-wrapper h4 {
-        font-size: 1.8rem;
-    }
+.supporter-wrapper h4 .icon {
+  width: 42px;
+  height: 42px;
 }
 
-@media (max-width: 768px) {
-    .supporter-section {
-        gap: 2.5rem;
-        align-items: center;
-    }
-
-    .supporter-section h1 {
-        align-self: center;
-        font-size: 1.8rem;
-        text-align: center;
-    }
-
-    .supporter-section .supporter-wrapper {
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 1.5rem 2.5rem;
-    }
-
-    .supporter-wrapper h4 {
-        font-size: 1.4rem;
-        text-align: center;
-    }
+@media (max-width: 1100px) {
+  .supporter-section .supporter-wrapper {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
 }
 
-@media (max-width: 480px) {
-    .supporter-wrapper h4 {
-        font-size: 1.2rem;
-    }
+@media (max-width: 767px) {
+  .supporter-section .supporter-wrapper {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 500px) {
+  .supporter-section .supporter-wrapper {
+    grid-template-columns: 1fr;
+  }
 }

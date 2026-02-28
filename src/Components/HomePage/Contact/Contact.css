@@ -1,0 +1,130 @@
+.contact-section {
+  width: 100%;
+  padding: 48px 0;
+  background: linear-gradient(120deg, #16345a 0%, #1b4a76 45%, #205f94 100%);
+}
+
+.contact-container {
+  width: min(1240px, 94%);
+  margin: 0 auto;
+}
+
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 30px;
+}
+
+.contact-head {
+  margin: 0;
+  color: #8bd9ff;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.contact-head-big {
+  margin: 8px 0 0;
+  color: #ffffff;
+  font-size: clamp(1.55rem, 2.7vw, 2.3rem);
+  font-weight: 700;
+}
+
+.contact-list {
+  margin-top: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.contact-list-item {
+  display: grid;
+  grid-template-columns: 38px 1fr;
+  gap: 12px;
+  align-items: flex-start;
+}
+
+.contact-list-item img {
+  width: 30px;
+  height: 30px;
+  object-fit: contain;
+  margin-top: 4px;
+}
+
+.contact-list-head {
+  margin: 0;
+  color: #ffffff;
+  font-weight: 700;
+}
+
+.contact-list-content {
+  margin: 6px 0 0;
+  color: #dcecff;
+  line-height: 1.7;
+}
+
+.contact-card {
+  background: #ffffff;
+  border-radius: 14px;
+  padding: 20px;
+}
+
+.contact-form-head {
+  margin: 0;
+  color: #1a4068;
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
+.contact-form-subhead {
+  margin: 8px 0 0;
+  color: #5e7189;
+  line-height: 1.6;
+}
+
+.contact-form {
+  margin-top: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.contact-form input {
+  width: 100%;
+  border: 1px solid #d6e5f3;
+  border-radius: 8px;
+  height: 44px;
+  padding: 0 12px;
+  color: #173f67;
+}
+
+.contact-row {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.contact-form button {
+  width: 140px;
+  height: 42px;
+  border: none;
+  border-radius: 8px;
+  background: #23a0db;
+  color: #fff;
+  font-weight: 700;
+}
+
+@media (max-width: 991px) {
+  .contact-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 575px) {
+  .contact-row {
+    grid-template-columns: 1fr;
+  }
+
+  .contact-form button {
+    width: 100%;
+  }
+}

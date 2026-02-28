@@ -1,145 +1,100 @@
-/* 🔒 GLOBAL SAFETY (footer scope only) */
-.footer-outer {
-    width: 100%;
-    overflow-x: hidden;   /* 🔥 main fix */
+.footer {
+  width: 100%;
+  padding: 36px 0 32px;
+  background: #f7fbff;
+  border-top: 1px solid #ddeaf5;
+  position: static !important;
+  bottom: auto !important;
+  left: auto !important;
+  right: auto !important;
+  inset: auto !important;
+  z-index: auto !important;
 }
 
-/* MAIN WRAPPER */
-.footer-wrapper {
-    margin: 0 auto;
-    max-width: 1100px;
-    width: 100%;
-    padding: 0 1rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 2rem;
-    margin-bottom: 1rem;
-    box-sizing: border-box;
+.footer-top {
+  width: min(1240px, 94%);
+  margin: 0 auto;
 }
 
-/* HEADER */
-.footer-wrapper .footer-headder {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
+.footer-grid {
+  display: grid;
+  grid-template-columns: 320px 1fr;
+  gap: 28px;
 }
 
-.footer-headder .logo img {
-    width: 40px;
-    height: 40px;
-    display: block;
+.footer-logo {
+  width: 66px;
+  height: 66px;
+  object-fit: contain;
 }
 
-.footer-headder h1 {
-    color: #fff;
-    font-size: 2rem;
-    margin: 0;
+.footer-contact-block {
+  margin-top: 12px;
 }
 
-/* ICON SECTION */
-.footer-icon {
-    display: flex;
-    gap: 2rem;
-    position: relative;
-    overflow: hidden;   /* 🔥 pseudo-element fix */
+.footer-contact-text {
+  margin: 0;
+  color: #173f67;
+  font-weight: 700;
 }
 
-/* ICON CIRCLE */
-.footer-icon .icon {
-    width: 50px;
-    height: 50px;
-    overflow: hidden;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: radial-gradient(circle at center,
-            #5b4aa8 0%,
-            #221d3b 45%,
-            #172d6a 70%);
-    position: relative;
-    border-radius: 50%;
-    flex-shrink: 0;
+.footer-address {
+  margin: 8px 0 12px;
+  color: #5f7086;
+  font-size: 0.85rem;
+  line-height: 1.6;
 }
 
-/* GLOW EFFECT (FIXED – no overflow) */
-.footer-icon .icon::before {
-    content: "";
-    position: absolute;
-    inset: -8px;     /* reduced to prevent overflow */
-    border-radius: 50%;
-    background: radial-gradient(circle,
-            rgba(123, 63, 228, 0.6),
-            transparent 70%);
-    filter: blur(10px);
-    z-index: -1;
+.footer-line {
+  margin: 0 0 8px;
+  color: #173f67;
+  display: flex;
+  align-items: center;
+  gap: 7px;
 }
 
-/* ICON IMAGE */
-.footer-icon img {
-    width: 25px;
-    height: 20px;
-    z-index: 1;
-    filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.6));
-    display: block;
+.footer-line a {
+  color: #173f67;
+  text-decoration: none;
 }
 
-/* ------------------ RESPONSIVE ------------------ */
-
-@media (max-width: 1024px) {
-    .footer-wrapper {
-        gap: 1.8rem;
-    }
-
-    .footer-headder h1 {
-        font-size: 1.8rem;
-    }
+.footer-links-wrap {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
 }
 
-@media (max-width: 768px) {
-    .footer-wrapper {
-        gap: 1.5rem;
-        text-align: center;
-    }
-
-    .footer-headder {
-        flex-direction: column;
-        gap: 0.5rem;
-    }
-
-    .footer-headder .logo img {
-        width: 45px;
-        height: 45px;
-    }
-
-    .footer-headder h1 {
-        font-size: 1.6rem;
-    }
-
-    .footer-icon {
-        gap: 1.2rem;
-    }
-
-    .footer-icon .icon {
-        width: 44px;
-        height: 44px;
-    }
-
-    .footer-icon img {
-        width: 22px;
-        height: auto;
-    }
+.footer-link-group h4 {
+  margin: 0 0 10px;
+  color: #173f67;
+  font-size: 1rem;
 }
 
-@media (max-width: 480px) {
-    .footer-headder h1 {
-        font-size: 1.4rem;
-    }
+.footer-link-group a {
+  display: block;
+  margin-bottom: 8px;
+  color: #5f7086;
+  text-decoration: none;
+  font-size: 0.95rem;
+}
 
-    .footer-icon .icon {
-        width: 40px;
-        height: 40px;
-    }
+@media (max-width: 991px) {
+  .footer-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .footer-links-wrap {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 575px) {
+  .footer-logo {
+    width: 44px;
+    height: 44px;
+  }
+
+  .footer-links-wrap {
+    grid-template-columns: 1fr;
+  }
 }

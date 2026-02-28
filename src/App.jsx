@@ -46,11 +46,6 @@ function HomeEntry() {
   return <Home />;
 }
 
-function LoginEntry() {
-  const location = useLocation();
-  return <Navigate to={`/signup${location.search || ""}`} replace />;
-}
-
 function AppContent() {
   return (
     <>
@@ -90,7 +85,7 @@ function AppContent() {
         <Routes>
           <Route path="/" element={<HomeEntry />} />
           <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/login" element={<LoginEntry />} />
+          <Route path="/login" element={<Login />} />
           <Route path="/home" element={<Home />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/Forget" element={<Forget />} />

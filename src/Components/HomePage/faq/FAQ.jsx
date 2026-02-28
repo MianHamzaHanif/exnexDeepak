@@ -3,30 +3,28 @@ import "./Faq.css";
 import faq1 from "/webimg/faq-icon-1.png";
 import faq2 from "/webimg/faq-icon-2.png";
 import faq3 from "/webimg/faq-icon-3.png";
-import faq4 from "/webimg/faq-icon-4.png";
-import faq5 from "/webimg/faq-icon-5.png";
 
 const faqData = [
   {
-    title: "How can you achieve 0% trading risks?",
-    desc: "Exnex is the first automated trading algorithm for market-making, farming rewards and arbitrage that executes zero trading risk strategies across all major CEXs and DEXs.",
+    title: "How does Exnex Token fit into the trading plan?",
+    desc: "Exnex Token is integrated into the strategy flow for plan access, tracking, and portfolio participation across supported trading setups.",
     icon: faq1,
   },
   {
-    title: "What are supported wallets/chains?",
-    desc: "Support chain binance smart chain",
+    title: "Which wallets and chain are supported?",
+    desc: "Exnex currently supports Binance Smart Chain (BSC) with wallets such as MetaMask, Trust Wallet, Token Pocket, and SafePal.",
     icon: faq2,
   },
   {
-    title: "Why Exnex in better?",
-    desc: "Exnex algorithms are optimized for maximal yields achievable only with limited market cap in today’s market conditions.",
+    title: "Why is Exnex different?",
+    desc: "Exnex focuses on disciplined, plan-based execution with transparent metrics, practical risk control, and token-aligned strategy design.",
     icon: faq3,
   },
 ];
 
 const FAQ = () => {
   return (
-    <section className="faq-ui-section">
+    <section id="faq" className="faq-ui-section">
       <div className="faq-header">
         <h1>FAQ</h1>
       </div>
