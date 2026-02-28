@@ -8,10 +8,6 @@ import {
   exnexDeepakAddress as ContractAddress_Main,
   exnexDeepakAbi as Abi_Main,
 } from "../../Services/exnexDeepakAddress";
-import {
-  poolContractAddress,
-  poolContractAbi,
-} from "../../Services/poolAddress";
 
 const ClaimSalary = () => {
   const web3State = useSelector((state) => state.web3State);
@@ -65,7 +61,6 @@ const ClaimSalary = () => {
     try {
       const web3 = window.web3 || new Web3(window.ethereum);
       const contract = new web3.eth.Contract(Abi_Main, ContractAddress_Main);
-      const poolContract = new web3.eth.Contract(poolContractAbi, poolContractAddress);
 
       const [salaryRaw, previewRaw, windowRaw, salaryCycleRaw] = await Promise.all([
         contract.methods.userSalaryEarned(account).call().catch(() => "0"),
@@ -156,11 +151,8 @@ const ClaimSalary = () => {
     try {
       setIsClaiming(true);
       const web3 = window.web3 || new Web3(window.ethereum);
-      const poolContract = new web3.eth.Contract(
-        poolContractAbi,
-        poolContractAddress
-      );
-      const tx = await poolContract.methods
+      const contract = new web3.eth.Contract(Abi_Main, ContractAddress_Main);
+      const tx = await contract.methods
         .claimMonthlySalary()
         .send({ from: account });
 
