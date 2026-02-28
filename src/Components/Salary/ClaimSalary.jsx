@@ -8,6 +8,10 @@ import {
   exnexDeepakAddress as ContractAddress_Main,
   exnexDeepakAbi as Abi_Main,
 } from "../../Services/exnexDeepakAddress";
+import {
+  poolContractAddress,
+  poolContractAbi,
+} from "../../Services/poolAddress";
 
 const ClaimSalary = () => {
   const web3State = useSelector((state) => state.web3State);
@@ -61,9 +65,11 @@ const ClaimSalary = () => {
     try {
       const web3 = window.web3 || new Web3(window.ethereum);
       const contract = new web3.eth.Contract(Abi_Main, ContractAddress_Main);
+      const poolContract = new web3.eth.Contract(poolContractAbi, poolContractAddress);
 
-      const [salaryRaw, previewRaw, windowRaw, salaryCycleRaw] = await Promise.all([
+      const [salaryRaw, approvedPendingRaw, previewRaw, windowRaw, salaryCycleRaw] = await Promise.all([
         contract.methods.userSalaryEarned(account).call().catch(() => "0"),
+        poolContract.methods.getUserPendingApprovedSalary(account).call().catch(() => null),
         contract.methods.getSalaryRequestPreview(account).call().catch(() => null),
         contract.methods
           .getSalaryRequestPreviewWithWindow(account)
@@ -82,6 +88,8 @@ const ClaimSalary = () => {
       const previewEligible = Boolean(previewRaw?.eligible ?? previewRaw?.[4]);
       const previewApproved = Boolean(previewRaw?.approved ?? previewRaw?.[5]);
       const previewClaimed = Boolean(previewRaw?.claimed ?? previewRaw?.[6]);
+      const approvedPendingRawAmount =
+        approvedPendingRaw?.totalAmount ?? approvedPendingRaw?.[0] ?? "0";
 
       setSalaryPreview({
         monthId: previewMonthId,
@@ -94,10 +102,9 @@ const ClaimSalary = () => {
       });
 
       const onChainEarned = toAmount(web3, salaryRaw);
-      const salaryEarnedValue = previewReward > 0 ? previewReward : onChainEarned;
-      const approvedValue = previewApproved && !previewClaimed ? previewReward : 0;
+      const approvedValue = toAmount(web3, approvedPendingRawAmount);
 
-      setSalaryEarned(salaryEarnedValue.toFixed(4));
+      setSalaryEarned(onChainEarned.toFixed(4));
       setApprovedPendingSalary(approvedValue.toFixed(4));
       setClaimedSalary(onChainEarned.toFixed(4));
 

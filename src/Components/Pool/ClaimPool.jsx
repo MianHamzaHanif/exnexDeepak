@@ -11,6 +11,9 @@ const ClaimPool = () => {
   const [monthOptions, setMonthOptions] = useState([]);
   const [selectedMonth, setSelectedMonth] = useState("");
   const [poolStatus, setPoolStatus] = useState(null);
+  const [salaryCycleSeconds, setSalaryCycleSeconds] = useState(0);
+  const [nextMonthCompleteAt, setNextMonthCompleteAt] = useState(0);
+  const [remainingToNextMonth, setRemainingToNextMonth] = useState("0d 00:00:00");
   const [isStatusLoading, setIsStatusLoading] = useState(false);
   const [isClaiming, setIsClaiming] = useState(false);
   const claimableAmount = Number(poolStatus?.claimableAmount || 0);
@@ -21,31 +24,75 @@ const ClaimPool = () => {
     selectedMonth !== "" &&
     claimableAmount > 0;
 
+  const formatRemainingTime = (secondsLeft) => {
+    const safe = Math.max(Number(secondsLeft || 0), 0);
+    const days = Math.floor(safe / 86400);
+    const hours = Math.floor((safe % 86400) / 3600);
+    const minutes = Math.floor((safe % 3600) / 60);
+    const seconds = safe % 60;
+    return `${days}d ${String(hours).padStart(2, "0")}:${String(minutes).padStart(2, "0")}:${String(seconds).padStart(2, "0")}`;
+  };
+
   useEffect(() => {
     const loadMonths = async () => {
       if (!account || !window.ethereum) {
         setMonthOptions([]);
         setSelectedMonth("");
+        setSalaryCycleSeconds(0);
+        setNextMonthCompleteAt(0);
         return;
       }
       try {
         const web3 = window.web3 || new Web3(window.ethereum);
         const poolContract = new web3.eth.Contract(poolContractAbi, poolContractAddress);
-        const currentMonthRaw = await poolContract.methods.getCurrentMonthId().call();
+        const [currentMonthRaw, salaryCycleRaw, deployedAtRaw] = await Promise.all([
+          poolContract.methods.getCurrentMonthId().call(),
+          poolContract.methods.salaryCycle().call().catch(() => "0"),
+          poolContract.methods.deployedAt().call().catch(() => "0"),
+        ]);
         const currentMonth = Number(currentMonthRaw || 0);
+        const salaryCycle = Number(salaryCycleRaw || 0);
+        const deployedAt = Number(deployedAtRaw || 0);
         const months =
           currentMonth > 0
             ? Array.from({ length: currentMonth }, (_, idx) => currentMonth - 1 - idx)
             : [];
+
+        const computedNextMonthCompleteAt =
+          deployedAt > 0 && salaryCycle > 0
+            ? deployedAt + (currentMonth + 1) * salaryCycle
+            : 0;
+
         setMonthOptions(months);
         setSelectedMonth(months.length > 0 ? String(months[0]) : "");
+        setSalaryCycleSeconds(salaryCycle);
+        setNextMonthCompleteAt(computedNextMonthCompleteAt);
       } catch (error) {
         setMonthOptions([]);
         setSelectedMonth("");
+        setSalaryCycleSeconds(0);
+        setNextMonthCompleteAt(0);
       }
     };
     loadMonths();
   }, [account]);
+
+  useEffect(() => {
+    if (!nextMonthCompleteAt) {
+      setRemainingToNextMonth("0d 00:00:00");
+      return undefined;
+    }
+
+    const updateRemaining = () => {
+      const now = Math.floor(Date.now() / 1000);
+      const remaining = Math.max(nextMonthCompleteAt - now, 0);
+      setRemainingToNextMonth(formatRemainingTime(remaining));
+    };
+
+    updateRemaining();
+    const timerId = setInterval(updateRemaining, 1000);
+    return () => clearInterval(timerId);
+  }, [nextMonthCompleteAt]);
 
   useEffect(() => {
     const loadPoolStatus = async () => {
@@ -202,6 +249,12 @@ const ClaimPool = () => {
                           </span>
                           <span className="pool-chip">
                             Selected: {selectedMonth === "" ? "-" : `Month ${selectedMonth}`}
+                          </span>
+                          <span className="pool-chip">
+                            Next Month Complete In: {remainingToNextMonth}
+                          </span>
+                          <span className="pool-chip">
+                            Salary Cycle: {salaryCycleSeconds || 0}s
                           </span>
                         </div>
                       </div>

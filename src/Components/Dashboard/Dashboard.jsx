@@ -25,6 +25,10 @@ import {
   tokenAddress as TokenAddress,
   tokenAbi as TokenAbi,
 } from "../../Services/tokenAddress";
+import {
+  poolContractAddress,
+  poolContractAbi,
+} from "../../Services/poolAddress";
 
 const UPGRADE_OPTIONS = ["100"];
 
@@ -51,6 +55,7 @@ const Dashboard = () => {
   const [onChainRoiLevelIncome, setOnChainRoiLevelIncome] = useState(null);
   const [onChainWithdrawLevelIncome, setOnChainWithdrawLevelIncome] = useState(null);
   const [onChainSalaryIncome, setOnChainSalaryIncome] = useState(null);
+  const [onChainPoolIncome, setOnChainPoolIncome] = useState(null);
   const [onChainLevelIncomeByLevel, setOnChainLevelIncomeByLevel] = useState([]);
   const [onChainUnlockedLevelCount, setOnChainUnlockedLevelCount] = useState(null);
   const [onChainUserRank, setOnChainUserRank] = useState(null);
@@ -87,6 +92,7 @@ const Dashboard = () => {
   const totalRoiLevelIncomeValue = onChainRoiLevelIncome ?? "0.00";
   const totalWithdrawLevelIncomeValue = onChainWithdrawLevelIncome ?? "0.00";
   const totalSalaryIncomeValue = onChainSalaryIncome ?? "0.00";
+  const totalPoolIncomeValue = onChainPoolIncome ?? "0.00";
   const totalEarningValue = (
     Number(totalRoiValue || 0) +
     Number(totalWithdrawnValue || 0) +
@@ -94,7 +100,8 @@ const Dashboard = () => {
     Number(levelIncomeValue || 0) +
     Number(totalRoiLevelIncomeValue || 0) +
     Number(totalWithdrawLevelIncomeValue || 0) +
-    Number(totalSalaryIncomeValue || 0)
+    Number(totalSalaryIncomeValue || 0) +
+    Number(totalPoolIncomeValue || 0)
   ).toFixed(2);
   const tokenSymbol = web3State.balances?.symbol || "USDT";
   const parsedWalletTokenBalance = Number(
@@ -384,6 +391,7 @@ const Dashboard = () => {
         setOnChainRoiLevelIncome(null);
         setOnChainWithdrawLevelIncome(null);
         setOnChainSalaryIncome(null);
+        setOnChainPoolIncome(null);
         setOnChainLevelIncomeByLevel([]);
         setOnChainUnlockedLevelCount(null);
         setOnChainUserRank(null);
@@ -395,6 +403,10 @@ const Dashboard = () => {
       try {
         const web3 = window.web3 || new Web3(window.ethereum);
         const contract = new web3.eth.Contract(Abi_Main, ContractAddress_Main);
+        const poolContract = new web3.eth.Contract(
+          poolContractAbi,
+          poolContractAddress
+        );
         const countsRaw = await Promise.all(
           Array.from({ length: 10 }, (_, idx) =>
             contract.methods
@@ -463,7 +475,7 @@ const Dashboard = () => {
         );
         setOnChainTotalWithdrawn(Number(totalWithdrawnFormatted).toFixed(2));
 
-        const [roiLevelIncomeRaw, withdrawLevelIncomeRaw, salaryIncomeRaw] =
+        const [roiLevelIncomeRaw, withdrawLevelIncomeRaw, salaryIncomeRaw, poolIncomeRaw] =
           await Promise.all([
             contract.methods
               .userRoiLevelIncome(web3State.account)
@@ -475,6 +487,10 @@ const Dashboard = () => {
               .catch(() => "0"),
             contract.methods
               .userSalaryEarned(web3State.account)
+              .call()
+              .catch(() => "0"),
+            poolContract.methods
+              .userTotalMonthlyRewardIncome(web3State.account)
               .call()
               .catch(() => "0"),
           ]);
@@ -492,6 +508,11 @@ const Dashboard = () => {
         setOnChainSalaryIncome(
           Number(
             web3.utils.fromWei((salaryIncomeRaw || "0").toString(), "ether")
+          ).toFixed(2)
+        );
+        setOnChainPoolIncome(
+          Number(
+            web3.utils.fromWei((poolIncomeRaw || "0").toString(), "ether")
           ).toFixed(2)
         );
 
@@ -899,23 +920,29 @@ const Dashboard = () => {
                             </div>
                           </div>
                           <div className="row stats-row g-2 mt-0">
-                            <div className="col-md-4 col-4">
+                            <div className="col-md-3 col-6">
                               <p className="label">
                                 Total ROI Level Income <span className="up"> &#9650;</span>
                               </p>
                               <h3>$ {totalRoiLevelIncomeValue}</h3>
                             </div>
-                            <div className="col-md-4 col-4">
+                            <div className="col-md-3 col-6">
                               <p className="label">
                                 Total Withdraw Level Income <span className="up"> &#9650;</span>
                               </p>
                               <h3>$ {totalWithdrawLevelIncomeValue}</h3>
                             </div>
-                            <div className="col-md-4 col-4">
+                            <div className="col-md-3 col-6">
                               <p className="label">
                                 Total Salary Income <span className="up"> &#9650;</span>
                               </p>
                               <h3>$ {totalSalaryIncomeValue}</h3>
+                            </div>
+                            <div className="col-md-3 col-6">
+                              <p className="label">
+                                Total Pool Income <span className="up"> &#9650;</span>
+                              </p>
+                              <h3>$ {totalPoolIncomeValue}</h3>
                             </div>
                           </div>
                         </div>

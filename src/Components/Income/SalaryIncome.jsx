@@ -49,7 +49,9 @@ const SalaryIncome = () => {
         rows.push({
           rank: rankRaw.toString(),
           periods: periodsRaw.toString(),
-          amount: amountRaw.toString(),
+          amount: amountRaw
+            ? Number(web3.utils.fromWei(amountRaw.toString(), "ether")).toFixed(4)
+            : "0.0000",
           claimedAt: claimedAtRaw.toString(),
         });
       }
