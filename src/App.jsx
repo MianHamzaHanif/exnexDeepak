@@ -17,6 +17,7 @@ import ActivationHistory from "./Components/Activation/ActivationHistory";
 import MyReferral from "./Components/MyTeam/MyReferral";
 import LevelDetails from "./Components/MyTeam/LevelDetails";
 import Downline from "./Components/MyTeam/Downline";
+import VestingDirectIncome from "./Components/MyTeam/VestingDirectIncome";
 import TradingIncome from "./Components/Income/TradingIncome";
 import LevelIncome from "./Components/Income/LevelIncome";
 import RoiLevelIncome from "./Components/Income/RoiLevelIncome";
@@ -98,6 +99,7 @@ function AppContent() {
           <Route path="/MyReferral" element={<MyReferral />} />
           <Route path="/LevelDetails" element={<LevelDetails />} />
           <Route path="/Downline" element={<Downline />} />
+          <Route path="/VestingDirectIncome" element={<VestingDirectIncome />} />
           <Route path="/TradingIncome" element={<TradingIncome />} />
           <Route path="/LevelIncome" element={<LevelIncome />} />
           <Route path="/RoiLevelIncome" element={<RoiLevelIncome />} />

@@ -102,6 +102,9 @@ const Sidebar = () => {
                 <li>
                   <Link to="/LevelDetails">Level Details</Link>
                 </li>
+                <li>
+                  <Link to="/VestingDirectIncome">Vesting Direct Income</Link>
+                </li>
                 {/* <li>
                   <Link to="/Downline">Downline</Link>
                 </li> */}

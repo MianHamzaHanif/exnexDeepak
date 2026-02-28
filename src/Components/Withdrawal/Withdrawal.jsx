@@ -15,6 +15,7 @@ import {
 const Withdrawal = () => {
   const dispatch = useDispatch();
   const web3State = useSelector((state) => state.web3State);
+  const [totalRoiGross, setTotalRoiGross] = useState("0.0000");
   const [pendingRoiBalance, setPendingRoiBalance] = useState("0.0000");
   const [onChainTotalWithdrawn, setOnChainTotalWithdrawn] = useState("0.0000");
   const [isWithdrawing, setIsWithdrawing] = useState(false);
@@ -62,6 +63,7 @@ const Withdrawal = () => {
 
   const loadWithdrawalStats = useCallback(async () => {
     if (!web3State.isConnected || !account || !window.ethereum) {
+      setTotalRoiGross("0.0000");
       setPendingRoiBalance("0.0000");
       setOnChainTotalWithdrawn("0.0000");
       return;
@@ -70,13 +72,22 @@ const Withdrawal = () => {
     try {
       const web3 = window.web3 || new Web3(window.ethereum);
       const contract = new web3.eth.Contract(Abi_Main, ContractAddress_Main);
-      const [pendingRoiRaw, totalWithdrawnRaw] = await Promise.all([
+      const [pendingRoiRaw, totalWithdrawnRaw, pendingCurrentDepositGrossRaw] = await Promise.all([
         contract.methods.getTotalPendingRoi(account).call(),
         contract.methods.userTotalWithdrawn(account).call(),
+        contract.methods.getPendingRoiForCurrentDepositGross(account).call(),
       ]);
+      const pendingCurrentDepositGrossWei =
+        pendingCurrentDepositGrossRaw?.pendingAmount ??
+        pendingCurrentDepositGrossRaw?.[2] ??
+        "0";
 
       const pendingRoi = web3.utils.fromWei(
         (pendingRoiRaw || "0").toString(),
+        "ether"
+      );
+      const totalRoiGrossValue = web3.utils.fromWei(
+        (pendingCurrentDepositGrossWei || "0").toString(),
         "ether"
       );
       const totalWithdrawnValue = web3.utils.fromWei(
@@ -84,10 +95,12 @@ const Withdrawal = () => {
         "ether"
       );
 
+      setTotalRoiGross(formatAmount(totalRoiGrossValue));
       setPendingRoiBalance(formatAmount(pendingRoi));
       setOnChainTotalWithdrawn(formatAmount(totalWithdrawnValue));
     } catch (error) {
       console.error("Failed to fetch getTotalPendingRoi:", error);
+      setTotalRoiGross("0.0000");
       setPendingRoiBalance("0.0000");
       setOnChainTotalWithdrawn("0.0000");
     }
@@ -164,15 +177,23 @@ const Withdrawal = () => {
               {/* Summary Cards with 4 decimal formatting */}
               <div className="col-12">
                 <div className="row g-3">
-                  <div className="col-md-6">
-                    <div className="card bg-primary text-white">
+                  <div className="col-md-4">
+                    <div className="card bg-warning text-dark">
                       <div className="card-body">
                         <h6 className="card-title">Total ROI Current Package</h6>
+                        <h3 className="mb-0">$ {totalRoiGross}</h3>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="col-md-4">
+                    <div className="card bg-primary text-white">
+                      <div className="card-body">
+                        <h6 className="card-title">Current ROI </h6>
                         <h3 className="mb-0">$ {withdrawableBalance}</h3>
                       </div>
                     </div>
                   </div>
-                  <div className="col-md-6">
+                  <div className="col-md-4">
                     <div className="card bg-success text-white">
                       <div className="card-body">
                         <h6 className="card-title">Total ROI Withdrawn</h6>
