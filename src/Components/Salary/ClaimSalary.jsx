@@ -104,7 +104,7 @@ const ClaimSalary = () => {
       const onChainEarned = toAmount(web3, salaryRaw);
       const approvedValue = toAmount(web3, approvedPendingRawAmount);
 
-      setSalaryEarned(onChainEarned.toFixed(4));
+      setSalaryEarned(previewReward.toFixed(4));
       setApprovedPendingSalary(approvedValue.toFixed(4));
       setClaimedSalary(onChainEarned.toFixed(4));
 
@@ -155,6 +155,13 @@ const ClaimSalary = () => {
       toast.error("Please connect wallet first");
       return;
     }
+
+    const approvedValue = Number(approvedPendingSalary || 0);
+    if (!Number.isFinite(approvedValue) || approvedValue <= 0) {
+      toast.error("Approved salary should be greater than 0");
+      return;
+    }
+
     try {
       setIsClaiming(true);
       const web3 = window.web3 || new Web3(window.ethereum);
@@ -183,7 +190,7 @@ const ClaimSalary = () => {
 
     const salaryValue = Number(salaryEarned || 0);
     if (!Number.isFinite(salaryValue) || salaryValue <= 0) {
-      toast.error("Salary value should be greater than 0");
+      toast.error("Salary earned should be greater than 0");
       return;
     }
 
@@ -346,7 +353,8 @@ const ClaimSalary = () => {
                       isClaiming ||
                       !account ||
                       isRequesting ||
-                      isRefreshing
+                      isRefreshing ||
+                      Number(approvedPendingSalary || 0) <= 0
                     }
                   >
                     {isClaiming ? "Processing..." : "Claim Salary"}
