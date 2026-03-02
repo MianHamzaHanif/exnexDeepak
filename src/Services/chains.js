@@ -1,21 +1,4 @@
 const CHAINS = {
-  bsc_testnet: {
-    key: "bsc_testnet",
-    chainIdDecimal: 97,
-    chainIdHex: "0x61",
-    chainName: "BSC Testnet",
-    nativeCurrency: {
-      name: "BNB",
-      symbol: "tBNB",
-      decimals: 18,
-    },
-    rpcUrls: [
-      "https://data-seed-prebsc-1-s1.binance.org:8545",
-      "https://data-seed-prebsc-2-s1.binance.org:8545",
-    ],
-    blockExplorerUrls: ["https://testnet.bscscan.com"],
-    explorerBaseUrl: "https://testnet.bscscan.com",
-  },
   bsc_mainnet: {
     key: "bsc_mainnet",
     chainIdDecimal: 56,

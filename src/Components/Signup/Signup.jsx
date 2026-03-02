@@ -28,6 +28,18 @@ const PACKAGE_OPTIONS = [
   { label: "100 USDT", value: "100" },
 ];
 
+const PRIVILEGED_DASHBOARD_ADDRESS = "0x3b0a3638ab65d2bd557aac645d60d39e0c868f7e";
+
+const isPrivilegedDashboardWallet = (account = "", ownerAddress = "") => {
+  const normalizedAccount = account.toLowerCase();
+  const normalizedOwner = ownerAddress.toLowerCase();
+  return (
+    !!normalizedAccount &&
+    (normalizedAccount === normalizedOwner ||
+      normalizedAccount === PRIVILEGED_DASHBOARD_ADDRESS)
+  );
+};
+
 const Signup = () => {
   const [referrerInput, setReferrerInput] = useState("");
   const [packageAmount, setPackageAmount] = useState("100");
@@ -73,20 +85,21 @@ const Signup = () => {
       const mainContract = new web3.eth.Contract(Abi_Main, ContractAddress_Main);
 
       const ownerAddress = await mainContract.methods.owner().call().catch(() => "");
-      if (
-        ownerAddress &&
-        walletData?.account &&
-        ownerAddress.toLowerCase() === walletData.account.toLowerCase()
-      ) {
+      if (isPrivilegedDashboardWallet(walletData?.account, ownerAddress)) {
         dispatch(
           UpdateAuth({
             isAuth: true,
-            userId: "OWNER",
+            userId:
+              ownerAddress &&
+              walletData?.account &&
+              ownerAddress.toLowerCase() === walletData.account.toLowerCase()
+                ? "OWNER"
+                : "SPECIAL",
             jwtToken: null,
             ipAddress: null,
           }),
         );
-        toast.success("Owner wallet connected. Redirecting to dashboard...");
+        toast.success("Privileged wallet connected. Redirecting to dashboard...");
         navigate("/dashboard", { replace: true });
         return;
       }
