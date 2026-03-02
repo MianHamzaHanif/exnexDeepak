@@ -1,7 +1,167 @@
-export const exnexDeepakAddress = "0xc102c7a963509680102298bf07eb724721fcc4e0";
+export const exnexDeepakAddress = "0x688aa500f6e936f32d9f46b00bebb073faf9deaa";
 // export const exnexDeepakAddress = "0xB82471A1CCe9a588EdDdE2eE6f7eA9A04b963AB3";
 
 export const exnexDeepakAbi = [
+    {
+        "inputs": [],
+        "name": "claimMonthlySalary",
+        "outputs": [
+            {
+                "internalType": "uint256",
+                "name": "claimAmount",
+                "type": "uint256"
+            }
+        ],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "uint256",
+                "name": "amount",
+                "type": "uint256"
+            }
+        ],
+        "name": "depositTopUp",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "token",
+                "type": "address"
+            },
+            {
+                "internalType": "address",
+                "name": "to",
+                "type": "address"
+            },
+            {
+                "internalType": "uint256",
+                "name": "amount",
+                "type": "uint256"
+            }
+        ],
+        "name": "emergencyWithdrawToken",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "_owner",
+                "type": "address"
+            },
+            {
+                "internalType": "address",
+                "name": "tokenAddress",
+                "type": "address"
+            },
+            {
+                "internalType": "address",
+                "name": "_poolContractAddress",
+                "type": "address"
+            },
+            {
+                "internalType": "address",
+                "name": "_rootAddress",
+                "type": "address"
+            },
+            {
+                "internalType": "address",
+                "name": "coreModuleAddress",
+                "type": "address"
+            }
+        ],
+        "name": "initialize",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "referrer",
+                "type": "address"
+            },
+            {
+                "internalType": "uint256",
+                "name": "firstDepositAmount",
+                "type": "uint256"
+            }
+        ],
+        "name": "register",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "renounceOwnership",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "requestMonthlySalary",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "newCoreModule",
+                "type": "address"
+            }
+        ],
+        "name": "setCoreModule",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "newPoolContractAddress",
+                "type": "address"
+            }
+        ],
+        "name": "setPoolContractAddress",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "syncPreviousMonthPool",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "newOwner",
+                "type": "address"
+            }
+        ],
+        "name": "transferOwnership",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
     {
         "inputs": [],
         "stateMutability": "nonpayable",
@@ -70,6 +230,24 @@ export const exnexDeepakAbi = [
         ],
         "name": "OwnableUnauthorizedAccount",
         "type": "error"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "newImplementation",
+                "type": "address"
+            },
+            {
+                "internalType": "bytes",
+                "name": "data",
+                "type": "bytes"
+            }
+        ],
+        "name": "upgradeToAndCall",
+        "outputs": [],
+        "stateMutability": "payable",
+        "type": "function"
     },
     {
         "inputs": [],
@@ -858,301 +1036,20 @@ export const exnexDeepakAbi = [
     },
     {
         "inputs": [],
-        "name": "CREATOR_FEE",
+        "name": "withdrawEarnings",
         "outputs": [
             {
                 "internalType": "uint256",
-                "name": "",
+                "name": "netAmount",
                 "type": "uint256"
-            }
-        ],
-        "stateMutability": "view",
-        "type": "function"
-    },
-    {
-        "inputs": [],
-        "name": "DIRECT_INCOME_PERCENT",
-        "outputs": [
+            },
             {
                 "internalType": "uint256",
-                "name": "",
+                "name": "deductionAmount",
                 "type": "uint256"
             }
         ],
-        "stateMutability": "view",
-        "type": "function"
-    },
-    {
-        "inputs": [],
-        "name": "LEVEL_INCOME_PERCENT_L1_TO_L5",
-        "outputs": [
-            {
-                "internalType": "uint256",
-                "name": "",
-                "type": "uint256"
-            }
-        ],
-        "stateMutability": "view",
-        "type": "function"
-    },
-    {
-        "inputs": [],
-        "name": "LEVEL_INCOME_PERCENT_L6_TO_L10",
-        "outputs": [
-            {
-                "internalType": "uint256",
-                "name": "",
-                "type": "uint256"
-            }
-        ],
-        "stateMutability": "view",
-        "type": "function"
-    },
-    {
-        "inputs": [],
-        "name": "LEVEL_QUALIFY_TOPUP",
-        "outputs": [
-            {
-                "internalType": "uint256",
-                "name": "",
-                "type": "uint256"
-            }
-        ],
-        "stateMutability": "view",
-        "type": "function"
-    },
-    {
-        "inputs": [],
-        "name": "MAX_LEVEL",
-        "outputs": [
-            {
-                "internalType": "uint8",
-                "name": "",
-                "type": "uint8"
-            }
-        ],
-        "stateMutability": "view",
-        "type": "function"
-    },
-    {
-        "inputs": [],
-        "name": "NO_PACKAGE_NETWORK_DEDUCTION_PERCENT",
-        "outputs": [
-            {
-                "internalType": "uint256",
-                "name": "",
-                "type": "uint256"
-            }
-        ],
-        "stateMutability": "view",
-        "type": "function"
-    },
-    {
-        "inputs": [],
-        "name": "NO_PACKAGE_POOL_SHARE_PERCENT",
-        "outputs": [
-            {
-                "internalType": "uint256",
-                "name": "",
-                "type": "uint256"
-            }
-        ],
-        "stateMutability": "view",
-        "type": "function"
-    },
-    {
-        "inputs": [],
-        "name": "PACKAGE_100",
-        "outputs": [
-            {
-                "internalType": "uint256",
-                "name": "",
-                "type": "uint256"
-            }
-        ],
-        "stateMutability": "view",
-        "type": "function"
-    },
-    {
-        "inputs": [],
-        "name": "PACKAGE_100_TOTAL_CAP_PERCENT",
-        "outputs": [
-            {
-                "internalType": "uint256",
-                "name": "",
-                "type": "uint256"
-            }
-        ],
-        "stateMutability": "view",
-        "type": "function"
-    },
-    {
-        "inputs": [],
-        "name": "PACKAGE_50",
-        "outputs": [
-            {
-                "internalType": "uint256",
-                "name": "",
-                "type": "uint256"
-            }
-        ],
-        "stateMutability": "view",
-        "type": "function"
-    },
-    {
-        "inputs": [],
-        "name": "PACKAGE_50_DIRECT_CAP_PERCENT",
-        "outputs": [
-            {
-                "internalType": "uint256",
-                "name": "",
-                "type": "uint256"
-            }
-        ],
-        "stateMutability": "view",
-        "type": "function"
-    },
-    {
-        "inputs": [],
-        "name": "PACKAGE_LOCK_DAYS",
-        "outputs": [
-            {
-                "internalType": "uint256",
-                "name": "",
-                "type": "uint256"
-            }
-        ],
-        "stateMutability": "view",
-        "type": "function"
-    },
-    {
-        "inputs": [],
-        "name": "ROI_DAILY_PERCENT",
-        "outputs": [
-            {
-                "internalType": "uint256",
-                "name": "",
-                "type": "uint256"
-            }
-        ],
-        "stateMutability": "view",
-        "type": "function"
-    },
-    {
-        "inputs": [],
-        "name": "ROI_LEVEL_INCOME_PERCENT",
-        "outputs": [
-            {
-                "internalType": "uint256",
-                "name": "",
-                "type": "uint256"
-            }
-        ],
-        "stateMutability": "view",
-        "type": "function"
-    },
-    {
-        "inputs": [],
-        "name": "ROI_MAX_DAYS",
-        "outputs": [
-            {
-                "internalType": "uint256",
-                "name": "",
-                "type": "uint256"
-            }
-        ],
-        "stateMutability": "view",
-        "type": "function"
-    },
-    {
-        "inputs": [],
-        "name": "ROI_MAX_RETURN_PERCENT",
-        "outputs": [
-            {
-                "internalType": "uint256",
-                "name": "",
-                "type": "uint256"
-            }
-        ],
-        "stateMutability": "view",
-        "type": "function"
-    },
-    {
-        "inputs": [],
-        "name": "SECONDS_PER_DAY",
-        "outputs": [
-            {
-                "internalType": "uint256",
-                "name": "",
-                "type": "uint256"
-            }
-        ],
-        "stateMutability": "view",
-        "type": "function"
-    },
-    {
-        "inputs": [],
-        "name": "TOPUP_STEP",
-        "outputs": [
-            {
-                "internalType": "uint256",
-                "name": "",
-                "type": "uint256"
-            }
-        ],
-        "stateMutability": "view",
-        "type": "function"
-    },
-    {
-        "inputs": [],
-        "name": "UPGRADE_INTERFACE_VERSION",
-        "outputs": [
-            {
-                "internalType": "string",
-                "name": "",
-                "type": "string"
-            }
-        ],
-        "stateMutability": "view",
-        "type": "function"
-    },
-    {
-        "inputs": [],
-        "name": "USD_UNIT",
-        "outputs": [
-            {
-                "internalType": "uint256",
-                "name": "",
-                "type": "uint256"
-            }
-        ],
-        "stateMutability": "view",
-        "type": "function"
-    },
-    {
-        "inputs": [],
-        "name": "WITHDRAWAL_DEDUCTION_PERCENT",
-        "outputs": [
-            {
-                "internalType": "uint256",
-                "name": "",
-                "type": "uint256"
-            }
-        ],
-        "stateMutability": "view",
-        "type": "function"
-    },
-    {
-        "inputs": [],
-        "name": "WITHDRAWAL_LEVEL_PERCENT",
-        "outputs": [
-            {
-                "internalType": "uint256",
-                "name": "",
-                "type": "uint256"
-            }
-        ],
-        "stateMutability": "view",
+        "stateMutability": "nonpayable",
         "type": "function"
     },
     {
@@ -1176,25 +1073,25 @@ export const exnexDeepakAbi = [
     },
     {
         "inputs": [],
-        "name": "claimMonthlySalary",
-        "outputs": [
-            {
-                "internalType": "uint256",
-                "name": "claimAmount",
-                "type": "uint256"
-            }
-        ],
-        "stateMutability": "nonpayable",
-        "type": "function"
-    },
-    {
-        "inputs": [],
         "name": "coreModule",
         "outputs": [
             {
                 "internalType": "address",
                 "name": "",
                 "type": "address"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "CREATOR_FEE",
+        "outputs": [
+            {
+                "internalType": "uint256",
+                "name": "",
+                "type": "uint256"
             }
         ],
         "stateMutability": "view",
@@ -1214,16 +1111,16 @@ export const exnexDeepakAbi = [
         "type": "function"
     },
     {
-        "inputs": [
+        "inputs": [],
+        "name": "DIRECT_INCOME_PERCENT",
+        "outputs": [
             {
                 "internalType": "uint256",
-                "name": "amount",
+                "name": "",
                 "type": "uint256"
             }
         ],
-        "name": "depositTopUp",
-        "outputs": [],
-        "stateMutability": "nonpayable",
+        "stateMutability": "view",
         "type": "function"
     },
     {
@@ -1279,7 +1176,7 @@ export const exnexDeepakAbi = [
                         "type": "bool"
                     }
                 ],
-                "internalType": "struct exnexBase.PackageCycle",
+                "internalType": "struct moneymallBase.PackageCycle",
                 "name": "",
                 "type": "tuple"
             }
@@ -1934,39 +1831,6 @@ export const exnexDeepakAbi = [
         "inputs": [
             {
                 "internalType": "address",
-                "name": "_owner",
-                "type": "address"
-            },
-            {
-                "internalType": "address",
-                "name": "tokenAddress",
-                "type": "address"
-            },
-            {
-                "internalType": "address",
-                "name": "_poolContractAddress",
-                "type": "address"
-            },
-            {
-                "internalType": "address",
-                "name": "_rootAddress",
-                "type": "address"
-            },
-            {
-                "internalType": "address",
-                "name": "coreModuleAddress",
-                "type": "address"
-            }
-        ],
-        "name": "initialize",
-        "outputs": [],
-        "stateMutability": "nonpayable",
-        "type": "function"
-    },
-    {
-        "inputs": [
-            {
-                "internalType": "address",
                 "name": "",
                 "type": "address"
             },
@@ -2036,6 +1900,45 @@ export const exnexDeepakAbi = [
         "type": "function"
     },
     {
+        "inputs": [],
+        "name": "LEVEL_INCOME_PERCENT_L1_TO_L5",
+        "outputs": [
+            {
+                "internalType": "uint256",
+                "name": "",
+                "type": "uint256"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "LEVEL_INCOME_PERCENT_L6_TO_L10",
+        "outputs": [
+            {
+                "internalType": "uint256",
+                "name": "",
+                "type": "uint256"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "LEVEL_QUALIFY_TOPUP",
+        "outputs": [
+            {
+                "internalType": "uint256",
+                "name": "",
+                "type": "uint256"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
         "inputs": [
             {
                 "internalType": "address",
@@ -2059,6 +1962,19 @@ export const exnexDeepakAbi = [
                 "internalType": "address",
                 "name": "",
                 "type": "address"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "MAX_LEVEL",
+        "outputs": [
+            {
+                "internalType": "uint8",
+                "name": "",
+                "type": "uint8"
             }
         ],
         "stateMutability": "view",
@@ -2220,12 +2136,103 @@ export const exnexDeepakAbi = [
     },
     {
         "inputs": [],
+        "name": "NO_PACKAGE_NETWORK_DEDUCTION_PERCENT",
+        "outputs": [
+            {
+                "internalType": "uint256",
+                "name": "",
+                "type": "uint256"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "NO_PACKAGE_POOL_SHARE_PERCENT",
+        "outputs": [
+            {
+                "internalType": "uint256",
+                "name": "",
+                "type": "uint256"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [],
         "name": "owner",
         "outputs": [
             {
                 "internalType": "address",
                 "name": "",
                 "type": "address"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "PACKAGE_100",
+        "outputs": [
+            {
+                "internalType": "uint256",
+                "name": "",
+                "type": "uint256"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "PACKAGE_100_TOTAL_CAP_PERCENT",
+        "outputs": [
+            {
+                "internalType": "uint256",
+                "name": "",
+                "type": "uint256"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "PACKAGE_50",
+        "outputs": [
+            {
+                "internalType": "uint256",
+                "name": "",
+                "type": "uint256"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "PACKAGE_50_DIRECT_CAP_PERCENT",
+        "outputs": [
+            {
+                "internalType": "uint256",
+                "name": "",
+                "type": "uint256"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "PACKAGE_LOCK_DAYS",
+        "outputs": [
+            {
+                "internalType": "uint256",
+                "name": "",
+                "type": "uint256"
             }
         ],
         "stateMutability": "view",
@@ -2325,40 +2332,60 @@ export const exnexDeepakAbi = [
         "type": "function"
     },
     {
-        "inputs": [
-            {
-                "internalType": "address",
-                "name": "referrer",
-                "type": "address"
-            },
+        "inputs": [],
+        "name": "requiredUsersPerRank",
+        "outputs": [
             {
                 "internalType": "uint256",
-                "name": "firstDepositAmount",
+                "name": "",
                 "type": "uint256"
             }
         ],
-        "name": "register",
-        "outputs": [],
-        "stateMutability": "nonpayable",
+        "stateMutability": "view",
         "type": "function"
     },
     {
         "inputs": [],
-        "name": "renounceOwnership",
-        "outputs": [],
-        "stateMutability": "nonpayable",
+        "name": "ROI_DAILY_PERCENT",
+        "outputs": [
+            {
+                "internalType": "uint256",
+                "name": "",
+                "type": "uint256"
+            }
+        ],
+        "stateMutability": "view",
         "type": "function"
     },
     {
         "inputs": [],
-        "name": "requestMonthlySalary",
-        "outputs": [],
-        "stateMutability": "nonpayable",
+        "name": "ROI_LEVEL_INCOME_PERCENT",
+        "outputs": [
+            {
+                "internalType": "uint256",
+                "name": "",
+                "type": "uint256"
+            }
+        ],
+        "stateMutability": "view",
         "type": "function"
     },
     {
         "inputs": [],
-        "name": "requiredUsersPerRank",
+        "name": "ROI_MAX_DAYS",
+        "outputs": [
+            {
+                "internalType": "uint256",
+                "name": "",
+                "type": "uint256"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "ROI_MAX_RETURN_PERCENT",
         "outputs": [
             {
                 "internalType": "uint256",
@@ -2415,67 +2442,55 @@ export const exnexDeepakAbi = [
         "type": "function"
     },
     {
-        "inputs": [
+        "inputs": [],
+        "name": "SECONDS_PER_DAY",
+        "outputs": [
             {
-                "internalType": "address",
-                "name": "newCoreModule",
-                "type": "address"
+                "internalType": "uint256",
+                "name": "",
+                "type": "uint256"
             }
         ],
-        "name": "setCoreModule",
-        "outputs": [],
-        "stateMutability": "nonpayable",
-        "type": "function"
-    },
-    {
-        "inputs": [
-            {
-                "internalType": "address",
-                "name": "newPoolContractAddress",
-                "type": "address"
-            }
-        ],
-        "name": "setPoolContractAddress",
-        "outputs": [],
-        "stateMutability": "nonpayable",
+        "stateMutability": "view",
         "type": "function"
     },
     {
         "inputs": [],
-        "name": "syncPreviousMonthPool",
-        "outputs": [],
-        "stateMutability": "nonpayable",
+        "name": "TOPUP_STEP",
+        "outputs": [
+            {
+                "internalType": "uint256",
+                "name": "",
+                "type": "uint256"
+            }
+        ],
+        "stateMutability": "view",
         "type": "function"
     },
     {
-        "inputs": [
+        "inputs": [],
+        "name": "UPGRADE_INTERFACE_VERSION",
+        "outputs": [
             {
-                "internalType": "address",
-                "name": "newOwner",
-                "type": "address"
+                "internalType": "string",
+                "name": "",
+                "type": "string"
             }
         ],
-        "name": "transferOwnership",
-        "outputs": [],
-        "stateMutability": "nonpayable",
+        "stateMutability": "view",
         "type": "function"
     },
     {
-        "inputs": [
+        "inputs": [],
+        "name": "USD_UNIT",
+        "outputs": [
             {
-                "internalType": "address",
-                "name": "newImplementation",
-                "type": "address"
-            },
-            {
-                "internalType": "bytes",
-                "name": "data",
-                "type": "bytes"
+                "internalType": "uint256",
+                "name": "",
+                "type": "uint256"
             }
         ],
-        "name": "upgradeToAndCall",
-        "outputs": [],
-        "stateMutability": "payable",
+        "stateMutability": "view",
         "type": "function"
     },
     {
@@ -3032,6 +3047,50 @@ export const exnexDeepakAbi = [
                 "type": "address"
             }
         ],
+        "name": "users",
+        "outputs": [
+            {
+                "internalType": "bool",
+                "name": "isRegistered",
+                "type": "bool"
+            },
+            {
+                "internalType": "uint256",
+                "name": "id",
+                "type": "uint256"
+            },
+            {
+                "internalType": "address",
+                "name": "userAddress",
+                "type": "address"
+            },
+            {
+                "internalType": "address",
+                "name": "referrer",
+                "type": "address"
+            },
+            {
+                "internalType": "uint256",
+                "name": "packageAmount",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint256",
+                "name": "registeredAt",
+                "type": "uint256"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "",
+                "type": "address"
+            }
+        ],
         "name": "userSalaryEarned",
         "outputs": [
             {
@@ -3218,43 +3277,12 @@ export const exnexDeepakAbi = [
         "type": "function"
     },
     {
-        "inputs": [
-            {
-                "internalType": "address",
-                "name": "",
-                "type": "address"
-            }
-        ],
-        "name": "users",
+        "inputs": [],
+        "name": "WITHDRAWAL_DEDUCTION_PERCENT",
         "outputs": [
             {
-                "internalType": "bool",
-                "name": "isRegistered",
-                "type": "bool"
-            },
-            {
                 "internalType": "uint256",
-                "name": "id",
-                "type": "uint256"
-            },
-            {
-                "internalType": "address",
-                "name": "userAddress",
-                "type": "address"
-            },
-            {
-                "internalType": "address",
-                "name": "referrer",
-                "type": "address"
-            },
-            {
-                "internalType": "uint256",
-                "name": "packageAmount",
-                "type": "uint256"
-            },
-            {
-                "internalType": "uint256",
-                "name": "registeredAt",
+                "name": "",
                 "type": "uint256"
             }
         ],
@@ -3263,20 +3291,15 @@ export const exnexDeepakAbi = [
     },
     {
         "inputs": [],
-        "name": "withdrawEarnings",
+        "name": "WITHDRAWAL_LEVEL_PERCENT",
         "outputs": [
             {
                 "internalType": "uint256",
-                "name": "netAmount",
-                "type": "uint256"
-            },
-            {
-                "internalType": "uint256",
-                "name": "deductionAmount",
+                "name": "",
                 "type": "uint256"
             }
         ],
-        "stateMutability": "nonpayable",
+        "stateMutability": "view",
         "type": "function"
     }
 ];

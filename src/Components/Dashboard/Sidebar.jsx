@@ -5,6 +5,7 @@ import { useSelector } from "react-redux";
 import Web3 from "web3";
 import "./Dash.css";
 import "./responsive.css";
+import "./DashboardPalette.css";
 import Logo from "../../../public/logoimg/logo2.png";
 import {
   exnexDeepakAddress as ContractAddress_Main,

@@ -1,7 +1,25 @@
-export const poolContractAddress = "0x4beb2051285dc8ba88da158be8442d39ee2643a8";
+export const poolContractAddress = "0x087faf1d63a8340bcacbb4bcc377108b26fda1df";
 // export const poolContractAddress = "0x267a2A71b9255713266837954567E711171A40cA";
 
 export const poolContractAbi = [
+    {
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "_owner",
+                "type": "address"
+            },
+            {
+                "internalType": "address",
+                "name": "tokenAddress",
+                "type": "address"
+            }
+        ],
+        "name": "initialize",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
     {
         "inputs": [],
         "stateMutability": "nonpayable",
@@ -17,6 +35,112 @@ export const poolContractAbi = [
         ],
         "name": "AddressEmptyCode",
         "type": "error"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "uint256",
+                "name": "monthId",
+                "type": "uint256"
+            },
+            {
+                "internalType": "address",
+                "name": "user",
+                "type": "address"
+            }
+        ],
+        "name": "approveUserMonthSalary",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "uint256",
+                "name": "monthId",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint256",
+                "name": "userId",
+                "type": "uint256"
+            }
+        ],
+        "name": "approveUserMonthSalaryById",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "uint256",
+                "name": "monthId",
+                "type": "uint256"
+            }
+        ],
+        "name": "claimMonthlyReward",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "user",
+                "type": "address"
+            }
+        ],
+        "name": "consumeNextApprovedSalary",
+        "outputs": [
+            {
+                "internalType": "bool",
+                "name": "found",
+                "type": "bool"
+            },
+            {
+                "internalType": "uint256",
+                "name": "monthId",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint8",
+                "name": "rank",
+                "type": "uint8"
+            },
+            {
+                "internalType": "uint256",
+                "name": "amount",
+                "type": "uint256"
+            }
+        ],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "token",
+                "type": "address"
+            },
+            {
+                "internalType": "address",
+                "name": "to",
+                "type": "address"
+            },
+            {
+                "internalType": "uint256",
+                "name": "amount",
+                "type": "uint256"
+            }
+        ],
+        "name": "emergencyWithdrawToken",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
     },
     {
         "inputs": [
@@ -38,6 +162,19 @@ export const poolContractAbi = [
         "inputs": [],
         "name": "FailedCall",
         "type": "error"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "uint256",
+                "name": "amount",
+                "type": "uint256"
+            }
+        ],
+        "name": "fundSalaryPool",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
     },
     {
         "inputs": [],
@@ -441,20 +578,96 @@ export const poolContractAbi = [
                 "type": "uint256"
             }
         ],
-        "name": "exnexSynced",
+        "name": "moneymallSynced",
         "type": "event"
     },
     {
-        "inputs": [],
-        "name": "UPGRADE_INTERFACE_VERSION",
-        "outputs": [
+        "inputs": [
             {
-                "internalType": "string",
-                "name": "",
-                "type": "string"
+                "internalType": "address",
+                "name": "user",
+                "type": "address"
+            },
+            {
+                "internalType": "uint256",
+                "name": "qualifiedAt",
+                "type": "uint256"
             }
         ],
-        "stateMutability": "view",
+        "name": "notifySalaryQualified",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "renounceOwnership",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "requestSalaryForCurrentWindow",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "user",
+                "type": "address"
+            }
+        ],
+        "name": "requestSalaryForCurrentWindowFor",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "newPlan",
+                "type": "address"
+            }
+        ],
+        "name": "setPlanContract",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "uint256",
+                "name": "newSalaryCycle",
+                "type": "uint256"
+            }
+        ],
+        "name": "setSalaryCycle",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "uint256",
+                "name": "monthId",
+                "type": "uint256"
+            },
+            {
+                "internalType": "bool",
+                "name": "approved",
+                "type": "bool"
+            }
+        ],
+        "name": "setSalaryMonthApproval",
+        "outputs": [],
+        "stateMutability": "nonpayable",
         "type": "function"
     },
     {
@@ -468,9 +681,70 @@ export const poolContractAbi = [
                 "internalType": "address",
                 "name": "user",
                 "type": "address"
+            },
+            {
+                "internalType": "bool",
+                "name": "approved",
+                "type": "bool"
             }
         ],
-        "name": "approveUserMonthSalary",
+        "name": "setSalaryUserApproval",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "uint256",
+                "name": "monthId",
+                "type": "uint256"
+            },
+            {
+                "internalType": "address",
+                "name": "user",
+                "type": "address"
+            },
+            {
+                "internalType": "bool",
+                "name": "approved",
+                "type": "bool"
+            },
+            {
+                "internalType": "uint8",
+                "name": "rank",
+                "type": "uint8"
+            },
+            {
+                "internalType": "uint256",
+                "name": "amount",
+                "type": "uint256"
+            }
+        ],
+        "name": "setSalaryUserMonthlyConfig",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "uint256",
+                "name": "monthId",
+                "type": "uint256"
+            },
+            {
+                "internalType": "address[]",
+                "name": "users",
+                "type": "address[]"
+            },
+            {
+                "internalType": "bool",
+                "name": "approved",
+                "type": "bool"
+            }
+        ],
+        "name": "setSalaryUsersApprovalBatch",
         "outputs": [],
         "stateMutability": "nonpayable",
         "type": "function"
@@ -484,11 +758,16 @@ export const poolContractAbi = [
             },
             {
                 "internalType": "uint256",
-                "name": "userId",
+                "name": "totalAmount",
                 "type": "uint256"
+            },
+            {
+                "internalType": "address[]",
+                "name": "qualifiedUsers",
+                "type": "address[]"
             }
         ],
-        "name": "approveUserMonthSalaryById",
+        "name": "syncmoneymall",
         "outputs": [],
         "stateMutability": "nonpayable",
         "type": "function"
@@ -499,11 +778,52 @@ export const poolContractAbi = [
                 "internalType": "uint256",
                 "name": "monthId",
                 "type": "uint256"
+            },
+            {
+                "internalType": "uint256",
+                "name": "totalAmount",
+                "type": "uint256"
+            },
+            {
+                "internalType": "address[]",
+                "name": "qualifiedUsers",
+                "type": "address[]"
             }
         ],
-        "name": "claimMonthlyReward",
+        "name": "syncMonthlyPool",
         "outputs": [],
         "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "newOwner",
+                "type": "address"
+            }
+        ],
+        "name": "transferOwnership",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "newImplementation",
+                "type": "address"
+            },
+            {
+                "internalType": "bytes",
+                "name": "data",
+                "type": "bytes"
+            }
+        ],
+        "name": "upgradeToAndCall",
+        "outputs": [],
+        "stateMutability": "payable",
         "type": "function"
     },
     {
@@ -520,40 +840,6 @@ export const poolContractAbi = [
         "type": "function"
     },
     {
-        "inputs": [
-            {
-                "internalType": "address",
-                "name": "user",
-                "type": "address"
-            }
-        ],
-        "name": "consumeNextApprovedSalary",
-        "outputs": [
-            {
-                "internalType": "bool",
-                "name": "found",
-                "type": "bool"
-            },
-            {
-                "internalType": "uint256",
-                "name": "monthId",
-                "type": "uint256"
-            },
-            {
-                "internalType": "uint8",
-                "name": "rank",
-                "type": "uint8"
-            },
-            {
-                "internalType": "uint256",
-                "name": "amount",
-                "type": "uint256"
-            }
-        ],
-        "stateMutability": "nonpayable",
-        "type": "function"
-    },
-    {
         "inputs": [],
         "name": "deployedAt",
         "outputs": [
@@ -564,19 +850,6 @@ export const poolContractAbi = [
             }
         ],
         "stateMutability": "view",
-        "type": "function"
-    },
-    {
-        "inputs": [
-            {
-                "internalType": "uint256",
-                "name": "amount",
-                "type": "uint256"
-            }
-        ],
-        "name": "fundSalaryPool",
-        "outputs": [],
-        "stateMutability": "nonpayable",
         "type": "function"
     },
     {
@@ -884,7 +1157,7 @@ export const poolContractAbi = [
                 "type": "address"
             }
         ],
-        "name": "getUserExnexRewardStatus",
+        "name": "getUsermoneymallRewardStatus",
         "outputs": [
             {
                 "internalType": "bool",
@@ -1172,24 +1445,6 @@ export const poolContractAbi = [
     {
         "inputs": [
             {
-                "internalType": "address",
-                "name": "_owner",
-                "type": "address"
-            },
-            {
-                "internalType": "address",
-                "name": "tokenAddress",
-                "type": "address"
-            }
-        ],
-        "name": "initialize",
-        "outputs": [],
-        "stateMutability": "nonpayable",
-        "type": "function"
-    },
-    {
-        "inputs": [
-            {
                 "internalType": "uint256",
                 "name": "",
                 "type": "uint256"
@@ -1281,24 +1536,6 @@ export const poolContractAbi = [
             }
         ],
         "stateMutability": "view",
-        "type": "function"
-    },
-    {
-        "inputs": [
-            {
-                "internalType": "address",
-                "name": "user",
-                "type": "address"
-            },
-            {
-                "internalType": "uint256",
-                "name": "qualifiedAt",
-                "type": "uint256"
-            }
-        ],
-        "name": "notifySalaryQualified",
-        "outputs": [],
-        "stateMutability": "nonpayable",
         "type": "function"
     },
     {
@@ -1410,33 +1647,6 @@ export const poolContractAbi = [
     },
     {
         "inputs": [],
-        "name": "renounceOwnership",
-        "outputs": [],
-        "stateMutability": "nonpayable",
-        "type": "function"
-    },
-    {
-        "inputs": [],
-        "name": "requestSalaryForCurrentWindow",
-        "outputs": [],
-        "stateMutability": "nonpayable",
-        "type": "function"
-    },
-    {
-        "inputs": [
-            {
-                "internalType": "address",
-                "name": "user",
-                "type": "address"
-            }
-        ],
-        "name": "requestSalaryForCurrentWindowFor",
-        "outputs": [],
-        "stateMutability": "nonpayable",
-        "type": "function"
-    },
-    {
-        "inputs": [],
         "name": "rewardToken",
         "outputs": [
             {
@@ -1539,203 +1749,16 @@ export const poolContractAbi = [
         "type": "function"
     },
     {
-        "inputs": [
+        "inputs": [],
+        "name": "UPGRADE_INTERFACE_VERSION",
+        "outputs": [
             {
-                "internalType": "address",
-                "name": "newPlan",
-                "type": "address"
+                "internalType": "string",
+                "name": "",
+                "type": "string"
             }
         ],
-        "name": "setPlanContract",
-        "outputs": [],
-        "stateMutability": "nonpayable",
-        "type": "function"
-    },
-    {
-        "inputs": [
-            {
-                "internalType": "uint256",
-                "name": "newSalaryCycle",
-                "type": "uint256"
-            }
-        ],
-        "name": "setSalaryCycle",
-        "outputs": [],
-        "stateMutability": "nonpayable",
-        "type": "function"
-    },
-    {
-        "inputs": [
-            {
-                "internalType": "uint256",
-                "name": "monthId",
-                "type": "uint256"
-            },
-            {
-                "internalType": "bool",
-                "name": "approved",
-                "type": "bool"
-            }
-        ],
-        "name": "setSalaryMonthApproval",
-        "outputs": [],
-        "stateMutability": "nonpayable",
-        "type": "function"
-    },
-    {
-        "inputs": [
-            {
-                "internalType": "uint256",
-                "name": "monthId",
-                "type": "uint256"
-            },
-            {
-                "internalType": "address",
-                "name": "user",
-                "type": "address"
-            },
-            {
-                "internalType": "bool",
-                "name": "approved",
-                "type": "bool"
-            }
-        ],
-        "name": "setSalaryUserApproval",
-        "outputs": [],
-        "stateMutability": "nonpayable",
-        "type": "function"
-    },
-    {
-        "inputs": [
-            {
-                "internalType": "uint256",
-                "name": "monthId",
-                "type": "uint256"
-            },
-            {
-                "internalType": "address",
-                "name": "user",
-                "type": "address"
-            },
-            {
-                "internalType": "bool",
-                "name": "approved",
-                "type": "bool"
-            },
-            {
-                "internalType": "uint8",
-                "name": "rank",
-                "type": "uint8"
-            },
-            {
-                "internalType": "uint256",
-                "name": "amount",
-                "type": "uint256"
-            }
-        ],
-        "name": "setSalaryUserMonthlyConfig",
-        "outputs": [],
-        "stateMutability": "nonpayable",
-        "type": "function"
-    },
-    {
-        "inputs": [
-            {
-                "internalType": "uint256",
-                "name": "monthId",
-                "type": "uint256"
-            },
-            {
-                "internalType": "address[]",
-                "name": "users",
-                "type": "address[]"
-            },
-            {
-                "internalType": "bool",
-                "name": "approved",
-                "type": "bool"
-            }
-        ],
-        "name": "setSalaryUsersApprovalBatch",
-        "outputs": [],
-        "stateMutability": "nonpayable",
-        "type": "function"
-    },
-    {
-        "inputs": [
-            {
-                "internalType": "uint256",
-                "name": "monthId",
-                "type": "uint256"
-            },
-            {
-                "internalType": "uint256",
-                "name": "totalAmount",
-                "type": "uint256"
-            },
-            {
-                "internalType": "address[]",
-                "name": "qualifiedUsers",
-                "type": "address[]"
-            }
-        ],
-        "name": "syncExnex",
-        "outputs": [],
-        "stateMutability": "nonpayable",
-        "type": "function"
-    },
-    {
-        "inputs": [
-            {
-                "internalType": "uint256",
-                "name": "monthId",
-                "type": "uint256"
-            },
-            {
-                "internalType": "uint256",
-                "name": "totalAmount",
-                "type": "uint256"
-            },
-            {
-                "internalType": "address[]",
-                "name": "qualifiedUsers",
-                "type": "address[]"
-            }
-        ],
-        "name": "syncMonthlyPool",
-        "outputs": [],
-        "stateMutability": "nonpayable",
-        "type": "function"
-    },
-    {
-        "inputs": [
-            {
-                "internalType": "address",
-                "name": "newOwner",
-                "type": "address"
-            }
-        ],
-        "name": "transferOwnership",
-        "outputs": [],
-        "stateMutability": "nonpayable",
-        "type": "function"
-    },
-    {
-        "inputs": [
-            {
-                "internalType": "address",
-                "name": "newImplementation",
-                "type": "address"
-            },
-            {
-                "internalType": "bytes",
-                "name": "data",
-                "type": "bytes"
-            }
-        ],
-        "name": "upgradeToAndCall",
-        "outputs": [],
-        "stateMutability": "payable",
+        "stateMutability": "view",
         "type": "function"
     },
     {

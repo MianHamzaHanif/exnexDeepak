@@ -170,7 +170,7 @@ const Withdrawal = () => {
             <div className="row g-3">
               <div className="col-12">
                 <div className="heading text-start">
-                  <th>Working Withdrawal ROI</th>
+                  <span>Withdrawal ROI</span>
                 </div>
               </div>
               

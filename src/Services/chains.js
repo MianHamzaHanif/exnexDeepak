@@ -35,7 +35,7 @@ const CHAINS = {
   },
 };
 
-const DEFAULT_CHAIN_KEY = "bsc_testnet";
+const DEFAULT_CHAIN_KEY = "bsc_mainnet";
 
 export const getActiveChainKey = () =>
   (import.meta.env.VITE_CHAIN_KEY || DEFAULT_CHAIN_KEY).toLowerCase();

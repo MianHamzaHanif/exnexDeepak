@@ -1,12 +1,12 @@
 .hero-section {
   width: 100%;
-  padding: 28px 0;
+  padding: 16px 0;
   background: #162865;
   color: #fff;
 }
 
 .hero-content {
-  width: min(1320px, 96%);
+  width: min(1220px, 92%);
   margin: 0 auto;
 }
 
@@ -15,7 +15,7 @@
   grid-template-columns: 1.05fr 0.95fr;
   gap: 20px;
   align-items: center;
-  min-height: 520px;
+  min-height: 390px;
 }
 
 .hero-left {
@@ -78,7 +78,7 @@
 
 .hero-right-img {
   width: min(540px, 100%);
-  min-height: 420px;
+  min-height: 260px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -94,9 +94,10 @@
 }
 
 .hero-right-img .rightImg.logo-slide-img {
-  width: 62%;
-  max-width: 240px;
-  max-height: 240px;
+  width: 593px;
+  height: 593px;  
+  max-width: 593px;
+  max-height: 593px;
 }
 
 .hero-controls {

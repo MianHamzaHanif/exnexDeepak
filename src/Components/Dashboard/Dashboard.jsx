@@ -643,7 +643,7 @@ const Dashboard = () => {
             <main>
               <div className="container-fluid mt-3 px-0 px-sm-2">
                 <div className="d-flex justify-content-between align-items-center mb-3">
-                  <h4 className="mb-0">Dashboard</h4>
+                  <h4 className="mb-0 dashboard-title">Dashboard</h4>
                   {web3State.isConnected && (
                     <button
                       className="btn btn-sm btn-primary"
@@ -822,15 +822,15 @@ const Dashboard = () => {
                 <div className="row g-3 mb-3">
                   <div className="col-12">
                     <div className="d-flex justify-content-between align-items-center mb-3">
-                      <span className="text-main">
+                      {/* <span className="text-main">
                         User ID: {dashboardData.userId || "N/A"}
-                      </span>
+                      </span> */}
                     </div>
                   </div>
                   <div className="col-12">
-                    <div className="card maincard">
+                    <div className="card maincard referral-card">
                       <div className="card-header bg-black text-white">
-                        <h5 className="text-white pb-2">Your Referral Link</h5>
+                        <h5 className="text-white pb-2 referral-title">Your Referral Link</h5>
                       </div>
                       <div className="card-body">
                         <div className="row g-2 align-items-center">
@@ -843,7 +843,7 @@ const Dashboard = () => {
                                 readOnly
                               />
                               <button
-                                className="btn btn-primary"
+                                className="btn btn-primary referral-copy-btn"
                                 onClick={copyReferralLink}
                               >
                                 <i className="fa-solid fa-copy"></i> Copy
@@ -851,14 +851,14 @@ const Dashboard = () => {
                             </div>
                           </div>
                           <div className="col-lg-4 col-md-12 text-lg-end">
-                            <div className="text-white">
-                              <small className="d-block text-white-50">
+                            <div className="cycle-time-box">
+                              <small className="d-block cycle-time-label">
                                 Current Cycle Time Left
                               </small>
-                              <span className="badge bg-primary fs-6">
+                              <span className="badge bg-primary fs-6 cycle-time-badge">
                                 {remainingCycleTime}
                               </span>
-                              <small className="d-block text-white mt-1">
+                              <small className="d-block cycle-time-sub mt-1">
                                 {remainingCycleDays} day(s) left
                               </small>
                             </div>
@@ -951,7 +951,7 @@ const Dashboard = () => {
 
                     <div className="row mt-3">
                       <div className="col-lg-6 col-md-12">
-                        <div className="card maincard">
+                        <div className="card maincard upgrade-package-card">
                           <div className="card-body">
                             <h5 className="text-white mb-3">Upgradeable Package</h5>
                             <div className="d-flex gap-2 flex-wrap">
@@ -968,7 +968,7 @@ const Dashboard = () => {
                                 ))}
                               </select>
                               <button
-                                className="btn btn-primary"
+                                className="btn btn-primary upgrade-package-btn"
                                 onClick={handleUpgradePackage}
                                 disabled={isUpgradeLoading}
                               >
@@ -1010,7 +1010,7 @@ const Dashboard = () => {
                     <div className="p-3">
                       <h5>Level Incomes</h5>
                     </div>
-                    <div className="card maincard overflow-hidden">
+                    <div className="card maincard overflow-hidden upgrade-history-card">
                       <div className="card-body px-0 pt-0">
                         <div className="table-responsive app-scroll dashtable overflow-x-hidden Dashtable">
                           <table className="table align-middle top-products-table mb-0">
@@ -1097,7 +1097,7 @@ const Dashboard = () => {
                   <div className="col-12">
                     <div className="card maincard overflow-hidden">
                       <div className="card-header bg-black text-white">
-                        <h5 className="text-white mb-0">
+                        <h5 className="text-white mb-0 upgrade-history-title">
                           Upgradeable Package History
                         </h5>
                       </div>

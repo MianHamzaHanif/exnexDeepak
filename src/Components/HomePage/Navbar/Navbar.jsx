@@ -10,7 +10,6 @@ const Navbar = () => {
           <div className="logo">
             <img src={logo} alt="" />
           </div>
-          <h4 className="title">EXNEX</h4>
         </div>
 
         <div className="login-section">

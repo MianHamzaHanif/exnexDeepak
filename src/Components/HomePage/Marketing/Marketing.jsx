@@ -5,13 +5,13 @@ const tabData = [
   {
     id: "tab1",
     label: "TOKEN TRENDS",
-    heading: "Track Exnex Token Momentum in Real Time",
+    heading: "Track USDT Market Momentum in Real Time",
     description:
       "Follow token momentum, liquidity changes, and price behavior to improve timing and strategy precision.",
     points: [
       {
         title: "Daily Token Pulse",
-        text: "Review Exnex Token movement and broader crypto trend direction.",
+        text: "Review USDT pair movement and broader crypto trend direction.",
       },
       {
         title: "Context-Based Analysis",
@@ -59,7 +59,7 @@ const tabData = [
     label: "EVENT CALENDAR",
     heading: "Plan Around High-Impact Market Events",
     description:
-      "Schedule your Exnex Token execution around macro events that influence crypto-wide liquidity and risk appetite.",
+      "Schedule your MONEY MALL plan execution around macro events that influence crypto-wide liquidity and risk appetite.",
     points: [
       {
         title: "Forecast vs. Outcome",
@@ -115,7 +115,7 @@ const tabData = [
     points: [
       {
         title: "Retracement & Extension",
-        text: "Map potential support and resistance for Exnex Token setups.",
+        text: "Map potential support and resistance for USDT-based setups.",
       },
       {
         title: "Chart Integration",
@@ -138,12 +138,12 @@ const stepsData = [
   {
     image: "https://www.moneymallfutures.com/fe/assets/img/illustration.png",
     title: "Choose a Trading Plan",
-    text: "Select the Exnex Token trading model that matches your capital and risk preference.",
+    text: "Select the MONEY MALL plan that matches your capital and risk preference.",
   },
   {
     image: "https://www.moneymallfutures.com/fe/assets/img/illustration2.png",
     title: "Connect Your Wallet",
-    text: "Set up a supported wallet and verify your Exnex Token readiness in a few steps.",
+    text: "Set up a supported wallet and verify your USDT readiness in a few steps.",
   },
   {
     image: "https://www.moneymallfutures.com/fe/assets/img/illustration3.png",
@@ -168,8 +168,8 @@ const Marketing = () => {
   return (
     <section id="marketing" className="marketing-section">
       <div className="marketing-container">
-        <p className="marketing-subhead">Exnex Research Center</p>
-        <p className="marketing-head">Token Trading Insights</p>
+        <p className="marketing-subhead">MONEY MALL Research Center</p>
+        <p className="marketing-head">Plan Trading Insights</p>
 
         <div className="marketing-body">
           <div className="marketing-tabs">
@@ -208,7 +208,7 @@ const Marketing = () => {
 
         <div className="steps-section">
           <p className="marketing-subhead center">Simple Steps</p>
-          <p className="marketing-head center">How Exnex Token Trading Works</p>
+          <p className="marketing-head center">How MONEY MALL Plan Works with USDT</p>
 
           <div className="steps-grid">
             {stepsData.map((step, index) => (

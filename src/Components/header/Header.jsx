@@ -22,41 +22,12 @@ const Header = () => {
 
   return (
     <header className="homepageheader">
-      <div className="home-topbar">
-        <div className="home-topbar-inner">
-          <div className="home-top-left">
-            <a href="tel:+12025550147">
-              <i className="bi bi-telephone" /> +1 (202) 555-0147
-            </a>
-            <a href="mailto:info@exnex.com">
-              <i className="bi bi-envelope" /> info@exnex.com
-            </a>
-          </div>
-          <div className="home-top-right">
-            <span>Follow Us</span>
-            <a href="https://www.youtube.com/channel/UCimtAunOgLl8v2YlpWZDimg" target="_blank" rel="noreferrer" aria-label="youtube">
-              <i className="bi bi-youtube" />
-            </a>
-            <a href="https://www.instagram.com/moneymallfutures" target="_blank" rel="noreferrer" aria-label="instagram">
-              <i className="bi bi-instagram" />
-            </a>
-            <a href="https://www.facebook.com/profile.php?id=61563581315872" target="_blank" rel="noreferrer" aria-label="facebook">
-              <i className="bi bi-facebook" />
-            </a>
-            <a href="https://www.tiktok.com/@moneymallfutures" target="_blank" rel="noreferrer" aria-label="tiktok">
-              <i className="bi bi-twitter-x" />
-            </a>
-            <span className="home-lang">English</span>
-          </div>
-        </div>
-      </div>
-
       <div className="home-main-nav">
         <div className="home-main-nav-inner">
           <Link to="/" className="home-brand">
             <img src={logo} alt="logo" />
             <div>
-              <h4>EXNEX</h4>
+              {/* <h4>EXNEX</h4> */}
               {/* <p>PT. GATRA MEGA BERJANGKA</p> */}
             </div>
           </Link>

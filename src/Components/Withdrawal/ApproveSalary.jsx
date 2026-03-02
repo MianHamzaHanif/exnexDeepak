@@ -173,7 +173,7 @@ const ApproveSalary = () => {
   };
 
   return (
-    <div className="app-wrapper">
+    <div className="app-wrapper ApproveSalaryPage">
       <Sidebar />
       <div className="app-content">
         <Header />
@@ -182,7 +182,7 @@ const ApproveSalary = () => {
             <div className="row g-3">
               <div className="col-12">
                 <div className="heading text-start">
-                  <th>Approve Salary</th>
+                  <span>Approve Salary</span>
                 </div>
               </div>
               <div className="col-12">

@@ -78,7 +78,7 @@ const PoolHistory = () => {
   };
 
   return (
-    <div className="app-wrapper">
+    <div className="app-wrapper PoolHistoryPage">
       <Sidebar />
       <div className="app-content">
         <Header />
@@ -87,7 +87,7 @@ const PoolHistory = () => {
             <div className="row g-3">
               <div className="col-12">
                 <div className="heading text-start">
-                  <th>Pool History</th>
+                  <span>Pool History</span>
                 </div>
               </div>
 

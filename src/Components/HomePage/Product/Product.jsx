@@ -3,25 +3,15 @@ import "./Product.css";
 
 const productCards = [
   {
-    title: "PRO",
+    title: "DECENTRALIZED PLAN",
     image: "https://www.moneymallfutures.com/fe/assets/img/pack-gold.webp",
     rows: [
-      { label: "Plan Type", value: "Balanced Growth" },
+      { label: "Plan Type", value: "Decentralized Plan" },
+      { label: "Income Type", value: "Income, Rewards, Salary, Pool Income, Direct Income" },
       { label: "Entry Capital", value: "Flexible" },
-      { label: "Execution Mode", value: "Guided Strategy" },
+      { label: "Trading Token", value: "USDT" },
+      { label: "Model", value: "Plan Participation + USDT Trading Link" },
       { label: "Leverage Range", value: "1:100 - 1:500" },
-      { label: "Risk Control", value: "20% - 75% Auto Cut" },
-    ],
-  },
-  {
-    title: "ZERO",
-    image: "https://www.moneymallfutures.com/fe/assets/img/pack-diamond.webp",
-    rows: [
-      { label: "Plan Type", value: "Active Trading" },
-      { label: "Entry Capital", value: "Flexible" },
-      { label: "Execution Mode", value: "Low Friction" },
-      { label: "Leverage Range", value: "1:100 - 1:500" },
-      { label: "Risk Control", value: "20% - 75% Auto Cut" },
     ],
   },
 ];
@@ -30,10 +20,10 @@ const Product = () => {
   return (
     <section id="product" className="product-section">
       <div className="product-container">
-        <p className="product-head">Exnex Token Trading Plans</p>
-        <p className="product-head-big">Choose a Strategy That Fits Your Risk Profile</p>
+        <p className="product-head">MONEY MALL Decentralized Plan</p>
+        <p className="product-head-big">USDT Linked Income Model</p>
 
-        <div className="product-grid">
+        <div className={`product-grid ${productCards.length === 1 ? "single-card" : ""}`}>
           {productCards.map((card) => (
             <article key={card.title} className="product-card">
               <div className="product-card-header">

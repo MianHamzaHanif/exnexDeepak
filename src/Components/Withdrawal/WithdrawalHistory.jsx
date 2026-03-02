@@ -103,7 +103,7 @@ const WithdrawalHistory = () => {
   };
 
   return (
-    <div className="app-wrapper">
+    <div className="app-wrapper WithdrawalHistoryPage">
       <Sidebar />
       <div className="app-content">
         <Header />

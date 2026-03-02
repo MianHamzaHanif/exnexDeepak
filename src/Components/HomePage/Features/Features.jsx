@@ -1,6 +1,5 @@
 import React from "react";
 import "./Features.css";
-import { tokenAddress } from "../../../Services/tokenAddress";
 
 export const Features = () => {
   return (
@@ -16,15 +15,18 @@ export const Features = () => {
           </div>
 
           <div className="featured-copy">
-            <p className="feature-text-heading">Exnex Token Trading Infrastructure</p>
+            <p className="feature-text-heading">MONEY MALL Plan Infrastructure</p>
             <p className="feature-text-heading-big">A Practical Framework for Consistent Crypto Execution</p>
             <hr className="feature-hr" />
             <p className="feature-text-content">
-              Exnex combines structured strategy, portfolio discipline, and token utility to
+              MONEY MALL combines structured strategy, portfolio discipline, and a clear plan model to
               help traders navigate volatility with a clear process.
             </p>
             <p className="feature-text-content">
-              Exnex Token Contract (BSC): <strong>{tokenAddress}</strong>
+              Primary Token for Plan Activity: <strong>USDT</strong>
+            </p>
+            <p className="feature-text-content">
+              All plan outcomes including Income, Rewards, Salary, Pool Income, and Direct Income are tracked in USDT.
             </p>
             <p>
               <a href="https://wa.me/6281953934694" target="_blank" rel="noreferrer" className="feature-link">
@@ -54,9 +56,9 @@ export const Features = () => {
               src="https://www.moneymallfutures.com/fe/assets/img/icon-1.png"
               alt="moneymall feature icon 1"
             />
-            <p className="feature-item-head">TOKEN-LED PORTFOLIO ACCESS</p>
+            <p className="feature-item-head">USDT-BASED PLAN ACCESS</p>
             <p className="feature-item-content">
-              Use Exnex Token as a core asset in a diversified trading setup built for long-term
+              Use USDT as the core token in a diversified setup built for long-term
               participation.
             </p>
           </article>
@@ -81,7 +83,7 @@ export const Features = () => {
             <p className="feature-item-head">SECURE WALLET FLOW</p>
             <p className="feature-item-content">
               Connect trusted wallets, verify transactions on-chain, and keep full visibility over
-              your Exnex Token activity.
+              your MONEY MALL plan activity.
             </p>
           </article>
         </div>

@@ -6,18 +6,18 @@ import faq3 from "/webimg/faq-icon-3.png";
 
 const faqData = [
   {
-    title: "How does Exnex Token fit into the trading plan?",
-    desc: "Exnex Token is integrated into the strategy flow for plan access, tracking, and portfolio participation across supported trading setups.",
+    title: "Which incomes are included in MONEY MALL plan?",
+    desc: "MONEY MALL includes Income, Rewards, Salary, Pool Income, and Direct Income, and all of them are tracked in USDT.",
     icon: faq1,
   },
   {
     title: "Which wallets and chain are supported?",
-    desc: "Exnex currently supports Binance Smart Chain (BSC) with wallets such as MetaMask, Trust Wallet, Token Pocket, and SafePal.",
+    desc: "MONEY MALL supports Binance Smart Chain (BSC) wallets such as MetaMask, Trust Wallet, Token Pocket, and SafePal.",
     icon: faq2,
   },
   {
-    title: "Why is Exnex different?",
-    desc: "Exnex focuses on disciplined, plan-based execution with transparent metrics, practical risk control, and token-aligned strategy design.",
+    title: "Why is MONEY MALL different?",
+    desc: "MONEY MALL focuses on disciplined, plan-based execution with transparent metrics, practical risk control, and clear USDT-based flow.",
     icon: faq3,
   },
 ];

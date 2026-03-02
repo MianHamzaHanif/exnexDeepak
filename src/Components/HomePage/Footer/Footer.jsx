@@ -12,30 +12,16 @@ export const Footer = () => {
               <img
                 src={logo}
                 className="footer-logo"
-                alt="Exnex"
+                alt="Money Mall"
               />
             </a>
 
             <div className="footer-contact-block">
-              <p className="footer-contact-text">Exnex</p>
-              <p className="footer-contact-text">Exnex Trading</p>
+              <p className="footer-contact-text">Money Mall Plan</p>
               <p className="footer-address">
-                Global digital trading infrastructure powered by Exnex Token on Binance Smart Chain.
+                Structured trading plan with USDT-based participation on Binance Smart Chain.
               </p>
 
-              <p className="footer-line">
-                <i className="bi bi-telephone me-1 icon-1" />
-                <span className="text-1">
-                  <a href="tel:+12025550147">+1 (202) 555-0147</a>
-                </span>
-              </p>
-
-              <p className="footer-line">
-                <i className="bi bi-envelope me-1 icon-1" />
-                <span className="text-1">
-                  <a href="mailto:info@exnex.com">info@exnex.com</a>
-                </span>
-              </p>
             </div>
           </div>
 
@@ -45,7 +31,6 @@ export const Footer = () => {
               <a href="https://wa.me/6281953934694" target="_blank" rel="noreferrer">
                 Customer Support
               </a>
-              <a href="mailto:info@exnex.com">Email Support</a>
               <a href="#contact">
                 Contact Form
               </a>
@@ -54,7 +39,7 @@ export const Footer = () => {
             <div className="footer-link-group">
               <h4>About Us</h4>
               <a href="#featured-services">
-                Why Exnex
+                Why Money Mall
               </a>
               <a href="#marketing">
                 Trading Insights

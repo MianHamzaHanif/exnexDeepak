@@ -8,10 +8,10 @@ export const About = () => {
       <div className="about-wrapper">
         <div className="about-left">
           <div className="about-content">
-            <h1 className="">About Exnex</h1>
+            <h1 className="">About MONEY MALL</h1>
             <p>
-              Exnex is a trading-focused ecosystem designed by experienced crypto operators to
-              make token-based portfolio growth more structured and transparent.
+              MONEY MALL is a structured trading plan built by experienced market operators to make
+              growth more disciplined, transparent, and process-driven.
             </p>
           </div>
 
@@ -21,12 +21,13 @@ export const About = () => {
               We have seen too many traders struggle in highly volatile markets, so we built a
               practical framework that balances opportunity with risk control.
               <br />
-              Exnex is for people who want disciplined execution, measured risk, and sustainable
+              MONEY MALL is for people who want disciplined execution, measured risk, and sustainable
               returns instead of random speculation.
             </p>
             <p>
-              As blockchain builders, we believe Exnex Token utility and structured trading can
-              improve market participation and long-term adoption.
+              We use USDT as the core token inside the MONEY MALL plan so participation, tracking,
+              and calculations for Income, Rewards, Salary, Pool Income, and Direct Income stay
+              simple and transparent.
             </p>
           </div>
         </div>

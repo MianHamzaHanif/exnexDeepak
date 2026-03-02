@@ -1,0 +1,383 @@
+.app-wrapper {
+  background: linear-gradient(180deg, #e3f5fb 0%, #e3f5fb 140px, #f8f9fb 140px, #ffffff 100%) !important;
+}
+
+.app-wrapper .app-content {
+  background: transparent !important;
+}
+
+.app-wrapper nav {
+  background: #162865 !important;
+  border-right: 1px solid rgba(255, 255, 255, 0.15) !important;
+}
+
+.app-wrapper nav .app-logo {
+  background: transparent !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2) !important;
+}
+
+.app-wrapper nav .app-nav .main-nav > li:not(.menu-title) > a {
+  color: #ffffff !important;
+}
+
+.app-wrapper nav .app-nav .main-nav > li:not(.menu-title) > a i {
+  color: #ffffff !important;
+}
+
+.app-wrapper nav .app-nav .main-nav > li:not(.menu-title) > a[aria-expanded="true"],
+.app-wrapper nav .app-nav .main-nav > li:not(.menu-title) > a:hover {
+  background: rgba(255, 255, 255, 0.14) !important;
+  color: #ffffff !important;
+  box-shadow: inset 3px 0 0 #ce9a2d;
+}
+
+.app-wrapper nav .app-nav .main-nav > li:not(.menu-title) ul li a {
+  color: #f8f9fb !important;
+}
+
+.app-wrapper nav .app-nav .main-nav > li:not(.menu-title) ul li.active a,
+.app-wrapper nav .app-nav .main-nav > li:not(.menu-title) ul li a:hover {
+  color: #ffffff !important;
+}
+
+.app-wrapper header.header-main {
+  background: #e3f5fb !important;
+  border-bottom: 1px solid #c6deec !important;
+}
+
+.app-wrapper header.header-main:before {
+  background: transparent !important;
+}
+
+.app-wrapper header.header-main .header-toggle {
+  background: #f8f9fb !important;
+  color: #162865 !important;
+}
+
+.app-wrapper header.header-main .head-icon {
+  background: #f8f9fb !important;
+}
+
+.app-wrapper .card,
+.app-wrapper .maincard,
+.app-wrapper .tablecard,
+.app-wrapper .bg-theme1 {
+  background: #ffffff !important;
+  border: 1px solid rgba(22, 40, 101, 0.18) !important;
+  box-shadow: 0 8px 24px rgba(22, 40, 101, 0.06) !important;
+  color: #162865 !important;
+}
+
+.app-wrapper .card .card-header {
+  background: #f8f9fb !important;
+  color: #162865 !important;
+  border-bottom: 1px solid rgba(22, 40, 101, 0.18) !important;
+}
+
+.app-wrapper .card-header.bg-black {
+  background: #162865 !important;
+  color: #ffffff !important;
+}
+
+.app-wrapper .bg-primary,
+.app-wrapper .bg-primary-300 {
+  background: #162865 !important;
+  color: #ffffff !important;
+}
+
+.app-wrapper .bg-info {
+  background: #2a6ca8 !important;
+  color: #ffffff !important;
+}
+
+.app-wrapper .bg-success {
+  background: #2f7f78 !important;
+  color: #ffffff !important;
+}
+
+.app-wrapper .bg-warning {
+  background: linear-gradient(135deg, #ce9a2d 0%, #ddba68 100%) !important;
+  color: #162865 !important;
+}
+
+.app-wrapper .btn-primary {
+  background: #162865 !important;
+  border-color: #162865 !important;
+  color: #000000 !important;
+}
+
+.app-wrapper .btn-warning {
+  background: rgba(206, 154, 45, 0.14) !important;
+  border-color: #ce9a2d !important;
+  color: #79530f !important;
+}
+
+.app-wrapper .btn-info {
+  background: #f8f9fb !important;
+  border-color: rgba(22, 40, 101, 0.2) !important;
+  color: #162865 !important;
+}
+
+.app-wrapper .pool-claim-card .pool-chip {
+  background: #162865 !important;
+  color: #ffffff !important;
+  border: 1px solid rgba(206, 154, 45, 0.45) !important;
+}
+
+.app-wrapper .pool-claim-card .pool-stat-card {
+  background: #f8f9fb !important;
+  border: 1px solid #d9ecf8 !important;
+}
+
+.app-wrapper .pool-claim-card .pool-stat-card-highlight {
+  border-color: rgba(206, 154, 45, 0.55) !important;
+  box-shadow: 0 0 0 1px rgba(206, 154, 45, 0.35) inset !important;
+}
+
+.app-wrapper.ClaimSalaryPage .salary-action-btn {
+  background: #162865 !important;
+  border: 1px solid #ce9a2d !important;
+  color: #ffffff !important;
+  font-weight: 600 !important;
+}
+
+.app-wrapper.ClaimSalaryPage .salary-action-btn:hover,
+.app-wrapper.ClaimSalaryPage .salary-action-btn:focus {
+  background: #1b347d !important;
+  border-color: #ce9a2d !important;
+  color: #ffffff !important;
+}
+
+.app-wrapper.ClaimSalaryPage .salary-action-btn:disabled {
+  background: #162865 !important;
+  border-color: rgba(206, 154, 45, 0.45) !important;
+  color: #ffffff !important;
+  opacity: 0.6 !important;
+}
+
+.app-wrapper.ApproveSalaryPage .form-select {
+  background: #ffffff !important;
+  color: #162865 !important;
+  border: 1px solid #ce9a2d !important;
+}
+
+.app-wrapper.ApproveSalaryPage .form-select:focus {
+  background: #ffffff !important;
+  color: #162865 !important;
+  border-color: #ce9a2d !important;
+  box-shadow: 0 0 0 0.2rem rgba(206, 154, 45, 0.2) !important;
+}
+
+.app-wrapper.ApproveSalaryPage .form-select option {
+  background: #ffffff !important;
+  color: #162865 !important;
+}
+
+.app-wrapper.ApproveSalaryPage .badge,
+.app-wrapper.ApproveSalaryPage .badge.bg-primary,
+.app-wrapper.ApproveSalaryPage .badge.bg-info,
+.app-wrapper.ApproveSalaryPage .badge.bg-success {
+  color: #ffffff !important;
+}
+
+.app-wrapper table thead th {
+  background: #f8f9fb !important;
+  color: #162865 !important;
+  border-color: #d9ecf8 !important;
+  text-transform: none !important;
+}
+
+.app-wrapper .app-content .heading span,
+.app-wrapper .card .card-header th,
+.app-wrapper .card .card-header h5,
+.app-wrapper .card .card-header span {
+  text-transform: none !important;
+}
+
+.app-wrapper table tbody td {
+  color: #233f74 !important;
+  border-color: #e6f2fa !important;
+}
+
+.app-wrapper .app-content,
+.app-wrapper .app-content * {
+  color: #000000 !important;
+}
+
+/* Overall Portfolio section theme */
+.app-wrapper .app-content .header-section {
+  background: linear-gradient(135deg, #162865 0%, #1b347d 100%) !important;
+  border: 1px solid rgba(206, 154, 45, 0.55) !important;
+  box-shadow: 0 10px 24px rgba(22, 40, 101, 0.3) !important;
+}
+
+.app-wrapper .app-content .header-section .header-title {
+  color: #ce9a2d !important;
+}
+
+.app-wrapper .app-content .header-section .label {
+  color: rgba(255, 255, 255, 0.82) !important;
+}
+
+.app-wrapper .app-content .header-section .label span,
+.app-wrapper .app-content .header-section .up {
+  color: #ce9a2d !important;
+}
+
+.app-wrapper .app-content .header-section h3 {
+  color: #ffffff !important;
+}
+
+/* Transactions section theme */
+.app-wrapper .app-content .exnex-trans-wrap {
+  color: #ffffff !important;
+}
+
+.app-wrapper .app-content .exnex-trans-header h5 {
+  color: #162865 !important;
+}
+
+.app-wrapper .app-content .exnex-trans-card {
+  background: linear-gradient(135deg, #162865 0%, #1b347d 100%) !important;
+  border: 1px solid rgba(206, 154, 45, 0.55) !important;
+  box-shadow: 0 12px 28px rgba(22, 40, 101, 0.3) !important;
+}
+
+.app-wrapper .app-content .exnex-trans-item {
+  background: rgba(255, 255, 255, 0.08) !important;
+  border-left: 3px solid #ce9a2d !important;
+}
+
+.app-wrapper .app-content .exnex-trans-item span {
+  color: rgba(255, 255, 255, 0.88) !important;
+}
+
+.app-wrapper .app-content .exnex-trans-item h3 {
+  color: #ffffff !important;
+}
+
+.app-wrapper .app-content .exnex-trans-item:hover {
+  box-shadow: 0 0 18px rgba(206, 154, 45, 0.45) !important;
+}
+
+/* Withdrawal ROI History + Vesting History tables */
+.app-wrapper .app-content .withdrawal-history-table,
+.app-wrapper .app-content .vesting-history-table {
+  border: 1px solid rgba(206, 154, 45, 0.35) !important;
+  border-radius: 10px !important;
+  overflow: hidden !important;
+}
+
+.app-wrapper .app-content .withdrawal-history-table thead th,
+.app-wrapper .app-content .vesting-history-table thead th {
+  background: #162865 !important;
+  color: #ffffff !important;
+  border-bottom: 1px solid #ce9a2d !important;
+}
+
+.app-wrapper .app-content .withdrawal-history-table tbody tr,
+.app-wrapper .app-content .vesting-history-table tbody tr {
+  background: #1b347d !important;
+}
+
+.app-wrapper .app-content .withdrawal-history-table tbody tr:nth-child(even),
+.app-wrapper .app-content .vesting-history-table tbody tr:nth-child(even) {
+  background: #203c8b !important;
+}
+
+.app-wrapper .app-content .withdrawal-history-table tbody tr:hover,
+.app-wrapper .app-content .vesting-history-table tbody tr:hover {
+  background: #28489d !important;
+}
+
+.app-wrapper .app-content .withdrawal-history-table tbody td,
+.app-wrapper .app-content .vesting-history-table tbody td {
+  color: #ffffff !important;
+  border-bottom: 1px solid rgba(206, 154, 45, 0.2) !important;
+}
+
+.app-wrapper.WithdrawalHistoryPage .app-content .pagination .btn,
+.app-wrapper.WithdrawalHistoryPage .app-content .pagination span,
+.app-wrapper.VestingHistoryPage .app-content .pagination .btn,
+.app-wrapper.VestingHistoryPage .app-content .pagination span {
+  color: #ffffff !important;
+}
+
+/* Pool History table */
+.app-wrapper.PoolHistoryPage .app-content .pool-history-table {
+  border: 1px solid rgba(206, 154, 45, 0.35) !important;
+  border-radius: 10px !important;
+  overflow: hidden !important;
+}
+
+.app-wrapper.PoolHistoryPage .ActivationPage .heading,
+.app-wrapper.PoolHistoryPage .ActivationPage .heading th,
+.app-wrapper.PoolHistoryPage .ActivationPage .heading span {
+  text-transform: none !important;
+}
+
+.app-wrapper.PoolHistoryPage .app-content .pool-history-table thead th {
+  background: #162865 !important;
+  color: #ffffff !important;
+  border-bottom: 1px solid #ce9a2d !important;
+}
+
+.app-wrapper.PoolHistoryPage .app-content .pool-history-table tbody tr {
+  background: #1b347d !important;
+}
+
+.app-wrapper.PoolHistoryPage .app-content .pool-history-table tbody tr:nth-child(even) {
+  background: #203c8b !important;
+}
+
+.app-wrapper.PoolHistoryPage .app-content .pool-history-table tbody tr:hover {
+  background: #28489d !important;
+}
+
+.app-wrapper.PoolHistoryPage .app-content .pool-history-table tbody td {
+  color: #ffffff !important;
+  border-bottom: 1px solid rgba(206, 154, 45, 0.2) !important;
+}
+
+.app-wrapper.PoolHistoryPage .app-content .pagination .btn,
+.app-wrapper.PoolHistoryPage .app-content .pagination span {
+  color: #ffffff !important;
+}
+
+/* Current cycle timer colors */
+.app-wrapper .app-content .cycle-time-box .cycle-time-label,
+.app-wrapper .app-content .cycle-time-box .cycle-time-sub,
+.app-wrapper .app-content .cycle-time-box .cycle-time-badge {
+  color: #ffffff !important;
+}
+
+/* Referral copy button text/icon */
+.app-wrapper .app-content .referral-card .referral-copy-btn,
+.app-wrapper .app-content .referral-card .referral-copy-btn i {
+  color: #ffffff !important;
+}
+
+.app-wrapper .app-content .referral-card .referral-title {
+  color: #ce9a2d !important;
+}
+
+.app-wrapper .app-content .dashboard-title {
+  color: #000000 !important;
+  font-weight: 700 !important;
+}
+
+.app-wrapper .app-content .upgrade-history-title {
+  color: #ce9a2d !important;
+}
+
+.app-wrapper .app-content .upgrade-package-btn,
+.app-wrapper .app-content .upgrade-package-btn i {
+  color: #ffffff !important;
+}
+
+/* Dashboard sidebar logo size */
+.app-wrapper nav .app-logo .logo img,
+.app-wrapper .semi-nav:hover .app-logo .logo img,
+.app-wrapper .semi-nav .app-logo .logo img {
+  width: 180px !important;
+}

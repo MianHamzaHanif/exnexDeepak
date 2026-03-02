@@ -16,6 +16,16 @@ const ClaimPool = () => {
   const [remainingToNextMonth, setRemainingToNextMonth] = useState("0d 00:00:00");
   const [isStatusLoading, setIsStatusLoading] = useState(false);
   const [isClaiming, setIsClaiming] = useState(false);
+  const defaultPoolStatus = {
+    monthSynced: false,
+    totalPoolAmount: "0.0000",
+    qualifiedCount: 0,
+    qualified: false,
+    claimed: false,
+    rewardPerUser: "0.0000",
+    claimableAmount: "0.0000",
+  };
+  const displayPoolStatus = poolStatus || defaultPoolStatus;
   const claimableAmount = Number(poolStatus?.claimableAmount || 0);
   const canClaim =
     !isClaiming &&
@@ -263,53 +273,54 @@ const ClaimPool = () => {
                     <div className="row g-3 mb-4">
                       {isStatusLoading ? (
                         <div className="col-12 text-white">Loading status...</div>
-                      ) : poolStatus ? (
+                      ) : (
                         <>
+                          {!poolStatus && (
+                            <div className="col-12 text-white">No status found.</div>
+                          )}
                           <div className="col-lg-3 col-md-4 col-6">
                             <div className="pool-stat-card">
                               <p>Month Synced</p>
-                              <h6>{poolStatus.monthSynced ? "Yes" : "No"}</h6>
+                              <h6>{displayPoolStatus.monthSynced ? "Yes" : "No"}</h6>
                             </div>
                           </div>
                           <div className="col-lg-3 col-md-4 col-6">
                             <div className="pool-stat-card">
                               <p>Qualified</p>
-                              <h6>{poolStatus.qualified ? "Yes" : "No"}</h6>
+                              <h6>{displayPoolStatus.qualified ? "Yes" : "No"}</h6>
                             </div>
                           </div>
                           <div className="col-lg-3 col-md-4 col-6">
                             <div className="pool-stat-card">
                               <p>Claimed</p>
-                              <h6>{poolStatus.claimed ? "Yes" : "No"}</h6>
+                              <h6>{displayPoolStatus.claimed ? "Yes" : "No"}</h6>
                             </div>
                           </div>
                           <div className="col-lg-3 col-md-4 col-6">
                             <div className="pool-stat-card">
                               <p>Qualified Count</p>
-                              <h6>{poolStatus.qualifiedCount}</h6>
+                              <h6>{displayPoolStatus.qualifiedCount}</h6>
                             </div>
                           </div>
                           <div className="col-lg-4 col-md-6">
                             <div className="pool-stat-card">
                               <p>Total Pool Amount</p>
-                              <h6>$ {poolStatus.totalPoolAmount}</h6>
+                              <h6>$ {displayPoolStatus.totalPoolAmount}</h6>
                             </div>
                           </div>
                           <div className="col-lg-4 col-md-6">
                             <div className="pool-stat-card">
                               <p>Reward Per User</p>
-                              <h6>$ {poolStatus.rewardPerUser}</h6>
+                              <h6>$ {displayPoolStatus.rewardPerUser}</h6>
                             </div>
                           </div>
                           <div className="col-lg-4 col-md-6">
                             <div className="pool-stat-card pool-stat-card-highlight">
                               <p>Claimable Amount</p>
-                              <h6>$ {poolStatus.claimableAmount}</h6>
+                              <h6>$ {displayPoolStatus.claimableAmount}</h6>
                             </div>
                           </div>
                         </>
-                      ) : (
-                        <div className="col-12 text-white">No status found.</div>
                       )}
                     </div>
 
@@ -330,10 +341,12 @@ const ClaimPool = () => {
                     color: #fff;
                     font-size: 1.5rem;
                     font-weight: 700;
+                    text-transform: none;
                   }
                   .pool-subtitle {
                     color: rgba(255, 255, 255, 0.75);
                     font-size: 0.92rem;
+                    text-transform: none;
                   }
                   .pool-claim-card .pool-meta {
                     display: flex;
@@ -348,6 +361,21 @@ const ClaimPool = () => {
                     border-radius: 999px;
                     font-size: 12px;
                     padding: 6px 12px;
+                  }
+                  .pool-claim-card .form-select {
+                    background: #ffffff !important;
+                    color: #162865 !important;
+                    border: 1px solid #ce9a2d !important;
+                  }
+                  .pool-claim-card .form-select:focus {
+                    background: #ffffff !important;
+                    color: #162865 !important;
+                    border-color: #ce9a2d !important;
+                    box-shadow: 0 0 0 0.2rem rgba(206, 154, 45, 0.2) !important;
+                  }
+                  .pool-claim-card .form-select option {
+                    background: #ffffff;
+                    color: #162865;
                   }
                   .pool-claim-card .pool-stat-card {
                     background: rgba(255, 255, 255, 0.04);

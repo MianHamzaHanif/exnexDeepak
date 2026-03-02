@@ -32,6 +32,11 @@
   gap: 18px;
 }
 
+.product-grid.single-card {
+  grid-template-columns: minmax(0, 760px);
+  justify-content: center;
+}
+
 .product-card {
   border: 1px solid #23a0db;
   border-radius: 0;

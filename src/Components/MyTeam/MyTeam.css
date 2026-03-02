@@ -1,26 +1,68 @@
+.MyReferralPage .card.tablecard,
+.LevelDetailsPage .card.tablecard,
+.DirectIncomePage .card.tablecard,
+.LevelIncomePage .card.tablecard,
+.RoiLevelIncomePage .card.tablecard,
+.WithdrawLevelIncomePage .card.tablecard,
+.SalaryIncomePage .card.tablecard {
+  background: #162865 !important;
+  border: 1px solid rgba(206, 154, 45, 0.55) !important;
+  box-shadow: 0 10px 24px rgba(22, 40, 101, 0.25) !important;
+}
+
+.MyReferralPage .custom-table-container,
+.LevelDetailsPage .custom-table-container,
+.DirectIncomePage .custom-table-container,
+.LevelIncomePage .custom-table-container,
+.RoiLevelIncomePage .custom-table-container,
+.WithdrawLevelIncomePage .custom-table-container,
+.SalaryIncomePage .custom-table-container {
+  border: 1px solid rgba(206, 154, 45, 0.35);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.MyReferralPage .custom-table thead th,
+.LevelDetailsPage .custom-table thead th,
+.DirectIncomePage .custom-table thead th,
+.LevelIncomePage .custom-table thead th,
+.RoiLevelIncomePage .custom-table thead th,
+.WithdrawLevelIncomePage .custom-table thead th,
+.SalaryIncomePage .custom-table thead th {
+  background: #162865 !important;
+  color: #ffffff !important;
+  border-bottom: 1px solid #ce9a2d !important;
+}
+
 .MyReferralPage .custom-table tbody tr,
-.MyReferralPage .custom-table tbody tr:hover,
-.MyReferralPage .custom-table tbody tr:nth-child(even),
 .LevelDetailsPage .custom-table tbody tr,
-.LevelDetailsPage .custom-table tbody tr:hover,
-.LevelDetailsPage .custom-table tbody tr:nth-child(even),
 .DirectIncomePage .custom-table tbody tr,
-.DirectIncomePage .custom-table tbody tr:hover,
-.DirectIncomePage .custom-table tbody tr:nth-child(even),
 .LevelIncomePage .custom-table tbody tr,
-.LevelIncomePage .custom-table tbody tr:hover,
-.LevelIncomePage .custom-table tbody tr:nth-child(even),
 .RoiLevelIncomePage .custom-table tbody tr,
-.RoiLevelIncomePage .custom-table tbody tr:hover,
-.RoiLevelIncomePage .custom-table tbody tr:nth-child(even),
 .WithdrawLevelIncomePage .custom-table tbody tr,
-.WithdrawLevelIncomePage .custom-table tbody tr:hover,
+.SalaryIncomePage .custom-table tbody tr {
+  background: #1b347d !important;
+  transition: background 0.2s ease !important;
+}
+
+.MyReferralPage .custom-table tbody tr:nth-child(even),
+.LevelDetailsPage .custom-table tbody tr:nth-child(even),
+.DirectIncomePage .custom-table tbody tr:nth-child(even),
+.LevelIncomePage .custom-table tbody tr:nth-child(even),
+.RoiLevelIncomePage .custom-table tbody tr:nth-child(even),
 .WithdrawLevelIncomePage .custom-table tbody tr:nth-child(even),
-.SalaryIncomePage .custom-table tbody tr,
-.SalaryIncomePage .custom-table tbody tr:hover,
 .SalaryIncomePage .custom-table tbody tr:nth-child(even) {
-  background: #000 !important;
-  transition: none !important;
+  background: #203c8b !important;
+}
+
+.MyReferralPage .custom-table tbody tr:hover,
+.LevelDetailsPage .custom-table tbody tr:hover,
+.DirectIncomePage .custom-table tbody tr:hover,
+.LevelIncomePage .custom-table tbody tr:hover,
+.RoiLevelIncomePage .custom-table tbody tr:hover,
+.WithdrawLevelIncomePage .custom-table tbody tr:hover,
+.SalaryIncomePage .custom-table tbody tr:hover {
+  background: #28489d !important;
 }
 
 .MyReferralPage .custom-table tbody td,
@@ -30,7 +72,58 @@
 .RoiLevelIncomePage .custom-table tbody td,
 .WithdrawLevelIncomePage .custom-table tbody td,
 .SalaryIncomePage .custom-table tbody td {
-  background: #000 !important;
-  color: #fff !important;
-  border-bottom-color: #222 !important;
+  background: transparent !important;
+  color: #ffffff !important;
+  border-bottom: 1px solid rgba(206, 154, 45, 0.2) !important;
+}
+
+.MyReferralPage .custom-table .badge,
+.LevelDetailsPage .custom-table .badge,
+.DirectIncomePage .custom-table .badge,
+.LevelIncomePage .custom-table .badge,
+.RoiLevelIncomePage .custom-table .badge,
+.WithdrawLevelIncomePage .custom-table .badge,
+.SalaryIncomePage .custom-table .badge {
+  border: 1px solid rgba(206, 154, 45, 0.65);
+}
+
+.MyReferralPage .heading span,
+.LevelDetailsPage .heading span,
+.DirectIncomePage .heading span,
+.LevelIncomePage .heading span,
+.RoiLevelIncomePage .heading span,
+.WithdrawLevelIncomePage .heading span,
+.SalaryIncomePage .heading span {
+  font-size: 24px !important;
+  font-weight: 700 !important;
+  text-transform: none !important;
+}
+
+.MyReferralPage .custom-table thead th,
+.LevelDetailsPage .custom-table thead th,
+.DirectIncomePage .custom-table thead th,
+.LevelIncomePage .custom-table thead th,
+.RoiLevelIncomePage .custom-table thead th,
+.WithdrawLevelIncomePage .custom-table thead th,
+.SalaryIncomePage .custom-table thead th {
+  font-size: 15px !important;
+  font-weight: 700 !important;
+  text-transform: none !important;
+}
+
+.MyReferralPage .pagination .btn,
+.LevelDetailsPage .pagination .btn,
+.DirectIncomePage .pagination .btn,
+.LevelIncomePage .pagination .btn,
+.RoiLevelIncomePage .pagination .btn,
+.WithdrawLevelIncomePage .pagination .btn,
+.SalaryIncomePage .pagination .btn,
+.MyReferralPage .pagination span,
+.LevelDetailsPage .pagination span,
+.DirectIncomePage .pagination span,
+.LevelIncomePage .pagination span,
+.RoiLevelIncomePage .pagination span,
+.WithdrawLevelIncomePage .pagination span,
+.SalaryIncomePage .pagination span {
+  color: #ffffff !important;
 }

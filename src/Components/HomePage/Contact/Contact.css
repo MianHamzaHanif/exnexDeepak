@@ -113,6 +113,25 @@
   font-weight: 700;
 }
 
+.contact-form button:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.contact-form-message {
+  margin: 4px 0 0;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.contact-form-message.success {
+  color: #178f54;
+}
+
+.contact-form-message.error {
+  color: #d14343;
+}
+
 @media (max-width: 991px) {
   .contact-grid {
     grid-template-columns: 1fr;

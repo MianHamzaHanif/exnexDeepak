@@ -94,7 +94,7 @@ const VestingHistory = () => {
   };
 
   return (
-    <div className="app-wrapper">
+    <div className="app-wrapper VestingHistoryPage">
       <Sidebar />
       <div className="app-content">
         <Header />
