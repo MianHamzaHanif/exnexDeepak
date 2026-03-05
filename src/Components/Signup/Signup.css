@@ -272,7 +272,8 @@ color:#00ffa6 !important;
    INPUT
 ========================= */
 
-.signup-ui .form-control{
+.signup-ui .form-control,
+.signup-ui .form-select{
 
 background:rgba(255,255,255,0.05);
 
@@ -300,7 +301,8 @@ color:#ffffff !important;
 
 /* FOCUS */
 
-.signup-ui .form-control:focus{
+.signup-ui .form-control:focus,
+.signup-ui .form-select:focus{
 
 background:rgba(255,255,255,0.08);
 
@@ -321,7 +323,20 @@ color:white;
 
 /* SELECT */
 
-.signup-ui select.form-control option{
+.signup-ui .signup-package-select{
+
+position:relative;
+z-index:3;
+cursor:pointer;
+touch-action:manipulation;
+-webkit-appearance:menulist;
+-moz-appearance:menulist;
+appearance:menulist;
+
+}
+
+
+.signup-ui select.signup-package-select option{
 
 background:#03130f;
 color:#fff;

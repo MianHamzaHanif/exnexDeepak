@@ -333,10 +333,11 @@ const Signup = () => {
                 <div className="col-12">
                   <div className="mb-3">
                     <select
-                      className="form-control"
+                      className="form-select signup-package-select"
                       value={packageAmount}
                       onChange={(e) => setPackageAmount(e.target.value)}
                       disabled={isRegistering}
+                      aria-label="Select package"
                     >
                       {PACKAGE_OPTIONS.map((option) => (
                         <option key={option.value} value={option.value}>
