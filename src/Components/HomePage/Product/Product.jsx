@@ -11,7 +11,7 @@ const productCards = [
       { label: "Entry Capital", value: "Flexible" },
       { label: "Trading Token", value: "USDT" },
       { label: "Model", value: "Plan Participation + USDT Trading Link" },
-      { label: "Leverage Range", value: "1:100 - 1:500" },
+      // { label: "Leverage Range", value: "1:100 - 1:500" },
     ],
   },
 ];

@@ -1,6 +1,5 @@
 import React from "react";
-import "../Dashboard/Dash.css";
-import "../Dashboard/responsive.css";
+import "./Forget.css"
 import Logo from "../../../public/logoimg/logo.png";
 import Loginimage from "../../../public/loginimage/01.png";
 
@@ -9,7 +8,7 @@ import Loginimage from "../../../public/loginimage/01.png";
 const Forget = () => {
   return (
     <>
-      <div className="app-wrapper d-block">
+      <div className="forgotpage d-block">
         <div className="main-container">
           {/* Reset Your Password start */}
           <div className="container">
@@ -21,13 +20,7 @@ const Forget = () => {
                       <img alt="logo" className="img-fluid " src={Logo} />
                     </span>
                   </div>
-                  <div className="signup-bg-img">
-                    <img
-                      alt=""
-                      className="img-fluid"
-                      src={Loginimage}
-                    />
-                  </div>
+                
                 </div>
               </div>
               <div className="col-lg-6 form-contentbox">

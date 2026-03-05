@@ -670,7 +670,7 @@ const Dashboard = () => {
                 )}
 
                 {!web3State.isConnected ? (
-                  <div className="alert alert-warning text-center">
+                  <div className="alert alert-warning text-center refferallink">
                     <p className="mb-2">
                       Please connect your wallet to view dashboard
                     </p>
@@ -828,7 +828,7 @@ const Dashboard = () => {
                     </div>
                   </div>
                   <div className="col-12">
-                    <div className="card maincard referral-card">
+                    <div className="card maincard referral-card bgtransparent">
                       <div className="card-header bg-black text-white">
                         <h5 className="text-white pb-2 referral-title">Your Referral Link</h5>
                       </div>

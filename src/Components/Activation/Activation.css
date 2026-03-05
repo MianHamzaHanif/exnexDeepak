@@ -27,9 +27,11 @@
 
 /* Card Header */
 .ActivationPage .bg-theme1 {
-    background: transparent !important;
-    border-radius: 14px 14px 0 0;
-    border: 1px solid white;
+    background: radial-gradient(circle at 20% 20%, rgba(0, 207, 255, 0.15), transparent 40%),
+    radial-gradient(circle at 80% 80%, rgba(255, 204, 0, 0.15), transparent 40%),
+    linear-gradient(180deg, #03130f, #000000) !important;
+    border-radius: 14px ;
+    border: 1px solid #ce9a2d !important;
 }
 
 /* Input Group Box */

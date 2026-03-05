@@ -4,12 +4,13 @@
 }
 
 .Homepage .pageBg {
-  background: transparent;
+  background: #030908;
   padding: 0 0 40px;
 }
 
 .home-float-icons {
   position: fixed;
+  display: none !important;
   right: 14px;
   bottom: 140px;
   z-index: 1000;

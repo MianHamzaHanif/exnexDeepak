@@ -293,7 +293,7 @@ const ClaimSalary = () => {
                   <div className="col-md-3">
                     <div className="card bg-theme1 text-white border-0">
                       <div className="card-body">
-                        <h6 className="card-title">Rank</h6>
+                        <h6 className="card-title text-white">Rank</h6>
                         <h5 className="mb-0">{salaryPreview?.rank ?? 0}</h5>
                       </div>
                     </div>
@@ -301,7 +301,7 @@ const ClaimSalary = () => {
                   <div className="col-md-3">
                     <div className="card bg-theme1 text-white border-0">
                       <div className="card-body">
-                        <h6 className="card-title">Reward</h6>
+                        <h6 className="card-title text-white">Reward</h6>
                         <h5 className="mb-0">$ {salaryPreview?.reward ?? "0.0000"}</h5>
                       </div>
                     </div>
@@ -309,7 +309,7 @@ const ClaimSalary = () => {
                   <div className="col-md-3">
                     <div className="card bg-theme1 text-white border-0">
                       <div className="card-body">
-                        <h6 className="card-title">Time Remaining</h6>
+                        <h6 className="card-title text-white">Time Remaining</h6>
                         <h6 className="mb-0">{remainingToComplete}</h6>
                       </div>
                     </div>
@@ -317,7 +317,7 @@ const ClaimSalary = () => {
                   <div className="col-md-3">
                     <div className="card bg-theme1 text-white border-0">
                       <div className="card-body">
-                        <h6 className="card-title">Status</h6>
+                        <h6 className="card-title text-white">Status</h6>
                         <h6 className="mb-0">
                           {salaryPreview?.claimed
                             ? "Claimed"

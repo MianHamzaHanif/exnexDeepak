@@ -1,58 +1,139 @@
 .supporter-section {
+
   width: min(1320px, 96%);
+
   margin: 24px auto 0;
-  background: #fff;
-  border: 1px solid #dce5f0;
+
+  /* MONEY MALL BACKGROUND */
+
+  background: linear-gradient(180deg, #03130f, #020202);
+
+  border: 1px solid rgba(0, 255, 255, 0.25);
+
   border-radius: 16px;
+
   padding: 28px 30px;
+
   display: flex;
+
   flex-direction: column;
+
   gap: 20px;
+
 }
+
+
+/* HEADING */
 
 .supporter-section h1 {
+
   margin: 0;
+
   font-size: clamp(1.3rem, 2.8vw, 2rem);
-  color: #24588b;
+
+  color: #ffffff;
+
+  text-align: center;
+
 }
+
+
+/* GRID */
 
 .supporter-section .supporter-wrapper {
+
   display: grid;
+
   grid-template-columns: repeat(5, minmax(0, 1fr));
+
   gap: 14px;
+
 }
+
+
+/* SUPPORTER BOX */
 
 .supporter-wrapper h4 {
+
   margin: 0;
-  border: 1px solid #dce5f0;
+
+  border: 1px solid rgba(0, 255, 255, 0.25);
+
   border-radius: 12px;
-  padding: 12px 10px;
-  color: #455d79;
+
+  padding: 16px 10px;
+
+  color: #ffffff;
+
   font-size: 1rem;
+
   font-weight: 700;
-  justify-content: center;
-  background: #f7fbff;
+
+  text-align: center;
+
+  /* CARD STYLE */
+
+  background: linear-gradient(180deg, #03130f, #000000);
+
+  transition: 0.3s;
+
 }
+
+
+/* HOVER */
+
+.supporter-wrapper h4:hover {
+
+  transform: translateY(-4px);
+
+  box-shadow: 0px 0px 15px rgba(0, 255, 255, 0.3);
+
+}
+
+
+/* ICON */
 
 .supporter-wrapper h4 .icon {
+
   width: 42px;
+
   height: 42px;
+
+  margin-bottom: 6px;
+
 }
 
-@media (max-width: 1100px) {
+
+/* RESPONSIVE */
+
+@media (max-width:1100px) {
+
   .supporter-section .supporter-wrapper {
+
     grid-template-columns: repeat(3, minmax(0, 1fr));
+
   }
+
 }
 
-@media (max-width: 767px) {
+
+@media (max-width:767px) {
+
   .supporter-section .supporter-wrapper {
+
     grid-template-columns: repeat(2, minmax(0, 1fr));
+
   }
+
 }
 
-@media (max-width: 500px) {
+
+@media (max-width:500px) {
+
   .supporter-section .supporter-wrapper {
+
     grid-template-columns: 1fr;
+
   }
+
 }

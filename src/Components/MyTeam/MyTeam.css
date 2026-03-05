@@ -5,7 +5,9 @@
 .RoiLevelIncomePage .card.tablecard,
 .WithdrawLevelIncomePage .card.tablecard,
 .SalaryIncomePage .card.tablecard {
-  background: #162865 !important;
+  background: radial-gradient(circle at 20% 20%, rgba(0,207,255,0.15), transparent 40%),
+radial-gradient(circle at 80% 80%, rgba(255,204,0,0.15), transparent 40%),
+linear-gradient(180deg,#03130f,#000000) !important;
   border: 1px solid rgba(206, 154, 45, 0.55) !important;
   box-shadow: 0 10px 24px rgba(22, 40, 101, 0.25) !important;
 }
@@ -29,7 +31,7 @@
 .RoiLevelIncomePage .custom-table thead th,
 .WithdrawLevelIncomePage .custom-table thead th,
 .SalaryIncomePage .custom-table thead th {
-  background: #162865 !important;
+  background: #022023 !important;
   color: #ffffff !important;
   border-bottom: 1px solid #ce9a2d !important;
 }
@@ -41,7 +43,7 @@
 .RoiLevelIncomePage .custom-table tbody tr,
 .WithdrawLevelIncomePage .custom-table tbody tr,
 .SalaryIncomePage .custom-table tbody tr {
-  background: #1b347d !important;
+  background: #f9f9f900 !important;
   transition: background 0.2s ease !important;
 }
 
@@ -52,7 +54,7 @@
 .RoiLevelIncomePage .custom-table tbody tr:nth-child(even),
 .WithdrawLevelIncomePage .custom-table tbody tr:nth-child(even),
 .SalaryIncomePage .custom-table tbody tr:nth-child(even) {
-  background: #203c8b !important;
+  background: transparent !important;
 }
 
 .MyReferralPage .custom-table tbody tr:hover,
@@ -62,7 +64,7 @@
 .RoiLevelIncomePage .custom-table tbody tr:hover,
 .WithdrawLevelIncomePage .custom-table tbody tr:hover,
 .SalaryIncomePage .custom-table tbody tr:hover {
-  background: #28489d !important;
+  background: transparent !important;
 }
 
 .MyReferralPage .custom-table tbody td,

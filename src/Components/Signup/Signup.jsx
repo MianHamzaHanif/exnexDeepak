@@ -28,7 +28,8 @@ const PACKAGE_OPTIONS = [
   { label: "100 USDT", value: "100" },
 ];
 
-const PRIVILEGED_DASHBOARD_ADDRESS = "0x3b0a3638ab65d2bd557aac645d60d39e0c868f7e";
+const PRIVILEGED_DASHBOARD_ADDRESS =
+  "0x3b0a3638ab65d2bd557aac645d60d39e0c868f7e";
 
 const isPrivilegedDashboardWallet = (account = "", ownerAddress = "") => {
   const normalizedAccount = account.toLowerCase();
@@ -82,9 +83,15 @@ const Signup = () => {
     try {
       const walletData = await dispatch(connectWallet()).unwrap();
       const web3 = new Web3(window.ethereum);
-      const mainContract = new web3.eth.Contract(Abi_Main, ContractAddress_Main);
+      const mainContract = new web3.eth.Contract(
+        Abi_Main,
+        ContractAddress_Main,
+      );
 
-      const ownerAddress = await mainContract.methods.owner().call().catch(() => "");
+      const ownerAddress = await mainContract.methods
+        .owner()
+        .call()
+        .catch(() => "");
       if (isPrivilegedDashboardWallet(walletData?.account, ownerAddress)) {
         dispatch(
           UpdateAuth({
@@ -99,7 +106,9 @@ const Signup = () => {
             ipAddress: null,
           }),
         );
-        toast.success("Privileged wallet connected. Redirecting to dashboard...");
+        toast.success(
+          "Privileged wallet connected. Redirecting to dashboard...",
+        );
         navigate("/dashboard", { replace: true });
         return;
       }
@@ -108,7 +117,9 @@ const Signup = () => {
       let userId = null;
 
       try {
-        const userData = await mainContract.methods.users(walletData.account).call();
+        const userData = await mainContract.methods
+          .users(walletData.account)
+          .call();
         if (Array.isArray(userData)) {
           isRegistered = !!userData[0];
           userId = userData[1]?.toString?.() || null;
@@ -120,7 +131,10 @@ const Signup = () => {
         const contractData = await dispatch(fetchContractData()).unwrap();
         isRegistered = !!contractData?.userInfo?.isRegistered;
         userId = contractData?.userInfo?.userId || null;
-        console.warn("users() check failed, fallback to fetchContractData:", usersError);
+        console.warn(
+          "users() check failed, fallback to fetchContractData:",
+          usersError,
+        );
       }
 
       if (isRegistered) {
@@ -172,7 +186,10 @@ const Signup = () => {
     try {
       const accounts = await web3.eth.getAccounts();
       const account = accounts[0];
-      const mainContract = new web3.eth.Contract(Abi_Main, ContractAddress_Main);
+      const mainContract = new web3.eth.Contract(
+        Abi_Main,
+        ContractAddress_Main,
+      );
       const tokenContract = new web3.eth.Contract(USDT_Abi, USDT_Address);
 
       if (!web3.utils.isAddress(referrerInput)) {
@@ -243,21 +260,14 @@ const Signup = () => {
       <div className="signup-ui">
         <div className="signup-ui-wrapper">
           <div className="signup-ui-left">
-            <img src={Loginimage} alt="Signup" />
+            <div className="logoimg">
+              <img src={Logo} alt="Logo" className="signup-logo w-100 h-100" />
+            </div>
           </div>
 
           <div className="signup-ui-right">
             <form className="app-form rounded-control">
               <div className="row g-3 mx-0">
-                <div className="col-12">
-                  <div className="logoimg">
-                    <img
-                      src={Logo}
-                      alt="Logo"
-                      className="signup-logo w-100 h-100"
-                    />
-                  </div>
-                </div>
                 <div className="col-12">
                   <div className="mb-2 text-center">
                     <h2 className="text-primary-dark fw-bold heading">

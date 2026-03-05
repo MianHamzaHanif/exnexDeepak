@@ -33,15 +33,15 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-    background-color: #3054f3b1;
+    background-color: #221f04;
 }
 
 ::-webkit-scrollbar-thumb {
-    background: linear-gradient(180deg, #6c5cff, #9f7cff);
+    background: linear-gradient(180deg, #011a1c, #050602);
     border-radius: 10px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-    background: linear-gradient(180deg, #9f7cff, #6c5cff);
+    background: linear-gradient(180deg, #011a1c, #050602);
     transition: all 04s ease-in;
 }

@@ -21,88 +21,26 @@ const contactItems = [
 
 const Contact = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [formMessage, setFormMessage] = useState("");
-  const [formMessageType, setFormMessageType] = useState("");
-
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    const form = event.currentTarget;
-    const formData = new FormData(form);
-
-    try {
-      setIsSubmitting(true);
-      setFormMessage("");
-      setFormMessageType("");
-
-      await fetch("https://www.moneymallfutures.com/contact/save", {
-        method: "POST",
-        body: formData,
-        mode: "no-cors",
-      });
-
-      setFormMessage("Message sent successfully.");
-      setFormMessageType("success");
-      form.reset();
-    } catch (error) {
-      setFormMessage("Failed to send message. Please try again.");
-      setFormMessageType("error");
-    } finally {
-      setIsSubmitting(false);
-    }
-  };
 
   return (
     <section id="contact" className="contact-section">
       <div className="contact-container">
-        <div className="contact-grid">
-          <div className="contact-left">
-            <p className="contact-head">How It Works</p>
-            <p className="contact-head-big">How to Start with MONEY MALL Plan (USDT)</p>
+        <p className="contact-head center">HOW IT WORKS</p>
 
-            <div className="contact-list">
-              {contactItems.map((item) => (
-                <article className="contact-list-item" key={item.title}>
-                  <img src={item.icon} alt={item.title} />
-                  <div>
-                    <p className="contact-list-head">{item.title}</p>
-                    <p className="contact-list-content">{item.text}</p>
-                  </div>
-                </article>
-              ))}
+        <p className="contact-head-big center">
+          How to Start with MONEY MALL Plan (USDT)
+        </p>
+
+        <div className="contact-cards">
+          {contactItems.map((item, index) => (
+            <div className="contact-card-item" key={index}>
+              <img src={item.icon} alt={item.title} />
+
+              <h3>{item.title}</h3>
+
+              <p>{item.text}</p>
             </div>
-          </div>
-
-          <div className="contact-right">
-            <div className="contact-card">
-              <p className="contact-form-head">CONTACT US</p>
-              <p className="contact-form-subhead">
-                Have questions about MONEY MALL plans or USDT setup? Our team is ready to help.
-              </p>
-
-              <form
-                className="contact-form"
-                method="post"
-                action="https://www.moneymallfutures.com/contact/save"
-                onSubmit={handleSubmit}
-              >
-                <input type="hidden" name="_token" value="wMSTrkxZfld7LZQhpXQSnVrZy41PyzMjaJPeflRm" />
-                <input type="text" placeholder="Full Name" name="fullname" required />
-
-                <div className="contact-row">
-                  <input type="email" placeholder="Email Address" name="email" required />
-                  <input type="text" placeholder="Phone Number" name="phone" required />
-                </div>
-
-                <input type="text" placeholder="Message Content" name="message" required />
-                <button type="submit" disabled={isSubmitting}>
-                  {isSubmitting ? "SENDING..." : "SEND"}
-                </button>
-                {formMessage ? (
-                  <p className={`contact-form-message ${formMessageType}`}>{formMessage}</p>
-                ) : null}
-              </form>
-            </div>
-          </div>
+          ))}
         </div>
       </div>
     </section>

@@ -971,6 +971,9 @@ body[text=large-text] {
     .app-wrapper nav.horizontal-sidebar {
         top: 61px;
     }
+    .mobilehed{
+        opacity: 0;
+    }
 
     .loader-container .loader-main {
         width: calc(33% - 10px);

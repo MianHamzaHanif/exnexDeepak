@@ -363,13 +363,13 @@ const ClaimPool = () => {
                     padding: 6px 12px;
                   }
                   .pool-claim-card .form-select {
-                    background: #ffffff !important;
-                    color: #162865 !important;
+                    background: #032728 !important;
+                    color: #fff !important;
                     border: 1px solid #ce9a2d !important;
                   }
                   .pool-claim-card .form-select:focus {
-                    background: #ffffff !important;
-                    color: #162865 !important;
+                    background: #032728 !important;
+                    color: #fff !important;
                     border-color: #ce9a2d !important;
                     box-shadow: 0 0 0 0.2rem rgba(206, 154, 45, 0.2) !important;
                   }
@@ -401,9 +401,9 @@ const ClaimPool = () => {
                     background: rgba(13, 110, 253, 0.12);
                   }
                   .pool-claim-btn {
-                    background: linear-gradient(90deg, #0d6efd, #0b5ed7);
+                    background: linear-gradient(45deg,#00cfff,#007bff,#ffcc00);
                     border: 0;
-                    color: #fff;
+                    color: #fff !important;
                     font-weight: 600;
                     min-width: 150px;
                     border-radius: 8px;

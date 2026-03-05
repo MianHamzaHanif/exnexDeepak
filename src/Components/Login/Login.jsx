@@ -92,21 +92,18 @@ const Login = () => {
       <div className="login-ui">
         <div className="login-ui-wrapper">
           <div className="login-ui-left">
-            <img src={Loginimage} alt="Login Visual" />
+            <div className="logoimg">
+              <img src={Logo} alt="Logo" className="signup-logo w-100 h-100" />
+            </div>
           </div>
 
           <div className="login-ui-right">
-            <form className="app-form rounded-control" onSubmit={handleRegister}>
+            <form
+              className="app-form rounded-control"
+              onSubmit={handleRegister}
+            >
               <div className="row g-3">
-                <div className="col-12">
-                  <div className="logoimg">
-                    <img
-                      src={Logo}
-                      alt="Logo"
-                      className="signup-logo w-100 h-100"
-                    />
-                  </div>
-                </div>
+                <div className="col-12"></div>
                 <div className="col-12">
                   <div className="mb-2 text-center">
                     <h2 className="text-white fw-bold text-center">

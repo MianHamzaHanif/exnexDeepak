@@ -1,240 +1,441 @@
 /* =========================
-   SIGNUP PAGE WRAPPER
+   SIGNUP BACKGROUND
 ========================= */
 
-.signup-ui {
-    min-height: 100vh;
-    background:
-        radial-gradient(circle at top left, #3a2a7a, transparent 40%),
-        radial-gradient(circle at bottom right, #0c0624, transparent 40%),
-        #070b1a;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #fff;
+.signup-ui{
+
+min-height:100vh;
+
+background:
+radial-gradient(circle at 20% 20%, rgba(0,207,255,0.15), transparent 40%),
+radial-gradient(circle at 80% 80%, rgba(255,204,0,0.15), transparent 40%),
+linear-gradient(180deg,#03130f,#000000);
+
+display:flex;
+align-items:center;
+justify-content:center;
+
+padding:20px;
+
+color:white;
+
 }
+
+
 
 /* =========================
    MAIN CARD
 ========================= */
 
-.signup-ui-wrapper {
-    width: 100%;
-    max-width: 1200px;
-    display: flex;
-    border-radius: 24px;
-    overflow: hidden;
-    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.6);
+.signup-ui-wrapper{
+
+width:100%;
+max-width:1100px;
+
+display:flex;
+
+border-radius:22px;
+
+overflow:hidden;
+
+border:1px solid rgba(0,255,255,0.25);
+
+box-shadow:0px 0px 50px rgba(0,255,255,0.25);
+
 }
+
+
 
 /* =========================
-   LEFT IMAGE SECTION
+   LEFT SIDE (ANIMATION)
 ========================= */
 
-.signup-ui-left {
-    width: 50%;
-    background: linear-gradient(135deg, #2d1c64, #120a30);
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.signup-ui-left{
+
+width:45%;
+
+position:relative;
+
+display:flex;
+align-items:center;
+justify-content:center;
+
+background:
+radial-gradient(circle at top left,#00cfff33,transparent 50%),
+radial-gradient(circle at bottom right,#ffcc0033,transparent 50%),
+linear-gradient(180deg,#03130f,#020202);
+
+overflow:hidden;
+
 }
 
-.signup-ui-left img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+
+/* LOGO */
+
+.signup-ui-left .logoimg{
+
+width:220px;
+
+z-index:2;
+
+animation:logoFloat 5s infinite ease-in-out;
+
 }
+
+
+.signup-ui-left img{
+
+width:100%;
+
+}
+
+
+/* FLOAT */
+
+@keyframes logoFloat{
+
+0%{transform:translateY(0px)}
+
+50%{transform:translateY(-15px)}
+
+100%{transform:translateY(0px)}
+
+}
+
+
+/* GLOW 1 */
+
+.signup-ui-left::before{
+
+content:"";
+
+position:absolute;
+
+width:260px;
+height:260px;
+
+background:radial-gradient(circle,#00cfff,transparent);
+
+top:10%;
+left:10%;
+
+opacity:0.4;
+
+animation:glowMove1 6s infinite;
+
+}
+
+
+/* GLOW 2 */
+
+.signup-ui-left::after{
+
+content:"";
+
+position:absolute;
+
+width:220px;
+height:220px;
+
+background:radial-gradient(circle,#ffcc00,transparent);
+
+bottom:10%;
+right:10%;
+
+opacity:0.4;
+
+animation:glowMove2 6s infinite;
+
+}
+
+
+@keyframes glowMove1{
+
+0%{transform:translate(0)}
+
+50%{transform:translate(30px,-20px)}
+
+100%{transform:translate(0)}
+
+}
+
+@keyframes glowMove2{
+
+0%{transform:translate(0)}
+
+50%{transform:translate(-30px,20px)}
+
+100%{transform:translate(0)}
+
+}
+
+
 
 /* =========================
-   RIGHT FORM SECTION
+   RIGHT FORM
 ========================= */
 
-.signup-ui-right {
-    width: 50%;
-    background: linear-gradient(180deg, #16113a, #0c0922);
-    padding: 70px 60px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.signup-ui-right{
+
+width:55%;
+
+background:linear-gradient(180deg,#03130f,#000000);
+
+padding:60px 50px;
+
+display:flex;
+align-items:center;
+justify-content:center;
+
 }
 
-.signup-ui-right .app-form {
-    width: 100%;
-    max-width: 420px;
+
+.signup-ui-right .app-form{
+
+width:100%;
+max-width:420px;
+
 }
+
+
+
+/* HEADING */
+
+.signup-ui-right .heading{
+
+font-size:30px;
+
+color:#ffffff !important;
+
+}
+
+
 
 /* =========================
-   HEADING
+   WALLET BUTTON
 ========================= */
 
-.signup-ui-right .heading {
-    font-size: 32px;
-    margin-bottom: 25px;
-    color: #fff !important;
+.wallet-btn{
+
+width:100%;
+
+background:linear-gradient(45deg,#00cfff,#007bff,#ffcc00);
+
+border:none;
+
+color:white;
+
+padding:14px 22px;
+
+border-radius:40px;
+
+font-size:15px;
+
+transition:0.3s;
+
 }
+
+
+.wallet-btn:hover{
+
+background:linear-gradient(45deg,#ffcc00,#00cfff,#007bff);
+
+box-shadow:0px 0px 20px rgba(0,255,255,0.7);
+
+transform:translateY(-3px);
+
+}
+
+
+
+/* DISCONNECT */
+
+.disconnect-btn{
+
+background:linear-gradient(45deg,#ff4d6d,#ff8fa3);
+
+}
+
+
+
+/* STATUS */
+
+.text-success{
+
+color:#00ffa6 !important;
+
+}
+
+
 
 /* =========================
-   CONNECT / REGISTER BUTTON
+   INPUT
 ========================= */
 
-.signup-ui .btn-light-primary {
-    background: rgba(255, 255, 255, 0.08);
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    color: #9bb0ff;
-    padding: 14px 22px;
-    border-radius: 999px;
-    font-size: 15px;
-    cursor: pointer;
-    transition: all 0.3s ease;
+.signup-ui .form-control{
+
+background:rgba(255,255,255,0.05);
+
+border:1px solid rgba(0,255,255,0.35);
+
+color:#fff;
+
+padding:14px 18px;
+
+border-radius:40px;
+
+transition:0.3s;
+
 }
 
-.signup-ui .btn-light-primary:hover {
-    background: rgba(255, 255, 255, 0.15);
+
+/* PLACEHOLDER */
+
+.signup-ui .form-control::placeholder{
+
+color:#ffffff !important;
+
 }
 
-.signup-ui .btn-light-primary:disabled {
-    opacity: 0.6;
-    cursor: not-allowed;
+
+/* FOCUS */
+
+.signup-ui .form-control:focus{
+
+background:rgba(255,255,255,0.08);
+
+border:1px solid #00cfff;
+
+outline:none;
+
+box-shadow:
+
+0px 0px 5px #00cfff,
+0px 0px 15px rgba(0,207,255,0.6);
+
+color:white;
+
 }
 
-.signup-ui .wallet-btn {
-    width: 100%;
-    background: rgba(255, 255, 255, 0.08);
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    color: #9bb0ff;
-    padding: 14px 22px;
-    border-radius: 999px;
-    font-size: 15px;
-    cursor: pointer;
-    transition: all 0.3s ease;
+
+
+/* SELECT */
+
+.signup-ui select.form-control option{
+
+background:#03130f;
+color:#fff;
+
 }
 
-.signup-ui .wallet-btn:hover {
-    background: rgba(255, 255, 255, 0.15);
-}
 
-.signup-ui .wallet-btn:disabled {
-    opacity: 0.6;
-    cursor: not-allowed;
-}
-
-.signup-ui .disconnect-btn {
-    background: rgba(255, 77, 109, 0.12);
-    border-color: rgba(255, 77, 109, 0.45);
-    color: #ff9fb5;
-}
-
-.signup-ui .disconnect-btn:hover {
-    background: rgba(255, 77, 109, 0.2);
-    border-color: rgba(255, 77, 109, 0.65);
-    color: #ffd5df;
-}
 
 /* =========================
-   WALLET STATUS
+   REGISTER BUTTON
 ========================= */
 
-.signup-ui-right p {
-    font-size: 14px;
-    margin-bottom: 15px;
+.btn-light-primary{
+
+background:linear-gradient(45deg,#00cfff,#007bff,#ffcc00);
+
+border:none;
+
+border-radius:40px;
+
+padding:14px;
+
+font-weight:600;
+
+transition:0.3s;
+
 }
 
-.signup-ui .text-success {
-    color: #5dff9b !important;
+
+.btn-light-primary:hover{
+
+background:linear-gradient(45deg,#ffcc00,#00cfff,#007bff);
+
+box-shadow:0px 0px 20px rgba(0,255,255,0.7);
+
 }
+
+
+
+/* LINK */
+
+.signup-ui-right a{
+
+color:#00cfff;
+
+}
+
+
 
 /* =========================
-   INPUT FIELD
+   TABLET
 ========================= */
 
-.signup-ui .form-control {
-    background: rgba(255, 255, 255, 0.06);
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    color: #fff;
-    padding: 14px 18px;
-    border-radius: 999px;
+@media(max-width:992px){
+
+.signup-ui-wrapper{
+
+flex-direction:column;
+
 }
 
-.signup-ui .form-control::placeholder {
-    color: #ffffff !important;
+.signup-ui-left{
+
+width:100%;
+height:220px;
+
 }
 
-.signup-ui .form-control:focus {
-    background: rgba(255, 255, 255, 0.08);
-    border-color: #5c6cff;
-    box-shadow: none;
-    color: #fff;
+.signup-ui-right{
+
+width:100%;
+
+padding:40px;
+
 }
 
-.signup-ui select.form-control {
-    appearance: auto;
-    -webkit-appearance: auto;
-    -moz-appearance: auto;
+.signup-ui-left .logoimg{
+
+width:160px;
+
 }
 
-.signup-ui select.form-control option {
-    background: #16113a;
-    color: #fff;
 }
 
-.signup-ui .form-control:disabled {
-    opacity: 1;
-    color: #fff;
-    -webkit-text-fill-color: #fff;
-}
+
 
 /* =========================
-   REGISTER BUTTON (FULL WIDTH)
+   MOBILE
 ========================= */
 
-.signup-ui .btn-light-primary.w-100 {
-    background: linear-gradient(90deg, #5c6cff, #4d8bff);
-    border: none;
-    color: white !important;
-    font-weight: 600;
+@media(max-width:576px){
+
+.signup-ui{
+
+padding:10px;
+
 }
 
+.signup-ui-right{
 
-.signup-ui .logoimg {
-    width: 380px;
-    margin: 10px auto 20px;
-}
-/* =========================
-   SIGN IN LINK
-========================= */
+padding:25px 20px;
 
-.signup-ui-right a {
-    color: #5dff9b;
 }
 
-/* =========================
-   RESPONSIVE
-========================= */
+.signup-ui-left{
 
-@media (max-width: 1024px) {
-    .signup-ui-wrapper {
-        flex-direction: column;
-    }
+height:180px;
 
-    .signup-ui-left,
-    .signup-ui-right {
-        width: 100%;
-    }
-    
-
-    .signup-ui-right {
-        padding: 50px 30px;
-    }
-}
-@media (max-width: 768px) {
-    .signup-ui-left {
-        display: none;
-    }
 }
 
+.signup-ui-right .heading{
 
-@media (max-width: 480px) {
-    .signup-ui-right .heading {
-        font-size: 26px;
-    }
+font-size:22px;
+
+}
+
 }

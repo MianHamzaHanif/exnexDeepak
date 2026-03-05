@@ -1,74 +1,161 @@
 .faq-ui-section {
+
   width: min(1320px, 96%);
+
   margin: 24px auto 0;
+
   padding: 28px 30px;
-  background: #fff;
-  border: 1px solid #dce5f0;
+
+  /* SAME THEME */
+
+  background: linear-gradient(180deg, #03130f, #020202);
+
+  border: 1px solid rgba(0, 255, 255, 0.25);
+
   border-radius: 16px;
-  color: #234f7d;
+
+  color: #ffffff;
+
 }
+
+
+/* HEADER */
 
 .faq-header h1 {
+
   margin: 0 0 18px;
+
   font-size: clamp(1.5rem, 3vw, 2rem);
+
+  text-align: center;
+
+  color: #ffffff;
+
 }
+
+
+/* GRID */
 
 .faq-grid {
+
   display: grid;
+
   grid-template-columns: repeat(3, minmax(0, 1fr));
+
   gap: 16px;
+
 }
+
+
+/* FAQ CARD */
 
 .faq-glass-card {
-  background: #f8fbff;
+
+  background: linear-gradient(180deg, #03130f, #000000);
+
   border-radius: 14px;
+
   padding: 20px;
-  border: 1px solid #dce5f0;
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
+
+  border: 1px solid rgba(0, 255, 255, 0.25);
+
+  transition: 0.3s;
+
 }
+
+
+/* HOVER */
 
 .faq-glass-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 8px 24px rgba(25, 85, 133, 0.12);
+
+  transform: translateY(-5px);
+
+  box-shadow: 0px 0px 20px rgba(0, 255, 255, 0.3);
+
 }
+
+
+/* ICON BOX */
 
 .faq-icon-wrap {
+
   width: 48px;
+
   height: 48px;
+
   border-radius: 12px;
-  background: linear-gradient(135deg, #23a0db, #1782be);
+
+  /* SAME BUTTON COLOR */
+
+  background: linear-gradient(45deg, #00cfff, #007bff, #ffcc00);
+
   display: flex;
+
   align-items: center;
+
   justify-content: center;
+
   margin-bottom: 12px;
+
 }
+
 
 .faq-icon-wrap img {
+
   width: 24px;
+
   height: 24px;
+
 }
+
+
+/* TITLE */
 
 .faq-glass-card h3 {
+
   margin: 0 0 10px;
+
   font-size: 16px;
-  color: #24588b;
+
+  color: #ffffff;
+
 }
+
+
+/* TEXT */
 
 .faq-glass-card p {
+
   margin: 0;
+
   font-size: 14px;
-  color: #526b86;
+
+  color: #cfefff;
+
   line-height: 1.7;
+
 }
 
-@media (max-width: 991px) {
+
+/* RESPONSIVE */
+
+@media (max-width:991px) {
+
   .faq-grid {
+
     grid-template-columns: 1fr 1fr;
+
   }
+
 }
 
-@media (max-width: 767px) {
+
+@media (max-width:767px) {
+
   .faq-grid {
+
     grid-template-columns: 1fr;
+
   }
+
 }

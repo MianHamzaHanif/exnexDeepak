@@ -42,17 +42,19 @@ const Sidebar = () => {
     <>
       <nav className={isCollapsed ? "collapsed-sidebar " : ""}>
         <div className="app-logo">
-          <Link className="logo d-inline-block" to="/dashboard">
-            <img alt="logo" src={Logo} />
-          </Link>
+          <div className="d-flex align-items-center justify-content-between pb-2">
+            <Link className="logo d-inline-block mt-2 ms-2 " to="/dashboard">
+              <img alt="logo" src={Logo} />
+            </Link>
+            <span
+              className="bg-light-primary toggle-semi-nav"
+              onClick={toggleSidebar}
+            >
+              <i className="fa-solid fa-chevron-right f-s-15 text-white" />
+            </span>
+          </div>
 
           {/* Toggle Button */}
-          <span
-            className="bg-light-primary toggle-semi-nav"
-            onClick={toggleSidebar}
-          >
-            <i className="fa-solid fa-chevron-right f-s-15 text-white" />
-          </span>
         </div>
 
         <div className="app-nav" id="app-simple-bar">

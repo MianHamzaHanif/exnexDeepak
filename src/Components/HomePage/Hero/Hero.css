@@ -1,7 +1,7 @@
 .hero-section {
   width: 100%;
   padding: 16px 0;
-  background: #162865;
+  background: linear-gradient(180deg,#03130f,#000000);
   color: #fff;
 }
 
@@ -45,8 +45,12 @@
   margin-top: 6px;
 }
 
+
+/* ===== BUTTONS (Money Mall Logo Theme) ===== */
+
 .btn-section .btn,
 .hero-link-btn {
+
   border: none;
   border-radius: 8px;
   font-size: 0.95rem;
@@ -56,19 +60,45 @@
   display: inline-flex;
   align-items: center;
   gap: 6px;
+
+  /* SAME BUTTON COLOR FOR ALL */
+
+  background: linear-gradient(45deg,#00cfff,#007bff,#ffcc00);
+  color: #ffffff;
+  font-weight: 600;
+
+  transition: 0.3s ease;
+
 }
+
+
+/* BUTTON HOVER */
+
+.btn-section .btn:hover,
+.hero-link-btn:hover {
+
+background: linear-gradient(45deg,#ffcc00,#00cfff,#007bff);
+
+box-shadow: 0px 0px 15px rgba(0,255,255,0.6);
+
+transform: translateY(-2px);
+
+}
+
+
+/* REMOVE OLD WHITE BUTTON */
 
 .btn-section .active {
-  background: #ffffff;
-  color: #1d81bc;
-  font-weight: 700;
+
+background: linear-gradient(45deg,#00cfff,#007bff,#ffcc00);
+color:#fff;
+font-weight:600;
+
 }
 
-.hero-link-btn {
-  color: #fff;
-  background: rgba(255, 255, 255, 0.2);
-  border: 1px solid rgba(255, 255, 255, 0.35);
-}
+
+/* ========================== */
+
 
 .hero-right {
   width: 100%;
@@ -87,7 +117,7 @@
 .hero-right-img .rightImg {
   width: 100%;
   max-width: 520px;
-  max-height: 500px;
+  max-height: auto;
   object-fit: contain;
   animation: heroImageFloat 4s ease-in-out infinite;
   filter: drop-shadow(0 12px 30px rgba(0, 0, 0, 0.25));
@@ -95,7 +125,7 @@
 
 .hero-right-img .rightImg.logo-slide-img {
   width: 593px;
-  height: 593px;  
+  height: 593px;
   max-width: 593px;
   max-height: 593px;
 }
@@ -109,13 +139,31 @@
 }
 
 .hero-controls button {
+
   width: 36px;
   height: 36px;
   border-radius: 50%;
-  border: 1px solid rgba(255, 255, 255, 0.55);
-  background: rgba(255, 255, 255, 0.15);
-  color: #fff;
+
+  border:1px solid rgba(0,255,255,0.5);
+
+  background: linear-gradient(45deg,#00cfff,#007bff);
+
+  color:#fff;
+
+  transition:0.3s;
 }
+
+
+/* CONTROL BUTTON HOVER */
+
+.hero-controls button:hover{
+
+background: linear-gradient(45deg,#ffcc00,#00cfff);
+
+box-shadow:0px 0px 10px #00cfff;
+
+}
+
 
 .hero-dots {
   display: flex;
@@ -132,24 +180,34 @@
 }
 
 .hero-dots .active-dot {
+
   width: 22px;
   border-radius: 999px;
-  background: #fff;
+
+  background: linear-gradient(45deg,#00cfff,#ffcc00);
+
 }
 
+
 @keyframes heroImageFloat {
+
   0% {
     transform: translateY(0px);
   }
+
   50% {
     transform: translateY(-14px);
   }
+
   100% {
     transform: translateY(0px);
   }
+
 }
 
+
 @media (max-width: 991px) {
+
   .hero-wrapper {
     grid-template-columns: 1fr;
     text-align: center;
@@ -164,12 +222,22 @@
     justify-content: center;
   }
 
+  .hero-right-img .rightImg.logo-slide-img {
+    width: 100%;
+    height: 100%;
+    max-width: 100%;
+    max-height: 100%;
+  }
+
   .hero-right-img {
     min-height: 320px;
   }
+
 }
 
+
 @media (max-width: 575px) {
+
   .hero-section {
     padding: 20px 0;
   }
@@ -177,4 +245,12 @@
   .hero-right-img {
     min-height: 250px;
   }
+
+  .hero-right-img .rightImg.logo-slide-img {
+    width: 100%;
+    height: 100%;
+    max-width: 100%;
+    max-height: 100%;
+  }
+
 }

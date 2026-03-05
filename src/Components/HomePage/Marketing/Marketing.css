@@ -1,7 +1,10 @@
 .marketing-section {
   width: 100%;
   padding: 46px 0 34px;
-  background: #f9fcff;
+
+  /* SAME BACKGROUND */
+
+  background: linear-gradient(180deg,#03130f,#000000);
 }
 
 .marketing-container {
@@ -9,19 +12,29 @@
   margin: 0 auto;
 }
 
+
+/* HEADINGS */
+
 .marketing-subhead {
   margin: 0;
-  color: #23a0db;
+
+  color:#00cfff;
+
   font-size: 1rem;
   font-weight: 600;
 }
 
 .marketing-head {
   margin: 6px 0 0;
-  color: #14395d;
+
+  color:#ffffff;
+
   font-size: clamp(1.55rem, 2.8vw, 2.3rem);
   font-weight: 700;
 }
+
+
+/* BODY GRID */
 
 .marketing-body {
   margin-top: 28px;
@@ -30,6 +43,9 @@
   gap: 24px;
 }
 
+
+/* TABS */
+
 .marketing-tabs {
   display: flex;
   flex-direction: column;
@@ -37,60 +53,121 @@
 }
 
 .marketing-tabs .tab-item {
+
   width: 100%;
-  border: 1px solid #d8e8f5;
-  background: #fff;
+
+  border:1px solid rgba(0,255,255,0.25);
+
+  background: linear-gradient(180deg,#03130f,#020202);
+
   border-radius: 10px;
+
   padding: 12px 14px;
+
   display: flex;
   justify-content: space-between;
   align-items: center;
-  color: #1b3f65;
+
+  color:#ffffff;
+
   font-size: 0.88rem;
   font-weight: 700;
   text-align: left;
+
+  transition:0.3s;
 }
+
+
+/* ACTIVE TAB */
 
 .marketing-tabs .tab-item.active {
-  border-color: #23a0db;
-  background: #eaf7ff;
-  color: #1586c6;
+
+  border-color:#00cfff;
+
+  background: linear-gradient(45deg,#00cfff,#007bff,#ffcc00);
+
+  color:#ffffff;
+
 }
 
+
+/* TAB HOVER */
+
+.marketing-tabs .tab-item:hover{
+
+box-shadow:0px 0px 10px rgba(0,255,255,0.4);
+
+transform:translateX(3px);
+
+}
+
+
+/* CONTENT BOX */
+
 .marketing-content {
-  border: 1px solid #d8e8f5;
+
+  border:1px solid rgba(0,255,255,0.25);
+
   border-radius: 14px;
-  background: #fff;
+
+  background: linear-gradient(180deg,#03130f,#020202);
+
   padding: 24px;
+
   display: grid;
   grid-template-columns: 1.1fr 0.9fr;
   gap: 24px;
   align-items: center;
+
 }
+
+
+/* CONTENT TITLE */
 
 .marketing-content-head {
+
   margin: 0;
-  color: #163f66;
+
+  color:#ffffff;
+
   font-size: clamp(1.2rem, 2.4vw, 1.7rem);
   font-weight: 700;
+
 }
+
+
+/* CONTENT TEXT */
 
 .marketing-content-text {
+
   margin: 10px 0 0;
-  color: #4f6078;
+
+  color:#cfefff;
+
   line-height: 1.75;
+
 }
 
+
+/* LIST */
+
 .marketing-list {
+
   margin: 14px 0 0;
   padding-left: 18px;
-  color: #4f6078;
+
+  color:#cfefff;
+
   line-height: 1.7;
+
 }
 
 .marketing-list li + li {
   margin-top: 8px;
 }
+
+
+/* IMAGE */
 
 .marketing-image-wrap {
   display: flex;
@@ -103,6 +180,9 @@
   object-fit: contain;
 }
 
+
+/* STEPS SECTION */
+
 .steps-section {
   margin-top: 46px;
 }
@@ -111,48 +191,96 @@
   text-align: center;
 }
 
+
+/* STEPS GRID */
+
 .steps-grid {
+
   margin-top: 28px;
+
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
+
   gap: 14px;
 }
 
+
+/* STEP CARD */
+
 .step-card {
+
   text-align: center;
-  border: 1px solid #d8e8f5;
+
+  border:1px solid rgba(0,255,255,0.25);
+
   border-radius: 14px;
-  background: #fff;
+
+  background: linear-gradient(180deg,#03130f,#020202);
+
   padding: 18px 14px;
+
+  transition:0.3s;
+
 }
+
+
+/* STEP HOVER */
+
+.step-card:hover{
+
+transform:translateY(-5px);
+
+box-shadow:0px 0px 20px rgba(0,255,255,0.3);
+
+}
+
 
 .step-card img {
   width: min(100%, 160px);
   height: auto;
 }
 
+
+/* STEP TEXT */
+
 .step-title {
   margin: 12px 0 8px;
 }
 
 .step-text {
-  color: #23a0db;
+
+  color:#00cfff;
+
   font-weight: 700;
+
 }
 
 .step-text-2 {
-  color: #173f67;
+
+  color:#ffffff;
+
   font-weight: 700;
+
 }
+
 
 .step-content-text {
+
   margin: 0;
-  color: #546781;
+
+  color:#cfefff;
+
   line-height: 1.65;
+
   font-size: 0.9rem;
+
 }
 
+
+/* RESPONSIVE */
+
 @media (max-width: 1100px) {
+
   .marketing-body {
     grid-template-columns: 1fr;
   }
@@ -160,16 +288,23 @@
   .marketing-content {
     grid-template-columns: 1fr;
   }
+
 }
 
+
 @media (max-width: 991px) {
+
   .steps-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
+
 }
 
+
 @media (max-width: 575px) {
+
   .steps-grid {
     grid-template-columns: 1fr;
   }
+
 }

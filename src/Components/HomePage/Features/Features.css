@@ -1,7 +1,11 @@
 .featured-services-section {
   width: 100%;
   padding: 42px 0 30px;
-  background: #f7fbff;
+
+  /* MONEY MALL BACKGROUND */
+
+  background: linear-gradient(180deg,#03130f,#000000);
+
 }
 
 .featured-services-container {
@@ -27,61 +31,133 @@
   object-fit: contain;
 }
 
+
+/* TEXT COLORS DARK THEME */
+
 .featured-copy {
-  color: #132b4b;
+  color: #ffffff;
 }
 
 .feature-text-heading {
   margin: 0 0 8px;
-  color: #23a0db;
+
+  color:#00cfff;
+
   font-size: 1rem;
   font-weight: 600;
 }
 
 .feature-text-heading-big {
   margin: 0;
-  color: #163f66;
+
+  color:#ffffff;
+
   font-size: clamp(1.45rem, 2.5vw, 2.1rem);
   font-weight: 700;
   line-height: 1.25;
 }
 
+
+/* HEADING LINE */
+
 .feature-hr {
+
   width: 120px;
   border: none;
-  border-top: 3px solid #23a0db;
+
+  border-top: 3px solid #00cfff;
+
   margin: 16px 0;
+
 }
+
 
 .feature-text-content {
   margin: 0 0 18px;
-  color: #4d5d72;
+
+  color:#cfefff;
+
   line-height: 1.75;
 }
 
+
+/* LINK BUTTON (SAME AS HERO BUTTONS) */
+
 .feature-link {
+
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  color: #23a0db;
+
   text-decoration: none;
   font-weight: 600;
+
+  padding:10px 18px;
+  border-radius:8px;
+
+  background: linear-gradient(45deg,#00cfff,#007bff,#ffcc00);
+
+  color:#ffffff;
+
+  transition:0.3s;
+
 }
 
+
+/* LINK HOVER */
+
+.feature-link:hover{
+
+background: linear-gradient(45deg,#ffcc00,#00cfff,#007bff);
+
+box-shadow:0px 0px 15px rgba(0,255,255,0.6);
+
+transform:translateY(-2px);
+
+}
+
+
+/* FEATURE CARDS */
+
 .featured-items {
+
   margin-top: 46px;
+
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 16px;
 }
 
+
+/* CARD DESIGN */
+
 .feature-item-card {
-  background: #fff;
-  border: 1px solid #dfebf6;
+
+  background: linear-gradient(180deg,#03130f,#020202);
+
+  border:1px solid rgba(0,255,255,0.2);
+
   border-radius: 14px;
+
   padding: 26px 20px 24px;
+
   text-align: center;
+
+  transition:0.3s;
+
 }
+
+
+/* CARD HOVER */
+
+.feature-item-card:hover{
+
+transform:translateY(-5px);
+
+box-shadow:0px 0px 20px rgba(0,255,255,0.3);
+
+}
+
 
 .feature-item-card img {
   width: 54px;
@@ -89,22 +165,34 @@
   object-fit: contain;
 }
 
+
 .feature-item-head {
+
   margin: 14px 0 8px;
-  color: #173f67;
+
+  color:#ffffff;
+
   font-size: 1rem;
   font-weight: 700;
   letter-spacing: 0.2px;
+
 }
+
 
 .feature-item-content {
+
   margin: 0;
-  color: #5b6d84;
+
+  color:#cfefff;
+
   line-height: 1.7;
   font-size: 0.95rem;
+
 }
 
+
 @media (max-width: 991px) {
+
   .featured-services-top {
     grid-template-columns: 1fr;
   }
@@ -121,4 +209,5 @@
     grid-template-columns: 1fr;
     margin-top: 28px;
   }
+
 }

@@ -3,11 +3,13 @@
 }
 
 .app-wrapper .app-content {
-  background: transparent !important;
+  background: #01191c !important;
 }
 
 .app-wrapper nav {
-  background: #162865 !important;
+  background: radial-gradient(circle at 20% 20%, rgba(0, 207, 255, 0.15), transparent 40%),
+    radial-gradient(circle at 80% 80%, rgba(255, 204, 0, 0.15), transparent 40%),
+    linear-gradient(180deg, #03130f, #000000) !important;
   border-right: 1px solid rgba(255, 255, 255, 0.15) !important;
 }
 
@@ -16,32 +18,34 @@
   border-bottom: 1px solid rgba(255, 255, 255, 0.2) !important;
 }
 
-.app-wrapper nav .app-nav .main-nav > li:not(.menu-title) > a {
+.app-wrapper nav .app-nav .main-nav>li:not(.menu-title)>a {
   color: #ffffff !important;
 }
 
-.app-wrapper nav .app-nav .main-nav > li:not(.menu-title) > a i {
+.app-wrapper nav .app-nav .main-nav>li:not(.menu-title)>a i {
   color: #ffffff !important;
 }
 
-.app-wrapper nav .app-nav .main-nav > li:not(.menu-title) > a[aria-expanded="true"],
-.app-wrapper nav .app-nav .main-nav > li:not(.menu-title) > a:hover {
+.app-wrapper nav .app-nav .main-nav>li:not(.menu-title)>a[aria-expanded="true"],
+.app-wrapper nav .app-nav .main-nav>li:not(.menu-title)>a:hover {
   background: rgba(255, 255, 255, 0.14) !important;
   color: #ffffff !important;
   box-shadow: inset 3px 0 0 #ce9a2d;
 }
 
-.app-wrapper nav .app-nav .main-nav > li:not(.menu-title) ul li a {
+.app-wrapper nav .app-nav .main-nav>li:not(.menu-title) ul li a {
   color: #f8f9fb !important;
 }
 
-.app-wrapper nav .app-nav .main-nav > li:not(.menu-title) ul li.active a,
-.app-wrapper nav .app-nav .main-nav > li:not(.menu-title) ul li a:hover {
+.app-wrapper nav .app-nav .main-nav>li:not(.menu-title) ul li.active a,
+.app-wrapper nav .app-nav .main-nav>li:not(.menu-title) ul li a:hover {
   color: #ffffff !important;
 }
 
 .app-wrapper header.header-main {
-  background: #e3f5fb !important;
+  background: radial-gradient(circle at 20% 20%, rgba(0, 207, 255, 0.15), transparent 40%),
+    radial-gradient(circle at 80% 80%, rgba(255, 204, 0, 0.15), transparent 40%),
+    linear-gradient(180deg, #03130f, #000000) !important;
   border-bottom: 1px solid #c6deec !important;
 }
 
@@ -55,14 +59,16 @@
 }
 
 .app-wrapper header.header-main .head-icon {
-  background: #f8f9fb !important;
+  background: #f8f9fb00 !important;
 }
 
 .app-wrapper .card,
 .app-wrapper .maincard,
 .app-wrapper .tablecard,
 .app-wrapper .bg-theme1 {
-  background: #ffffff !important;
+  background: radial-gradient(circle at 20% 20%, rgba(0, 207, 255, 0.15), transparent 40%),
+    radial-gradient(circle at 80% 80%, rgba(255, 204, 0, 0.15), transparent 40%),
+    linear-gradient(180deg, #03130f, #000000) !important;
   border: 1px solid rgba(22, 40, 101, 0.18) !important;
   box-shadow: 0 8px 24px rgba(22, 40, 101, 0.06) !important;
   color: #162865 !important;
@@ -75,8 +81,15 @@
 }
 
 .app-wrapper .card-header.bg-black {
-  background: #162865 !important;
+  background: radial-gradient(circle at 20% 20%, rgba(0, 207, 255, 0.15), transparent 40%),
+    radial-gradient(circle at 80% 80%, rgba(255, 204, 0, 0.15), transparent 40%),
+    linear-gradient(180deg, #03130f, #000000) !important;
   color: #ffffff !important;
+}
+
+.Dashboardpage .bgtransparent {
+  background: transparent !important;
+  border: 1px solid rgb(236 235 0) !important;
 }
 
 .app-wrapper .bg-primary,
@@ -101,8 +114,8 @@
 }
 
 .app-wrapper .btn-primary {
-  background: #162865 !important;
-  border-color: #162865 !important;
+  background: linear-gradient(45deg, #00cfff, #007bff, #ffcc00) !important;
+  border-color: #00a4ff !important;
   color: #000000 !important;
 }
 
@@ -119,14 +132,16 @@
 }
 
 .app-wrapper .pool-claim-card .pool-chip {
-  background: #162865 !important;
+  background: linear-gradient(45deg,#00cfff,#007bff,#ffcc00) !important;
   color: #ffffff !important;
   border: 1px solid rgba(206, 154, 45, 0.45) !important;
 }
 
 .app-wrapper .pool-claim-card .pool-stat-card {
-  background: #f8f9fb !important;
-  border: 1px solid #d9ecf8 !important;
+  background: radial-gradient(circle at 20% 20%, rgba(0, 207, 255, 0.15), transparent 40%),
+    radial-gradient(circle at 80% 80%, rgba(255, 204, 0, 0.15), transparent 40%),
+    linear-gradient(180deg, #03130f, #000000)  !important;
+  border: 1px solid #ce9a2d !important;
 }
 
 .app-wrapper .pool-claim-card .pool-stat-card-highlight {
@@ -149,7 +164,7 @@
 }
 
 .app-wrapper.ClaimSalaryPage .salary-action-btn:disabled {
-  background: #162865 !important;
+  background: linear-gradient(45deg,#00cfff,#007bff,#ffcc00) !important;
   border-color: rgba(206, 154, 45, 0.45) !important;
   color: #ffffff !important;
   opacity: 0.6 !important;
@@ -181,8 +196,8 @@
 }
 
 .app-wrapper table thead th {
-  background: #f8f9fb !important;
-  color: #162865 !important;
+  background: #002f34 !important;
+  color: #fff !important;
   border-color: #d9ecf8 !important;
   text-transform: none !important;
 }
@@ -195,18 +210,15 @@
 }
 
 .app-wrapper table tbody td {
-  color: #233f74 !important;
+  color: #fff !important;
   border-color: #e6f2fa !important;
-}
-
-.app-wrapper .app-content,
-.app-wrapper .app-content * {
-  color: #000000 !important;
 }
 
 /* Overall Portfolio section theme */
 .app-wrapper .app-content .header-section {
-  background: linear-gradient(135deg, #162865 0%, #1b347d 100%) !important;
+  background: radial-gradient(circle at 20% 20%, rgba(0, 207, 255, 0.15), transparent 40%),
+    radial-gradient(circle at 80% 80%, rgba(255, 204, 0, 0.15), transparent 40%),
+    linear-gradient(180deg, #03130f, #000000) !important;
   border: 1px solid rgba(206, 154, 45, 0.55) !important;
   box-shadow: 0 10px 24px rgba(22, 40, 101, 0.3) !important;
 }
@@ -234,11 +246,13 @@
 }
 
 .app-wrapper .app-content .exnex-trans-header h5 {
-  color: #162865 !important;
+  color: #fff !important;
 }
 
 .app-wrapper .app-content .exnex-trans-card {
-  background: linear-gradient(135deg, #162865 0%, #1b347d 100%) !important;
+  background: radial-gradient(circle at 20% 20%, rgba(0,207,255,0.15), transparent 40%),
+radial-gradient(circle at 80% 80%, rgba(255,204,0,0.15), transparent 40%),
+linear-gradient(180deg,#03130f,#000000) !important;
   border: 1px solid rgba(206, 154, 45, 0.55) !important;
   box-shadow: 0 12px 28px rgba(22, 40, 101, 0.3) !important;
 }
@@ -270,24 +284,24 @@
 
 .app-wrapper .app-content .withdrawal-history-table thead th,
 .app-wrapper .app-content .vesting-history-table thead th {
-  background: #162865 !important;
+  background: #022023 !important;
   color: #ffffff !important;
   border-bottom: 1px solid #ce9a2d !important;
 }
 
 .app-wrapper .app-content .withdrawal-history-table tbody tr,
 .app-wrapper .app-content .vesting-history-table tbody tr {
-  background: #1b347d !important;
+  background: #1b347d00 !important;
 }
 
 .app-wrapper .app-content .withdrawal-history-table tbody tr:nth-child(even),
 .app-wrapper .app-content .vesting-history-table tbody tr:nth-child(even) {
-  background: #203c8b !important;
+  background: #1b347d00 !important;
 }
 
 .app-wrapper .app-content .withdrawal-history-table tbody tr:hover,
 .app-wrapper .app-content .vesting-history-table tbody tr:hover {
-  background: #28489d !important;
+  background: #1b347d00 !important;
 }
 
 .app-wrapper .app-content .withdrawal-history-table tbody td,
@@ -317,21 +331,21 @@
 }
 
 .app-wrapper.PoolHistoryPage .app-content .pool-history-table thead th {
-  background: #162865 !important;
+  background: #022023 !important;
   color: #ffffff !important;
   border-bottom: 1px solid #ce9a2d !important;
 }
 
 .app-wrapper.PoolHistoryPage .app-content .pool-history-table tbody tr {
-  background: #1b347d !important;
+  background: #02202300 !important;
 }
 
 .app-wrapper.PoolHistoryPage .app-content .pool-history-table tbody tr:nth-child(even) {
-  background: #203c8b !important;
+  background: #02202300 !important;
 }
 
 .app-wrapper.PoolHistoryPage .app-content .pool-history-table tbody tr:hover {
-  background: #28489d !important;
+  background: #02202300 !important;
 }
 
 .app-wrapper.PoolHistoryPage .app-content .pool-history-table tbody td {
@@ -362,7 +376,7 @@
 }
 
 .app-wrapper .app-content .dashboard-title {
-  color: #000000 !important;
+  color: #fff !important;
   font-weight: 700 !important;
 }
 
@@ -379,5 +393,5 @@
 .app-wrapper nav .app-logo .logo img,
 .app-wrapper .semi-nav:hover .app-logo .logo img,
 .app-wrapper .semi-nav .app-logo .logo img {
-  width: 180px !important;
+  width:50px !important;
 }
