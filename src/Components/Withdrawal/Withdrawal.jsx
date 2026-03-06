@@ -13,7 +13,7 @@ import {
 } from "../../Services/exnexDeepakAddress";
 
 const Withdrawal = () => {
-  const MIN_WITHDRAWAL_ROI = 10;
+  const MIN_WITHDRAWAL_ROI = 5;
   const dispatch = useDispatch();
   const web3State = useSelector((state) => state.web3State);
   const [totalRoiGross, setTotalRoiGross] = useState("0.0000");
@@ -119,13 +119,8 @@ const Withdrawal = () => {
 
     const available = Number(withdrawableBalance || 0);
 
-    if (available <= 0) {
-      toast.error("No balance to withdraw");
-      return;
-    }
-
-    if (available <= MIN_WITHDRAWAL_ROI) {
-      toast.error(`Current ROI must be greater than ${MIN_WITHDRAWAL_ROI}`);
+    if (available < MIN_WITHDRAWAL_ROI) {
+      toast.error(`Current ROI must be at least ${MIN_WITHDRAWAL_ROI}`);
       return;
     }
 
@@ -222,7 +217,7 @@ const Withdrawal = () => {
                         className="btn btn-primary px-4 py-2 text-white"
                         type="button"
                         onClick={handleWithdraw}
-                        disabled={isWithdrawing || Number(withdrawableBalance) <= MIN_WITHDRAWAL_ROI}
+                        disabled={isWithdrawing || Number(withdrawableBalance) < MIN_WITHDRAWAL_ROI}
                       >
                         {isWithdrawing ? (
                           <>
